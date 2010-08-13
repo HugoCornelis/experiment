@@ -114,9 +114,6 @@ test: check
 html-upload-prepare:
 	( cd tests && ./tests_2_html --introduction introduction.html )
 	rm -fr html/htdocs/neurospaces_project/experiment/
-	echo removing following files:
-	find html/ -name "*swiggable*wrap*" -ls
-	find html/ -name "*swiggable*wrap*" -exec rm \{\} \;
 	mkdir -p html/htdocs/neurospaces_project/experiment
 	mkdir -p html/htdocs/neurospaces_project/experiment/html_source
 	tar cfh - tests/html | ( cd html/htdocs/neurospaces_project/experiment && tar vxf - )
