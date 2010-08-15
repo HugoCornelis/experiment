@@ -335,6 +335,10 @@ struct OutputGenerator * OutputGeneratorNew(char *pcFilename)
 
     pogResult->pcFormat = " %g";
 
+    //- initialize: non-steps mode
+
+    pogResult->iSteps = 0;
+
     //- return result
 
     return(pogResult);
@@ -361,6 +365,33 @@ int OutputGeneratorSetFormat(struct OutputGenerator * pog, char *pcFormat)
     //- set format
 
     pog->pcFormat = pcFormat;
+
+    //- return result
+
+    return(iResult);
+}
+
+
+/// 
+/// \arg pog output generator.
+/// \arg iSteps 1 to turn on steps mode, 0 otherwise.
+/// 
+/// \return int
+/// 
+///	success of operation.
+/// 
+/// \brief Turn on / off steps mode.
+/// 
+
+int OutputGeneratorSetSteps(struct OutputGenerator * pog, int iSteps)
+{
+    //- set default result : ok
+
+    int iResult = 1;
+
+    //- set format
+
+    pog->iSteps = iSteps;
 
     //- return result
 

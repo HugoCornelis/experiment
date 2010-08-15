@@ -45,6 +45,10 @@ struct OutputGenerator
 
     FILE *pfileOutput;
 
+    /// steps mode
+
+    int iSteps;
+
     /// output format
 
     char *pcFormat;
@@ -78,6 +82,8 @@ int OutputGeneratorInitiate(struct OutputGenerator * pog);
 struct OutputGenerator * OutputGeneratorNew(char *pcFilename);
 
 int OutputGeneratorSetFormat(struct OutputGenerator * pog, char *pcFormat);
+
+int OutputGeneratorSetSteps(struct OutputGenerator * pog, int iSteps);
 
 int OutputGeneratorTimedStep(struct OutputGenerator * pog, double dTime);
 
