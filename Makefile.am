@@ -95,8 +95,6 @@ dist-hook:
 #	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications
 #	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/algorithms
 #	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/code
-	cp -pR $(srcdir)/tests/command_extractor $(distdir)/tests
-	cp -pR $(srcdir)/tests/command_extractor.ptkdb $(distdir)/tests
 	cp -pR $(srcdir)/tests/tests_2_html $(distdir)/tests
 	cp -pR $(srcdir)/tests/tests_2_html.ptkdb $(distdir)/tests
 	cp -pR $(srcdir)/tests/tests.config $(distdir)/tests
