@@ -90,19 +90,9 @@ dist-hook:
 	rm -rf $(distdir)/docs/rtf
 	$(srcdir)/install-sh -d $(distdir)/tests
 	$(srcdir)/install-sh -d $(distdir)/tests/html
-#	$(srcdir)/install-sh -d $(distdir)/tests/html/algorithms
-#	$(srcdir)/install-sh -d $(distdir)/tests/html/code
-#	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications
-#	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/algorithms
-#	$(srcdir)/install-sh -d $(distdir)/tests/html/specifications/code
 	cp -pR $(srcdir)/tests/tests_2_html $(distdir)/tests
-	cp -pR $(srcdir)/tests/tests_2_html.ptkdb $(distdir)/tests
 	cp -pR $(srcdir)/tests/tests.config $(distdir)/tests
 	cp -pR $(srcdir)/tests.config $(distdir)
-	cp -pR $(srcdir)/tests/code/tests.config $(distdir)/tests/code/tests.config
-#	cp -pR $(srcdir)/hierarchy $(distdir)
-#	rm -fr $(distdir)/hierarchy/output
-#	( cd $(distdir)/tests && chmod -R u+w . && ./tests_2_html --introduction introduction.html )
 
 #! this one breaks the distcheck, because automake makes dist dirs read-only
 #	cd $(distdir)/tests && ./tests_2_html --introduction introduction.html
