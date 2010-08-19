@@ -45,7 +45,7 @@
 
 //-------------------------------------------------------------------
 /*!
- * \fun int PulseGenSetFields(struct simobj_PulseGen *ppg,double dLevel1, double dWidth1,
+ * \fn int PulseGenSetFields(struct simobj_PulseGen *ppg,double dLevel1, double dWidth1,
  double dDelay1,double dLevel2,double dWidth2,double dDelay2,int iTriggerMode,double *pdPulseOut)
 * \param ppg A pointer to a PulseGen struct.
 * \param dLevel1 level of pulse1
@@ -97,7 +97,7 @@ int PulseGenSetFields
 
 //-------------------------------------------------------------------
 /*!
- * \fun int PulseGenStep(struct simobj_PulseGen *ppg)
+ * \fn int PulseGenSingleStep(struct simobj_PulseGen *ppg, double dTime)
  * \return -1 on error, 1 on success, 0 for no operation.
  *
  * Processes a single time step for a pulsegen object.
@@ -247,7 +247,7 @@ int PulseGenSingleStep(struct simobj_PulseGen *ppg, double dTime)
 
 //-------------------------------------------------------------------
 /*!
- * \fun struct simobj_PulseGen * PulseGenNew(char *pcName)
+ * \fn struct simobj_PulseGen * PulseGenNew(char *pcName)
  * \param pcName The name for this pulsegen object.
  * \return A pointer to a struct on success, NULL on error.
  *
@@ -291,7 +291,7 @@ struct simobj_PulseGen * PulseGenNew(char *pcName)
 
 //-------------------------------------------------------------------
 /*!
- *  \fun int PulseGenReset(struct simobj_PulseGen *ppg)
+ *  \fn int PulseGenReset(struct simobj_PulseGen *ppg)
  *  \param ppg A pointer to a PulseGen simulation object.
  *  \return 0 on error, 1 on success.
  *
@@ -330,7 +330,7 @@ int PulseGenReset(struct simobj_PulseGen *ppg)
 
 //-------------------------------------------------------------------
 /*!
- *  \fun int PulseGenFinish(struct simobj_PulseGen *ppg)
+ *  \fn int PulseGenFinish(struct simobj_PulseGen *ppg)
  *  \param ppg A pointer to a PulseGen simulation object.
  *  \return 0 on error, 1 on success.
  *
@@ -354,7 +354,7 @@ int PulseGenFinish(struct simobj_PulseGen *ppg)
 
 //-------------------------------------------------------------------
 /*!
- *  \fun int PulseGenAddInput(struct simobj_PulseGen *ppg,void pvInput)
+ *  \fn int PulseGenAddInput(struct simobj_PulseGen *ppg,void pvInput)
  *  \param ppg A pointer to a PulseGen simulation object.
  *  \return 0 on no operation, 1 on success.
  *
@@ -383,7 +383,7 @@ int PulseGenAddInput(struct simobj_PulseGen *ppg, void *pvInput)
 
 //-------------------------------------------------------------------
 /*!
- *  \fun int PulseGenAddInput(struct simobj_PulseGen *ppg,void pvInput)
+ *  \fn int PulseGenAddInput(struct simobj_PulseGen *ppg,void pvInput)
  *  \param ppg A pointer to a PulseGen simulation object.
  *  \return 0 on no operation, 1 on success.
  *
