@@ -1,0 +1,13 @@
+Source: experiment
+Section: Science 
+Priority: optional
+Maintainer: Hugo Cornelis [hugo.cornelis@gmail.com]
+Build-Depends: python2.5(>=2.5),libc6(>=2.3.6),libgcc1 (>=4.1.1)
+Homepage: http://www.neurospaces.org/
+
+Package: experiment
+Architecture: any
+Depends: python2.5(>=2.5),libc6(>=2.3.6),libgcc1 (>=4.1.1)
+Suggests: gnuplot
+Description: The Experiment package provides a library of experimental protocols useful for neuronal simulations.  It is meant to be used in combination with the GENESIS 3.0 neuronal simulator.
+

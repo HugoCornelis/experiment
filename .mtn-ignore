@@ -33,10 +33,10 @@ stamp-h1$
 tar.gz$
 ^aclocal\.m4$
 ^config\.sub$
-.deb$
-.dsc$
-.changes$
+\.deb$
+\.dsc$
+\.changes$
 \.log$
 ^a.out.dSYM$
 _BUILD$
-.pkg$
+\.pkg$
