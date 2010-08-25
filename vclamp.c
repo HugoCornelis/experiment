@@ -27,8 +27,8 @@
 
 /// 
 /// \arg pvc voltage clamper.
-/// \arg pvVoltage pointer to the voltage variable, assumed is double *
-/// \arg pvInjector pointer to the variable for injected current.
+/// \arg pdVoltage pointer to the voltage variable, assumed is double *
+/// \arg pdInjector pointer to the variable for injected current.
 /// 
 /// \return int
 /// 
@@ -39,7 +39,7 @@
 
 int
 VClampAddVariable
-(struct VClamp * pvc, void *pvVoltage, void *pvInjector)
+(struct VClamp * pvc, double *pdVoltage, double *pdInjector)
 {
     //- set default result: ok
 
@@ -52,9 +52,9 @@ VClampAddVariable
 
     //- set next variable
 
-    pvc->pdVoltage = (double *)pvVoltage;
+    pvc->pdVoltage = pdVoltage;
 
-    pvc->pdInjector = (double *)pvInjector;
+    pvc->pdInjector = pdInjector;
 
     pvc->iClampsActive++;
 

@@ -31,7 +31,7 @@
 /// 
 /// \arg pog output generator.
 /// \arg pcName name of the variable.
-/// \arg pvVariable pointer to the variable, assumed is double *
+/// \arg pdVariable pointer to the variable.
 /// 
 /// \return int
 /// 
@@ -42,7 +42,7 @@
 
 int
 OutputGeneratorAddVariable
-(struct OutputGenerator * pog, char *pcName, void *pvVariable)
+(struct OutputGenerator * pog, char *pcName, double *pdVariable)
 {
     //- set default result : ok
 
@@ -55,7 +55,7 @@ OutputGeneratorAddVariable
 
     //- set next variable
 
-    pog->ppdVariables[pog->iVariablesActive] = (double *)pvVariable;
+    pog->ppdVariables[pog->iVariablesActive] = pdVariable;
 
     pog->iVariablesActive++;
 

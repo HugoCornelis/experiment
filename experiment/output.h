@@ -69,7 +69,7 @@ struct OutputGenerator
 
 int
 OutputGeneratorAddVariable
-(struct OutputGenerator * pog, char *pcName, void *pvVariable);
+(struct OutputGenerator * pog, char *pcName, double *pdVariable);
 
 int OutputGeneratorAnnotatedStep(struct OutputGenerator * pog, char * pc);
 

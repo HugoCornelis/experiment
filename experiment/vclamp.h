@@ -81,7 +81,7 @@ struct VClamp
 
 int
 VClampAddVariable
-(struct VClamp * pvc, void *pvVoltage, void *pvInjector);
+(struct VClamp * pvc, double *pdVoltage, double *pdInjector);
 
 int VClampSingleStep(struct VClamp * pvc, double dTime);
 
