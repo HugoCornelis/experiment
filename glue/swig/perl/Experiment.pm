@@ -87,10 +87,12 @@ sub get_driver
 
     my $result
 	= {
-	   data => $self->{backend}->output_generator_get_driver_data(),
-	   method => undef,
+# 	   data => $self->{backend}->output_generator_get_driver_data(),
+# 	   method => $self->{backend}->output_generator_get_driver_method(),
 # 	   data => $self->{backend},
-# 	   method => undef,
+# 	   method => \&SwiggableHeccer::OutputGeneratorAnnotatedStep,
+	   data => -1,
+	   method => -1,
 	  };
 
     return $result;
