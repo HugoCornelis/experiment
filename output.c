@@ -254,10 +254,6 @@ int OutputGeneratorInitiate(struct OutputGenerator * pog)
 
 /*     if (!pog->pfileOutput) */
     {
-	/// \todo what again did I mean with this todo ?
-
-	/// \todo file name taken from options
-
 	//- open file
 
 	pog->pfileOutput = fopen(pog->pcFilename, "w");
