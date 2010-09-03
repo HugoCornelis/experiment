@@ -23,7 +23,6 @@ Makefile$
 ^tests/output
 _Inline
 autoscan.log$
-config.guess$
 config.h$
 config.h.in$
 config.log$
