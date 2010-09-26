@@ -6,6 +6,18 @@
 use SwiggableExperiment;
 
 
+package Experiment;
+
+
+sub version
+{
+    # $Format: "    my $version=\"${package}-${label}\";"$
+    my $version="experiment-alpha";
+
+    return $version;
+}
+
+
 package Experiment::Glue;
 
 
@@ -62,6 +74,12 @@ sub add
 sub connect
 {
     my $self = shift;
+
+    my $peer = shift;
+
+    my $scheduler = $self->{scheduler};
+
+    my $event_system = $scheduler->lookup_object('event_system');
 
     my $backend = $self->backend();
 
