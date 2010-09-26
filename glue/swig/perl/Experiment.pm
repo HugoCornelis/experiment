@@ -169,33 +169,33 @@ sub new
 
     $self->{backend}->swig_dBase_set(0);
 
-    # lookup the event_distributor service
+#     # lookup the event_distributor service
 
-    my $event_source = $options->{event_source};
+#     my $event_source = $options->{event_source};
 
-    if ($event_source)
-    {
-	my $scheduler = $self->{scheduler};
+#     if ($event_source)
+#     {
+# 	my $scheduler = $self->{scheduler};
 
-	my $ssp_distributor = $scheduler->lookup_object($event_source);
+# 	my $ssp_distributor = $scheduler->lookup_object($event_source);
 
-	if (!$ssp_distributor)
-	{
-	    die "$0: " . __PACKAGE__ . " cannot construct, $event_source not found as an ssp service";
-	}
+# 	if (!$ssp_distributor)
+# 	{
+# 	    die "$0: " . __PACKAGE__ . " cannot construct, $event_source not found as an ssp service";
+# 	}
 
-	my $distributor = $ssp_distributor->backend();
+# 	my $distributor = $ssp_distributor->backend();
 
-	if (!$distributor)
-	{
-	    die "$0: " . __PACKAGE__ . " cannot construct, $event_source has no low-level backend";
-	}
+# 	if (!$distributor)
+# 	{
+# 	    die "$0: " . __PACKAGE__ . " cannot construct, $event_source has no low-level backend";
+# 	}
 
-	if (!$distributor->add_output($self))
-	{
-	    die "$0: " . __PACKAGE__ . " cannot construct";
-	}
-    }
+# 	if (!$distributor->add_output($self))
+# 	{
+# 	    die "$0: " . __PACKAGE__ . " cannot construct";
+# 	}
+#     }
 
     # return result
 
