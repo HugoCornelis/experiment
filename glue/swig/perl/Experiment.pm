@@ -77,13 +77,45 @@ sub connect
 
     my $peer = shift;
 
+    my $result;
+
     my $scheduler = $self->{scheduler};
+
+    # add the event output to the event distributor
 
     my $event_system = $scheduler->lookup_object('event_system');
 
-    my $backend = $self->backend();
+    if (not ref $event_system)
+    {
+	die "$0: *** Error: event outputs defined without an event_system ($event_system)";
+    }
 
-    return undef;
+    $event_system = $event_system->backend();
+
+    my $outputs = $scheduler->{outputs};
+
+    foreach my $output (@$outputs)
+    {
+	#t should compare the solverclass with $self->solverclass or something
+
+	if ($output->{field} ne 'spike')
+	{
+	    next;
+	}
+
+	my $event_distributor = $event_system->get_distributor($output);
+
+	my $error = $event_distributor->add_output($self, $output);
+
+	if ($error)
+	{
+	    $result = $error;
+
+	    last;
+	}
+    }
+
+    return $result;
 }
 
 
@@ -233,16 +265,18 @@ sub step
 
     my $backend = $self->backend();
 
-    my $result;
+    my $result = 1;
 
-    if ($self->{output_mode}) # eq 'steps')
-    {
-	$result = $backend->OutputGeneratorAnnotatedStep("$options->{steps}");
-    }
-    else
-    {
-	$result = $backend->OutputGeneratorTimedStep($options->{time});
-    }
+#     if ($self->{output_mode}) # eq 'steps')
+#     {
+# 	$result = $backend->OutputGeneratorAnnotatedStep("$options->{steps}");
+#     }
+#     else
+#     {
+# 	$result = $backend->OutputGeneratorTimedStep($options->{time});
+#     }
+
+    $result = 1;
 
     return $result;
 }
