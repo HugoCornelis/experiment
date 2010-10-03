@@ -149,6 +149,16 @@ sub get_driver
 }
 
 
+sub get_event_processor
+{
+    my $self = shift;
+
+    my $result = $self->{backend}->output_generator_get_event_processor();
+
+    return $result;
+}
+
+
 sub get_time_step
 {
     my $self = shift;

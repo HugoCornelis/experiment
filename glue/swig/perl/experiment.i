@@ -126,6 +126,12 @@ void * output_generator_get_driver_method(struct OutputGenerator *pog)
 }
 
 
+void * output_generator_get_event_processor(struct OutputGenerator *pog)
+{
+    return((void *)OutputGeneratorTimedStep);
+}
+
+
 void * perfect_clamp_get_driver_data(struct PerfectClamp *ppc)
 {
     return((void *)ppc);
