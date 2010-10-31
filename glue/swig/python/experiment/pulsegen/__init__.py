@@ -16,7 +16,7 @@ try:
 
     import pulsegen_base
 
-except ImportError as error:
+except ImportError:
     sys.exit("Could not import compiled SWIG pulsegen_base library: %s" % error)
 
 
