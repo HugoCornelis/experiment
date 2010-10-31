@@ -6,8 +6,6 @@ import os
 import sys
 import pdb
 
-sys.path.append( os.path.join( os.getcwd(), '.' ) )
-
 __author__ = 'Mando Rodriguez'
 __credits__ = []
 __license__ = "GPL"
@@ -18,8 +16,8 @@ try:
 
     import pulsegen_base
 
-except ImportError:
-    sys.exit("Could not import compiled SWIG pulsegen_base library")
+except ImportError as error:
+    sys.exit("Could not import compiled SWIG pulsegen_base library: %s" % error)
 
 
 class PulseGen:
