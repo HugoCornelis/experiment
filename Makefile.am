@@ -147,6 +147,3 @@ pkg-rpm: dist
 
 pkg-osx: 
 	nspkg-osx 
-
-python:
-	echo "Building python bindings"

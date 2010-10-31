@@ -14,6 +14,8 @@ Makefile$
 ^glue/swig/perl/swiggable_experiment_wrap.c$
 ^glue/swig/python/SwiggableExperiment.py$
 ^glue/swig/python/swiggable_experiment_wrap.c$
+^glue/swig/python/experiment/pulsegen/pulsegen_base.py$
+^glue/swig/python/experiment/pulsegen/pulsegen_wrap.c$
 ^html/
 ^installed$
 ^installed/

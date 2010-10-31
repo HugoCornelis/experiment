@@ -9,8 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "experiment/pulsegen.h"
+#include "../../../../../experiment/pulsegen.h"
 %}
 
 
