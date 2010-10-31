@@ -57,28 +57,58 @@ dnl python macro won't look for python in the proper path.
 dnl 
 case "$host_os" in
   darwin*)
+
     PYTHON='/Library/Frameworks/Python.framework/Versions/Current/bin/python'
     AC_SUBST(PYTHON)
+
   ;;
 esac
 
-case $PYTHON_PREFIX in
-  *)   
-    PYTHON_PREFIX=`echo $PYTHON | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
-    PYTHON_PREFIX=`echo $PYTHON_PREFIX | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
-    PYTHONHOME=$PYTHON_PREFIX
-    AC_SUBST(PYTHON_PREFIX)
-    AC_SUBST(PYTHONHOME)
-				
-    AC_MSG_CHECKING([Python header location])
-    PYTHON_HEADERS='$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)'
-    AC_SUBST(PYTHON_HEADERS)
-    AC_MSG_RESULT([$PYTHON_PREFIX/include/python$PYTHON_VERSION])
+# This is to set the proper python-config for getting the 
+# proper flags and prefixes
 
-    PYTHON_EXE='$(PYTHON_PREFIX)/bin/python'
-    AC_SUBST(PYTHON_EXE)
-  ;;
-esac
+
+AC_MSG_CHECKING([Python config location])
+PYTHON_CONFIG=$PYTHON-config
+AC_SUBST(PYTHON_CONFIG)
+AC_MSG_RESULT([$PYTHON_CONFIG])
+
+
+AC_MSG_CHECKING([Python prefix is])
+PYTHON_PREFIX=`$PYTHON_CONFIG --prefix`
+AC_SUBST(PYTHON_PREFIX)
+AC_MSG_RESULT([$PYTHON_PREFIX])
+
+
+AC_MSG_CHECKING([Python includes are])
+PYTHON_INCLUDE=`$PYTHON_CONFIG --include`
+AC_SUBST(PYTHON_INCLUDE)
+AC_MSG_RESULT([$PYTHON_INCLUDE])
+
+
+AC_MSG_CHECKING([Python libs are])
+PYTHON_LIBS=`$PYTHON_CONFIG --libs`
+AC_SUBST(PYTHON_LIBS)
+AC_MSG_RESULT([$PYTHON_LIBS])
+
+
+AC_MSG_CHECKING([Python cflags are])
+PYTHON_CFLAGS=`$PYTHON_CONFIG --cflags`
+AC_SUBST(PYTHON_CFLAGS)
+AC_MSG_RESULT([$PYTHON_CFLAGS])
+
+
+AC_MSG_CHECKING([Python ldflags are])
+PYTHON_LDFLAGS=`$PYTHON_CONFIG --ldflags`
+AC_SUBST(PYTHON_LDFLAGS)
+AC_MSG_RESULT([$PYTHON_LDFLAGS])
+
+AC_MSG_CHECKING([Python executable is])
+PYTHON_EXE=$PYTHON_PREFIX/bin/python
+AC_SUBST(PYTHON_EXE)
+AC_MSG_RESULT([$PYTHON_EXE])
+
+
 
 # Checks for options
 
@@ -278,13 +308,13 @@ case "$host_os" in
     PYTHONLIB_EXTENSION='so'
     AC_SUBST(PYHONLIB_EXTENSION)
 
-    SWIGCOMPILELINKSFORPYTHON='-I$(PYTHON_HEADERS) 	-I/usr/local/neurospaces/instrumentor 	-I.../../.. 	-I./../../.. 	-I.../../../hierarchy/output/symbols 	-I./../../../hierarchy/output/symbols/'
+    SWIGCOMPILELINKSFORPYTHON='$(PYTHON_INCLUDE) 	-I/usr/local/neurospaces/instrumentor 	-I.../../.. 	-I./../../.. 	-I.../../../hierarchy/output/symbols 	-I./../../../hierarchy/output/symbols/'
     AC_SUBST(SWIGCOMPILELINKSFORPYTHON)
 
     SWIGCOMPILECOMMAND_PYTHON='gcc         $(SWIGCOMPILELINKSFORPYTHON)         -c swiggable_experiment_wrap.c'
     AC_SUBST(SWIGCOMPILECOMMAND_PYTHON)
 
-    SWIGLDLINKSFORPYTHON='-L$(PYTHON_HEADERS)    -L../../../ -lexperiment  -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline  -framework Python         -flat_namespace         -undefined suppress 	-bundle 	-bundle_loader $(PYTHON_EXE)'
+    SWIGLDLINKSFORPYTHON='$(PYTHON_LDFLAGS) -L../../../ -lexperiment  -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline  -framework Python         -flat_namespace         -undefined suppress 	-bundle 	-bundle_loader $(PYTHON_EXE)'
     AC_SUBST(SWIGLDLINKSFORPYTHON)
 
 
@@ -322,7 +352,9 @@ case "$host_os" in
 
 
   *)
-  
+    #
+    # These are settings specific to Linux/Unix POSIX systems.
+    #
     dnl {{{
     AR='ar'
     ARFLAGS='cru'
@@ -363,7 +395,7 @@ case "$host_os" in
     PYTHONLIB_EXTENSION='so'
     AC_SUBST(PYTHONLIB_EXTENSION)
 
-    SWIGCOMPILELINKSFORPYTHON='-g -DPRE_PROTO_TRAVERSAL -I$(PYTHON_HEADERS) -I/usr/local/neurospaces/instrumentor -I$(builddir)../../.. -I$(srcdir)/../../.. -I$(builddir)../../../hierarchy/output/symbols -I$(srcdir)/../../../hierarchy/output/symbols/ -fPIC -Xlinker -export-dynamic'
+    SWIGCOMPILELINKSFORPYTHON='-g -DPRE_PROTO_TRAVERSAL $(PYTHON_INCLUDE) -I/usr/local/neurospaces/instrumentor -I$(builddir)../../.. -I$(srcdir)/../../.. -I$(builddir)../../../hierarchy/output/symbols -I$(srcdir)/../../../hierarchy/output/symbols/ -fPIC -Xlinker -export-dynamic'
     AC_SUBST(SWIGCOMPILELINKSFORPYTHON)
 
    SWIGCOMPILECOMMAND_PYTHON='gcc $(SWIGCOMPILELINKSFORPYTHON) -c swiggable_experiment_wrap.c'
@@ -392,6 +424,7 @@ AC_CONFIG_FILES([Makefile
                  glue/Makefile
                  glue/swig/perl/Makefile
                  glue/swig/python/Makefile
+		 glue/swig/python/experiment/pulsegen/Makefile
                  tests/Makefile])
 AC_OUTPUT
 
