@@ -13,7 +13,8 @@ BUILT_SOURCES = \
 all: _pulsegen_base.so
 
 _pulsegen_base.so: pulsegen_wrap.o
-	ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.so /usr/lib/bundle1.o pulsegen_wrap.o
+	$(PULSEGEN_SWIGLINKCOMMAND_PYTHON)
+#ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.so /usr/lib/bundle1.o pulsegen_wrap.o
 
 pulsegen_wrap.o: pulsegen_wrap.c
 	gcc $(SWIGCOMPILELINKSFORPYTHON) -c pulsegen_wrap.c

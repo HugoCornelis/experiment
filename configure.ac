@@ -274,27 +274,13 @@ case "$host_os" in
     AC_SUBST(SWIGLDLINKSFORPERL)
 
     case "$host_os" in
-	*darwin10.2.0)
+	*darwin10.2.0 | *darwin10.3.0 | *darwin10.4.0)
 	    dnl This is snow leopard
             SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableExperiment.$(PERLLIB_EXTENSION) /usr/lib/bundle1.o  swiggable_experiment_wrap.o'
             AC_SUBST(SWIGLINKCOMMAND_PERL)
 
 
 	;;    
-	*darwin10.3.0)
-	    dnl This is also snow leopard
-            SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableExperiment.$(PERLLIB_EXTENSION) /usr/lib/bundle1.o  swiggable_experiment_wrap.o'
-            AC_SUBST(SWIGLINKCOMMAND_PERL)
-
-
-	;;
-	*darwin10.4.0)
-	    dnl This is also snow leopard
-            SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableExperiment.$(PERLLIB_EXTENSION) /usr/lib/bundle1.o  swiggable_experiment_wrap.o'
-            AC_SUBST(SWIGLINKCOMMAND_PERL)
-
-
-	;;
 	*)
             SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableExperiment.$(PERLLIB_EXTENSION) 	swiggable_experiment_wrap.o'
             AC_SUBST(SWIGLINKCOMMAND_PERL)
@@ -319,27 +305,23 @@ case "$host_os" in
 
 
     case "$host_os" in
-	*darwin10.2.0)
+	*darwin10.2.0 | *darwin10.3.0 | *darwin10.4.0)
 	    dnl This is snow leopard
 
-            SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableExperiment.$(PYTHONLIB_EXTENSION) /usr/lib/bundle1.o swiggable_experiment_wrap.o'
+            SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.$(PYTHONLIB_EXTENSION) /usr/lib/bundle1.o swiggable_experiment_wrap.o'
             AC_SUBST(SWIGLINKCOMMAND_PYTHON)
-	;;
-	*darwin10.3.0)
-	    dnl This is also snow leopard
 
-            SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableExperiment.$(PYTHONLIB_EXTENSION) /usr/lib/bundle1.o swiggable_experiment_wrap.o'
-            AC_SUBST(SWIGLINKCOMMAND_PYTHON)
-	;;
-	*darwin10.4.0)
-	    dnl This is also snow leopard
 
-            SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableExperiment.$(PYTHONLIB_EXTENSION) /usr/lib/bundle1.o swiggable_experiment_wrap.o'
+            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.$(PYTHONLIB_EXTENSION) /usr/lib/bundle1.o pulsegen_wrap.o'
             AC_SUBST(SWIGLINKCOMMAND_PYTHON)
 	;;
 	*)
-            SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) 	-o _SwiggableExperiment.$(PYTHONLIB_EXTENSION)  swiggable_experiment_wrap.o'
-            AC_SUBST(SWIGLINKCOMMAND_PYTHON)	
+            SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.$(PYTHONLIB_EXTENSION)  swiggable_experiment_wrap.o'
+            AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+
+
+            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.$(PYTHONLIB_EXTENSION)  pulsegen_wrap.o'
+            AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)	
         ;;
     esac 
 
@@ -406,6 +388,10 @@ case "$host_os" in
 
     SWIGLINKCOMMAND_PYTHON='gcc $(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.$(PYTHONLIB_EXTENSION)'
     AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+
+
+    PULSEGEN_SWIGLINKCOMMAND_PYTHON='gcc $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.$(PYTHONLIB_EXTENSION)'
+    AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)
     dnl }}} End of General Settings
 
   ;;
