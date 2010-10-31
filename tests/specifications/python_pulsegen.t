@@ -20,7 +20,6 @@ my $test
 						  },
 						 ],
 				description => "Just performs a basic import",
-				disabled => "not integrated yet",
 
 			       },
 
@@ -48,7 +47,6 @@ Done!
 						  },
 						 ],
 				description => "Creates a pulsegen base type",
-				disabled => "not integrated yet",
 
 			       },
 
@@ -76,7 +74,6 @@ Done!
 						  },
 						 ],
 				description => "Creates a pulsegen object with basic test values",
-				disabled => "not integrated yet",
 
 			       },
 
