@@ -20,3 +20,14 @@ def print_simobj_pulsegen(spg):
     print "TriggerMode: %s" % spg.iTriggerMode
 
 
+def print_pulsegen(pg):
+
+    print "Name: %s" % pg.GetName()
+    print "Level1: %s" % pg.GetLevel1()
+    print "Width1: %s" % pg.GetWidth1()
+    print "Delay1: %s" % pg.GetDelay1()
+    print "Level2: %s" % pg.GetLevel2()
+    print "Width2: %s" % pg.GetWidth2()
+    print "Delay2: %s" % pg.GetDelay2()
+    print "BaseLevel: %s" % pg.GetBaseLevel()
+    print "TriggerMode: %s" % pg.GetTriggerMode()

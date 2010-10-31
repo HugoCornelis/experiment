@@ -19,40 +19,105 @@ try:
 except ImportError:
     sys.exit("Could not import compiled SWIG pulsegen_base library: %s")
 
+from pulsegen_base import simobj_PulseGen
+from pulsegen_base import PulseGenFinish
+from pulsegen_base import PulseGenAddInput
+from pulsegen_base import PulseGenAddVariable
+from pulsegen_base import PulseGenReset
+from pulsegen_base import PulseGenSingleStep
+from pulsegen_base import PulseGenSetFields
 
 class PulseGen:
 
-    def __init__(self,level1=0, width1=0, delay1=0,
+    def __init__(self,name="", level1=0, width1=0, delay1=0,
                  level2=0, width2=0, delay2=0,
                  base_level=0, trigger_mode=0):
-        
-        print "Initializing a pulsegen"
-        pass
 
+
+        self.spg = simobj_PulseGen()
+
+        self.spg.pcName = name
+        self.spg.dLevel1 = level1
+        self.spg.dWidth1 = width1
+        self.spg.dDelay1 = delay1
+        self.spg.dLevel2 = level2
+        self.spg.dWidth2 = width2
+        self.spg.dDelay2 = delay2
+        self.spg.dBaseLevel = base_level
+        self.spg.iTriggerMode = trigger_mode
+
+
+    def SetName(self,name):
+
+        self.spg.pcName = name
+
+    def GetName(self):
+
+        return self.spg.pcName
 
     def SetLevel1(self,level1):
-        pass
+
+        self.spg.dLevel1 = level1
+
+    def GetLevel1(self):
+
+        return self.spg.dLevel1
 
     def SetWidth1(self,width1):
-        pass
+
+        self.spg.dWidth1 = width1
+
+    def GetWidth1(self):
+
+        return self.spg.dWidth1
 
     def SetDelay1(self,delay1):
-        pass
+
+        self.spg.dDelay1 = delay1
+
+    def GetDelay1(self):
+
+        return self.spg.dDelay1
 
     def SetLevel2(self,level2):
-        pass
+
+        self.spg.dLevel2 = level2
+
+    def GetLevel2(self):
+
+        return self.spg.dLevel2
 
     def SetWidth2(self,width2):
-        pass
+
+        self.spg.dWidth2 = width2
+
+    def GetWidth2(self):
+
+        return self.spg.dWidth2
 
     def SetDelay2(self,delay2):
-        pass
+
+        self.spg.dDelay2 = delay2
+
+    def GetDelay2(self):
+
+        return self.spg.dDelay2
 
     def SetBaseLevel(self,base_level):
-        pass
+
+        self.spg.dBaseLevel = base_level
+
+    def GetBaseLevel(self):
+
+        return self.spg.dBaseLevel
 
     def SetTriggerMode(self,trigger_mode):
-        pass
+
+        self.spg.iTriggerMode = trigger_mode
+
+    def GetTriggerMode(self):
+
+        return self.spg.iTriggerMode
 
     def SingleStep(self):
         pass
