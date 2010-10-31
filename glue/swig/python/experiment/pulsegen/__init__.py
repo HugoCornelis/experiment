@@ -17,12 +17,15 @@ try:
     import pulsegen_base
 
 except ImportError:
-    sys.exit("Could not import compiled SWIG pulsegen_base library: %s" % error)
+    sys.exit("Could not import compiled SWIG pulsegen_base library: %s")
 
 
 class PulseGen:
 
-    def __init__(self):
+    def __init__(self,level1=0, width1=0, delay1=0,
+                 level2=0, width2=0, delay2=0,
+                 base_level=0, trigger_mode=0):
+        
         print "Initializing a pulsegen"
         pass
 

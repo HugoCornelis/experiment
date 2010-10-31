@@ -1,5 +1,7 @@
 %module pulsegen_base	
 
+%include "../../../../../experiment/pulsegen.h"
+
 %{
 /* Include directives necessary for your following definitions
     should be here. */
