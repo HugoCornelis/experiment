@@ -119,19 +119,32 @@ class PulseGen:
 
         return self.spg.iTriggerMode
 
-    def SingleStep(self):
-        pass
+    def SingleStep(self,time=0.0):
+
+        PulseGenSingleStep(self.spg,time)
 
     def Reset(self):
-        pass
+
+        PulseGenReset(self.spg)
 
     def Finish(self):
-        pass
+
+        val = PulseGenFinish(self.spg)
+
+        if val == 0:
+
+            return False
+
+        else:
+
+            return True
 
     def AddInput(self,input):
-        pass
 
-    def AddVariable(self,variable):
-        pass
+        PulseGenAddInput(self.spg,input)
 
-    
+    def AddVariable(self,output):
+
+        PulseGenAddVariable(self.spg,output)
+
+
