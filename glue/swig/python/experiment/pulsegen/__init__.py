@@ -45,6 +45,7 @@ class PulseGen:
         self.spg.dDelay2 = delay2
         self.spg.dBaseLevel = base_level
         self.spg.iTriggerMode = trigger_mode
+        self.spg.pdPulseOut = None
 
 
     def SetName(self,name):
@@ -118,6 +119,14 @@ class PulseGen:
     def GetTriggerMode(self):
 
         return self.spg.iTriggerMode
+
+    def SetOutput(self,output):
+
+        self.spg.pdPulseOut = output
+
+    def GetOutput(self):
+
+        return self.spg.pdPulseOut
 
     def SingleStep(self,time=0.0):
 
