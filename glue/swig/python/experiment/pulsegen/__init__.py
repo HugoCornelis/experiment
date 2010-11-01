@@ -27,6 +27,11 @@ from pulsegen_base import PulseGenReset
 from pulsegen_base import PulseGenSingleStep
 from pulsegen_base import PulseGenSetFields
 
+#importing our constants.
+from pulsegen_base import FREE_RUN
+from pulsegen_base import EXT_TRIG
+from pulsegen_base import EXT_GATE
+
 class PulseGen:
 
     def __init__(self,name="", level1=0, width1=0, delay1=0,
