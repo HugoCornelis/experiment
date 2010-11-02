@@ -2,15 +2,13 @@
 This is the module used to create a pulsegen python object
 from the swig bindings.
 """
+import ctypes
 import os
 import sys
 import pdb
 
-__author__ = 'Mando Rodriguez'
-__credits__ = []
-__license__ = "GPL"
-__version__ = "0.1"
-__status__ = "Development"
+from ctypes import c_double
+from ctypes import pointer
 
 try:
 
@@ -32,6 +30,13 @@ from pulsegen_base import FREE_RUN
 from pulsegen_base import EXT_TRIG
 from pulsegen_base import EXT_GATE
 
+
+__author__ = 'Mando Rodriguez'
+__credits__ = []
+__license__ = "GPL"
+__version__ = "0.1"
+__status__ = "Development"
+
 class PulseGen:
 
     def __init__(self,name="", level1=0, width1=0, delay1=0,
@@ -50,9 +55,8 @@ class PulseGen:
         self.spg.dDelay2 = delay2
         self.spg.dBaseLevel = base_level
         self.spg.iTriggerMode = trigger_mode
-        self.spg.pdPulseOut = None
-
-
+        #self.spg.pdPulseOut = None
+        
     def SetName(self,name):
 
         self.spg.pcName = name
@@ -127,11 +131,17 @@ class PulseGen:
 
     def SetOutput(self,output):
 
-        self.spg.pdPulseOut = output
+#        doutput = ctypes.c_double(output)
+
+        self.spg.pdPulseOut = pointer(output)
 
     def GetOutput(self):
 
-        return self.spg.pdPulseOut
+        if self.spg.pdPulseOut == None:
+
+            return None
+
+        return self.spg.pdPulseOut[0]
 
     def SingleStep(self,time=0.0):
 
