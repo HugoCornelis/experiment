@@ -19,7 +19,7 @@ _pulsegen_base.so: pulsegen_wrap.o
 pulsegen_wrap.o: pulsegen_wrap.c
 	gcc $(SWIGCOMPILELINKSFORPYTHON) -c pulsegen_wrap.c
 
-pulsegen_wrap.c: pulsegen.i
+pulsegen_wrap.c: 
 	$(SWIG) -python -o pulsegen_wrap.c pulsegen.i
 
 clean-local:
