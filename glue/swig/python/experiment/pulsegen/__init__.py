@@ -56,6 +56,8 @@ class PulseGen:
         self.spg.dBaseLevel = base_level
         self.spg.iTriggerMode = trigger_mode
         #self.spg.pdPulseOut = None
+
+        self.pulse_out = None
         
     def SetName(self,name):
 
@@ -131,7 +133,7 @@ class PulseGen:
 
     def SetOutput(self,output):
 
-#        doutput = ctypes.c_double(output)
+#        self.pulse_out = c_double(output)
 
         self.spg.pdPulseOut = pointer(output)
 
@@ -169,6 +171,9 @@ class PulseGen:
 
     def AddVariable(self,output):
 
-        PulseGenAddVariable(self.spg,output)
+        o = c_double(output)
+        pout = pointer(o)
+        ppass = ctypes.c_void_p(pout)
+        PulseGenAddVariable(self.spg,ppass)
 
 
