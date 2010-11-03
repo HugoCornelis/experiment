@@ -136,9 +136,9 @@ class PulseGen:
 
         dout = c_double(output)
 
-        pout = pointer(dout)
+        pdout = pointer(dout)
 
-        self.spg.pdPulseOut = pout
+        self.spg.pdPulseOut = pdout
 
 
     def GetOutput(self):
@@ -186,4 +186,6 @@ class PulseGen:
         #pdb.set_trace()
         PulseGenAddVariable(self.spg,pvout)
 
+        #http://www.swig.org/Doc1.3/Varargs.html
+        #http://python.net/crew/theller/ctypes/tutorial.html#pointers
 
