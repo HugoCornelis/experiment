@@ -69,6 +69,8 @@ esac
 
 
 AC_CHECK_PROG(HAVE_PYTHON_CONFIG, python-config, "yes", "no",[$PYTHON_PREFIX/bin])
+AC_MSG_CHECKING([python-config present])
+AC_MSG_RESULT([$HAVE_PYTHON_CONFIG])
 
 
 if test "$HAVE_PYTHON_CONFIG" == "yes"; then
