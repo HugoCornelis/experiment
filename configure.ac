@@ -122,17 +122,32 @@ else
 
   # This is legacy to make sure that systems with python
   # that do not have python-config can get the python info
+  # This has always been a bit error prone, particularly if the 
+  # user has more than one python version installed.
  
   PYTHON_PREFIX=`echo $PYTHON | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
   PYTHON_PREFIX=`echo $PYTHON_PREFIX | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
-  PYTHONHOME=$PYTHON_PREFIX
   AC_SUBST(PYTHON_PREFIX)
-  AC_SUBST(PYTHONHOME)
-				
-  AC_MSG_CHECKING([Python header location])
+
+
+  AC_MSG_CHECKING([Python prefix is])
+  AC_MSG_RESULT([$PYTHON_PREFIX])
+
+
   PYTHON_HEADERS='$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)'
   AC_SUBST(PYTHON_HEADERS)
-  AC_MSG_RESULT([$PYTHON_PREFIX/include/python$PYTHON_VERSION])
+
+  AC_MSG_CHECKING([Python includes are])
+  PYTHON_INCLUDE='-I$(PYTHON_HEADERS)'
+  AC_SUBST(PYTHON_INCLUDE)
+  AC_MSG_RESULT([$PYTHON_INCLUDE])
+
+  AC_MSG_CHECKING([Python ldflags are])
+  PYTHON_LIBS='-L$(pyexecdir)/../config'
+  AC_SUBST(PYTHON_LIBS)
+  AC_MSG_RESULT([$PYTHON_LIBS])
+				
+
 
   PYTHON_EXE='$(PYTHON_PREFIX)/bin/python'
   AC_SUBST(PYTHON_EXE)
