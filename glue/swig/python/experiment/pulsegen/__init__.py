@@ -7,8 +7,9 @@ import os
 import sys
 import pdb
 
-from ctypes import c_double
-from ctypes import pointer
+# from ctypes import c_double
+# from ctypes import pointer
+from ctypes import * # remove this later
 
 try:
 
@@ -55,7 +56,7 @@ class PulseGen:
         self.spg.dDelay2 = delay2
         self.spg.dBaseLevel = base_level
         self.spg.iTriggerMode = trigger_mode
-        #self.spg.pdPulseOut = None
+#        self.spg.pdPulseOut = 0.0
 
         self.pulse_out = None
         
@@ -133,9 +134,12 @@ class PulseGen:
 
     def SetOutput(self,output):
 
-#        self.pulse_out = c_double(output)
+        dout = c_double(output)
 
-        self.spg.pdPulseOut = pointer(output)
+        pout = pointer(dout)
+
+        self.spg.pdPulseOut = pout
+
 
     def GetOutput(self):
 
@@ -171,9 +175,15 @@ class PulseGen:
 
     def AddVariable(self,output):
 
-        o = c_double(output)
-        pout = pointer(o)
-        ppass = ctypes.c_void_p(pout)
-        PulseGenAddVariable(self.spg,ppass)
+        # create C instance 'double out = output'
+        out = c_double(output)
+
+        # double *pout = &out
+        pout = pointer(out)
+
+        # casting pointer to a void
+        pvout = cast(pout,POINTER(c_void_p))
+        #pdb.set_trace()
+        PulseGenAddVariable(self.spg,pvout)
 
 
