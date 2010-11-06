@@ -19,6 +19,7 @@ except ImportError:
     sys.exit("Could not import compiled SWIG pulsegen_base library: %s")
 
 from pulsegen_base import simobj_PulseGen
+from pulsegen_base import PulseGenNew
 from pulsegen_base import PulseGenFinish
 from pulsegen_base import PulseGenAddInput
 from pulsegen_base import PulseGenAddVariable
@@ -44,8 +45,7 @@ class PulseGen:
                  level2=0, width2=0, delay2=0,
                  base_level=0, trigger_mode=0):
 
-
-        self.spg = simobj_PulseGen()
+        self.spg = PulseGenNew("My Pulsegen")
 
         self.spg.pcName = name
         self.spg.dLevel1 = level1
@@ -56,7 +56,7 @@ class PulseGen:
         self.spg.dDelay2 = delay2
         self.spg.dBaseLevel = base_level
         self.spg.iTriggerMode = trigger_mode
-        self.spg.pdPulseOut = None
+        #self.spg.pdPulseOut = pointer(c_double(float(1.0)))
 
         self.pulse_out = None
         
@@ -173,6 +173,8 @@ class PulseGen:
 
         PulseGenAddInput(self.spg,input)
 
+
+
     def AddVariable(self,output):
 
         # create C instance 'double out = output'
@@ -185,9 +187,11 @@ class PulseGen:
 
         # casting pointer to a void
         pvout = cast(pout,POINTER(c_void_p))
-        pdb.set_trace()
-        PulseGenAddVariable(self.spg,pout)
+        #pdb.set_trace()
+        #pvout = self.ptrcast(c_void_p,pout)
+        PulseGenAddVariable(self.spg,pvout)
 
         #http://www.swig.org/Doc1.3/Varargs.html
         #http://python.net/crew/theller/ctypes/tutorial.html#pointers
+
 

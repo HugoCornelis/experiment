@@ -277,7 +277,7 @@ struct simobj_PulseGen * PulseGenNew(char *pcName)
   ppgResult->dDelay2 = DBL_MAX;
   ppgResult->dBaseLevel = DBL_MAX;
   ppgResult->iTriggerMode = -1;
-
+  ppgResult->pdPulseOut = NULL;
   //
   // This sets the new pulsegen to a "never triggered" 
   // state. Not sure how to handle it recieving a message

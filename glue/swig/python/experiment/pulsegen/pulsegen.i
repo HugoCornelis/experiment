@@ -1,6 +1,8 @@
 %module pulsegen_base	
 
-%include "../../../../../experiment/pulsegen.h"
+# Some detailed swig information for handling pointers
+#- http://embedded.eecs.berkeley.edu/Alumni/pinhong/scriptEDA/pyTypemapFAQ.html#overcast
+
 
 %{
 /* Include directives necessary for your following definitions
@@ -16,7 +18,22 @@
 
 
 
+#Import our structs and make data objects out of them
+%include "../../../../../experiment/pulsegen.h"
+
+%typemap (in) double*
+{
+  if (PyCObject_Check($input))
+  {
+
+    $1 = PyCObject_AsVoidPtr($input)
+
+  }
+}
+
 // Wrap these functions
+%{
+extern struct simobj_PulseGen * PulseGenNew(char *pcName);
 extern int PulseGenSetFields(
 	struct simobj_PulseGen *ppg,
 	double dLevel1,
@@ -28,10 +45,11 @@ extern int PulseGenSetFields(
  	double dBaseLevel,
  	int iTriggerMode
 	);
-int PulseGenSingleStep(struct simobj_PulseGen *ppg, double dTime);;
-struct simobj_PulseGen * PulseGenNew(char *pcName);
-int PulseGenReset(struct simobj_PulseGen *ppg);
-int PulseGenFinish(struct simobj_PulseGen *ppg);
+extern int PulseGenSingleStep(struct simobj_PulseGen *ppg, double dTime);
+extern struct simobj_PulseGen * PulseGenNew(char *pcName);
+extern int PulseGenReset(struct simobj_PulseGen *ppg);
+extern int PulseGenFinish(struct simobj_PulseGen *ppg);
+%}
 
 %typemap (in) void*
 {
