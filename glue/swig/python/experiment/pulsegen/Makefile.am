@@ -10,6 +10,9 @@ BUILT_SOURCES = \
 	pulsegen_wrap.c \
 	pulsegen_base.py 
 
+dist-hook:
+	cp $(srcdir)/pulsegen.i $(distdir)
+
 all: _pulsegen_base.so
 
 _pulsegen_base.so: pulsegen_wrap.o
@@ -17,17 +20,17 @@ _pulsegen_base.so: pulsegen_wrap.o
 #ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.so /usr/lib/bundle1.o pulsegen_wrap.o
 
 pulsegen_wrap.o: pulsegen_wrap.c
-	gcc $(SWIGCOMPILELINKSFORPYTHON) -c pulsegen_wrap.c
+	gcc $(SWIGCOMPILELINKSFORPYTHON) -c $(srcdir)/pulsegen_wrap.c
 
 pulsegen_wrap.c: 
-	$(SWIG) -python -o pulsegen_wrap.c pulsegen.i
+	$(SWIG) -python -o $(srcdir)/pulsegen_wrap.c $(srcdir)/pulsegen.i
 
 clean-local:
-	rm -f *.o *.pyc *.so
+	rm -f $(srcdir)/*.o $(srcdir)/*.pyc $(srcdir)/*.so
 
 CLEANFILES = \
-	pulsegen_wrap.c \
-	pulsegen_wrap.o \
-	pulsegen_base.so \
-	pulsegen_base.py
+	$(srcdir)/pulsegen_wrap.c \
+	$(srcdir)/pulsegen_wrap.o \
+	$(srcdir)/pulsegen_base.so \
+	$(srcdir)/pulsegen_base.py
 

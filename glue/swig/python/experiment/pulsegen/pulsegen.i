@@ -32,6 +32,17 @@ int PulseGenSingleStep(struct simobj_PulseGen *ppg, double dTime);;
 struct simobj_PulseGen * PulseGenNew(char *pcName);
 int PulseGenReset(struct simobj_PulseGen *ppg);
 int PulseGenFinish(struct simobj_PulseGen *ppg);
+
+%typemap (in) void*
+{
+  if (PyCObject_Check($input))
+  {
+
+    $1 = PyCObject_AsVoidPtr($input)
+
+  }
+}
+
 int PulseGenAddInput(struct simobj_PulseGen *ppg, void *pvInput);
 int PulseGenAddVariable(struct simobj_PulseGen *ppg, void *pvOutput);
 

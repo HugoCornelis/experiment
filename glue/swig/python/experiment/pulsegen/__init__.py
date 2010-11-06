@@ -56,7 +56,7 @@ class PulseGen:
         self.spg.dDelay2 = delay2
         self.spg.dBaseLevel = base_level
         self.spg.iTriggerMode = trigger_mode
-#        self.spg.pdPulseOut = 0.0
+        self.spg.pdPulseOut = None
 
         self.pulse_out = None
         
@@ -185,7 +185,7 @@ class PulseGen:
 
         # casting pointer to a void
         pvout = cast(pout,POINTER(c_void_p))
-        #pdb.set_trace()
+        pdb.set_trace()
         PulseGenAddVariable(self.spg,pout)
 
         #http://www.swig.org/Doc1.3/Varargs.html
