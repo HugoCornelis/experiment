@@ -1,7 +1,9 @@
 %module pulsegen_base	
 
-# Some detailed swig information for handling pointers
-#- http://embedded.eecs.berkeley.edu/Alumni/pinhong/scriptEDA/pyTypemapFAQ.html#overcast
+# Some information
+#- typemapes and functions: http://www.swig.org/Doc1.3/Python.html#Python_nn55
+#- type conversion: http://www.swig.org/Doc1.3/Typemaps.html#Typemaps_nn3
+#- typemaps -http://embedded.eecs.berkeley.edu/Alumni/pinhong/scriptEDA/pyTypemapFAQ.html#overcast
 
 
 %{
