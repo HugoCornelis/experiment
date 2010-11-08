@@ -125,6 +125,10 @@ extern int PulseGenAddVariable(struct simobj_PulseGen *ppg, void *pvOutput);
   $1 = PyInt_AsLong($input);
   printf("Received an integer : %d\n",  (int)$1);
 }
+
+%typemap(out) int {
+  $result = PyInt_FromLong($1);
+}
 %inline %{
 extern int fact(int nonnegative);
 %}

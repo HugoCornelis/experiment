@@ -188,8 +188,8 @@ class PulseGen:
         #pvout = self.ptrcast(c_void_p,pout)
         #o = 10.0
         d = 100
-        #pulsegen_base.fact(d)
-        PulseGenAddVariable(self.spg,d)
+        pulsegen_base.fact(d)
+        #PulseGenAddVariable(self.spg,d)
        
         #http://www.swig.org/Doc1.3/Varargs.html
         #http://python.net/crew/theller/ctypes/tutorial.html#pointers
