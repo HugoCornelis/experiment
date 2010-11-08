@@ -1,17 +1,6 @@
 %module pulsegen_base	
 
 
-//Import our structs and make data objects out of them
-%include "../../../../../experiment/pulsegen.h"
-
-//%include "cpointer.i"
-
-//%pointer_functions(int,intp);
-
-//%pointer_functions(double,doublep);
-
-
-//--------------------------------------------------------------------------------
 %{
 #include <float.h>
 #include <math.h>
@@ -20,25 +9,7 @@
 #include <string.h>
 #include "../../../../../experiment/pulsegen.h"
 
-extern struct simobj_PulseGen * PulseGenNew(char *pcName);
-extern int PulseGenSetFields(
-	struct simobj_PulseGen *ppg,
-	double dLevel1,
- 	double dWidth1,
- 	double dDelay1,
- 	double dLevel2,
- 	double dWidth2,
- 	double dDelay2,
- 	double dBaseLevel,
- 	int iTriggerMode
-	);
-extern int PulseGenSingleStep(struct simobj_PulseGen *ppg, double dTime);
-extern struct simobj_PulseGen * PulseGenNew(char *pcName);
-extern int PulseGenReset(struct simobj_PulseGen *ppg);
-extern int PulseGenFinish(struct simobj_PulseGen *ppg);
-extern int PulseGenAddInput(struct simobj_PulseGen *ppg, void *pvInput);
-extern int PulseGenAddVariable(struct simobj_PulseGen *ppg, void *pvOutput);
-
+// This is just an example function
 int fact(int nonnegative)
 {
 
@@ -46,61 +17,28 @@ int fact(int nonnegative)
 
 }
 %}
-//--------------------------------------------------------------------------------
 
 
-%typemap(in) void *pvInput
-{
-  
-  printf("Recieved a void %f\n",(double)(*$input));
+/* commented out for now
+%typemap(in) double {
 
-
-}
-
-%typemap(out) void *pvInput
-{
-  
-  printf("Recieved a void %f\n",(double)(*$input));
-
-
-}
-
-
-%typemap(in) void * pvOutput
-{
-  
-  printf("Recieved a void %f\n",(double)(*$input));
-
-
-}
-
-
-%typemap(out) void * pvOutput
-{
-  
-  printf("Recieved a void %f\n",(double)(*$input));
-
-
+  $1 = PyFloat_AsDouble($input);
+  printf("Checked a double : %f\n",  (double)$1);
 }
 
 
 
+%typemap(in) char *pcName {
+  printf("Got a name!\n");
 
-%typemap(out) void * pvOutput
-{
-  
-  printf("Recieved a void %f\n",(double)(*$input));
-
-
+  $1 = $input;
 }
+*/
 
 
-%typemap(in) void * pvOutput {
-  printf("Received an pvOutput : %f\n",  (double)*$1);
-}
-
-// Wrap these functions
 extern struct simobj_PulseGen * PulseGenNew(char *pcName);
+
+
 extern int PulseGenSetFields(
 	struct simobj_PulseGen *ppg,
 	double dLevel1,
@@ -120,15 +58,27 @@ extern int PulseGenAddInput(struct simobj_PulseGen *ppg, void *pvInput);
 extern int PulseGenAddVariable(struct simobj_PulseGen *ppg, void *pvOutput);
 
 
-
+/* Commented out for now
 %typemap(in) int {
   $1 = PyInt_AsLong($input);
   printf("Received an integer : %d\n",  (int)$1);
+  $1+= 100;
 }
 
 %typemap(out) int {
   $result = PyInt_FromLong($1);
+  printf("Outputting an integer : %d\n",  (int)$1);
 }
+*/
+
 %inline %{
 extern int fact(int nonnegative);
 %}
+
+
+/*------------------------------------------------------------------------
+* Grab the original header file so SWIG can import the prototypes and
+* create low level data classes out of the member structs. Apparently this
+* line must be at the end of the file otherwise SWIG will ignore my typemaps.
+*------------------------------------------------------------------------*/
+%include "../../../../../experiment/pulsegen.h"

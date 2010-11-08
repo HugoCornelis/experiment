@@ -174,24 +174,7 @@ class PulseGen:
 
     def AddVariable(self,output):
 
-        # create C instance 'double out = output'
-        #out = c_double(output)
-
-        #byref(out)
-        
-        # double *pout = &out
-        #pout = pointer(out)
-
-        # casting pointer to a void
-        #pvout = cast(pout,POINTER(c_void_p))
-        #pdb.set_trace()
-        #pvout = self.ptrcast(c_void_p,pout)
-        #o = 10.0
-        d = 100
-        pulsegen_base.fact(d)
-        #PulseGenAddVariable(self.spg,d)
+        PulseGenAddVariable(self.spg,output)
        
-        #http://www.swig.org/Doc1.3/Varargs.html
-        #http://python.net/crew/theller/ctypes/tutorial.html#pointers
-
+ 
 
