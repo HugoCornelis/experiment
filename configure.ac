@@ -50,6 +50,9 @@ AM_PATH_PYTHON(,[],[
    exit -1
 ])
 
+AC_MSG_CHECKING([Python prefix is!!!!!])
+  AC_MSG_RESULT(['$PYTHON_PREFIX'])
+
 dnl
 dnl This is a forced fix to make sure a mac installation gets the proper
 dnl python executable. Unless the macpython installer was run, the autotools
@@ -64,13 +67,20 @@ case "$host_os" in
     PYTHON=$PYTHON_PREFIX/bin/python
     AC_SUBST(PYTHON)
 
+    AC_CHECK_PROG(HAVE_PYTHON_CONFIG, python-config, "yes", "no",[$PYTHON_PREFIX/bin])
+    AC_MSG_CHECKING([python-config present])
+    AC_MSG_RESULT([$HAVE_PYTHON_CONFIG])
+  ;;
+  *)
+
+    AC_CHECK_PROG(HAVE_PYTHON_CONFIG, python-config, "yes", "no")
+    AC_MSG_CHECKING([python-config present])
+    AC_MSG_RESULT([$HAVE_PYTHON_CONFIG])
+
   ;;
 esac
 
 
-AC_CHECK_PROG(HAVE_PYTHON_CONFIG, python-config, "yes", "no",[$PYTHON_PREFIX/bin])
-AC_MSG_CHECKING([python-config present])
-AC_MSG_RESULT([$HAVE_PYTHON_CONFIG])
 
 
 if test "$HAVE_PYTHON_CONFIG" == "yes"; then
@@ -127,6 +137,9 @@ else
   # This has always been a bit error prone, particularly if the 
   # user has more than one python version installed.
  
+  AC_MSG_CHECKING([Herp])
+  AC_MSG_RESULT([Derp])
+
   PYTHON_PREFIX=`echo $PYTHON | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
   PYTHON_PREFIX=`echo $PYTHON_PREFIX | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
   AC_SUBST(PYTHON_PREFIX)
@@ -432,7 +445,7 @@ case "$host_os" in
    SWIGCOMPILECOMMAND_PYTHON='gcc $(SWIGCOMPILELINKSFORPYTHON) -c swiggable_experiment_wrap.c'
    AC_SUBST(SWIGCOMPILECOMMAND_PYTHON)
 
-    SWIGLDLINKSFORPYTHON='-g -L${top_builddir} -lexperiment -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC -Xlinker -export-dynamic'
+    SWIGLDLINKSFORPYTHON='-g -L${top_builddir} -lexperiment -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC -Xlinker -export-dynamic $(PYTHON_LDFLAGS)'
     AC_SUBST(SWIGLDLINKSFORPYTHON)
 
     SWIGLINKCOMMAND_PYTHON='gcc -shared swiggable_experiment_wrap.o $(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.$(PYTHONLIB_EXTENSION)'

@@ -7,9 +7,6 @@ import os
 import sys
 import pdb
 
-# from ctypes import c_double
-# from ctypes import pointer
-from ctypes import * # remove this later
 
 try:
 
@@ -178,19 +175,22 @@ class PulseGen:
     def AddVariable(self,output):
 
         # create C instance 'double out = output'
-        out = c_double(output)
+        #out = c_double(output)
 
-        byref(out)
+        #byref(out)
         
         # double *pout = &out
-        pout = pointer(out)
+        #pout = pointer(out)
 
         # casting pointer to a void
-        pvout = cast(pout,POINTER(c_void_p))
+        #pvout = cast(pout,POINTER(c_void_p))
         #pdb.set_trace()
         #pvout = self.ptrcast(c_void_p,pout)
-        PulseGenAddVariable(self.spg,pvout)
-
+        #o = 10.0
+        d = 100
+        #pulsegen_base.fact(d)
+        PulseGenAddVariable(self.spg,d)
+       
         #http://www.swig.org/Doc1.3/Varargs.html
         #http://python.net/crew/theller/ctypes/tutorial.html#pointers
 
