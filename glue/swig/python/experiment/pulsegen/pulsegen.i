@@ -1,6 +1,8 @@
 %module pulsegen_base	
 
-
+/***************************************************
+* Start C code block
+***************************************************/
 %{
 #include <float.h>
 #include <math.h>
@@ -17,6 +19,11 @@ int fact(int nonnegative)
 
 }
 %}
+
+/***************************************************
+* End C code block
+***************************************************/
+
 
 
 /* commented out for now
@@ -35,6 +42,28 @@ int fact(int nonnegative)
 }
 */
 
+%typemap(in) void *pvOutput
+{
+
+  double dTemp = PyFloat_AsDouble($input);
+
+  $1 = (double*)&dTemp;
+
+  printf("Got a void pointer: %f\n",(double)(dTemp));
+
+
+}
+
+
+%typemap(out) void *pvOutput
+{
+
+  $result = PyFloat_FromDouble($1);
+
+  printf("Outputting a void pointer: %f\n",(double)($1));
+
+
+}
 
 extern struct simobj_PulseGen * PulseGenNew(char *pcName);
 

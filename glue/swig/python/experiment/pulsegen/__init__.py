@@ -53,7 +53,7 @@ class PulseGen:
         self.spg.dDelay2 = delay2
         self.spg.dBaseLevel = base_level
         self.spg.iTriggerMode = trigger_mode
-        #self.spg.pdPulseOut = pointer(c_double(float(1.0)))
+#        self.spg.pdPulseOut = pointer(c_double(float(1.0)))
 
         self.pulse_out = None
         
