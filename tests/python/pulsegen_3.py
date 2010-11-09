@@ -35,6 +35,7 @@ for i in range(0,200):
 
   pg.SingleStep(dtime)
   dtime += stepsize
-  print "%f %f" % (dtime,pg.pg.GetOutPut())
+  pdb.set_trace()
+  print "%f %f" % (dtime,pg.GetOutput())
 
 print "Done!"
