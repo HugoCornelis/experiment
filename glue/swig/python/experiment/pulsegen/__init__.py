@@ -29,6 +29,9 @@ from pulsegen_base import FREE_RUN
 from pulsegen_base import EXT_TRIG
 from pulsegen_base import EXT_GATE
 
+FREE_RUN = pulsegen_base.FREE_RUN
+EXT_TRIG = pulsegen_base.EXT_TRIG
+EXT_GATE = pulsegen_base.EXT_GATE
 
 __author__ = 'Mando Rodriguez'
 __credits__ = []

@@ -16,10 +16,13 @@ sys.path.append(pulsegen_path)
 
 from test_library import print_pulsegen
 from pulsegen import PulseGen
+from pulsegen import FREE_RUN
 
 pg = PulseGen("Test name", 50.0, 3.0, 5.0, -20.0,
               5.0, 8.0, 10.0, 0)
 
+
+pg.SetTriggerMode(FREE_RUN)
 
 dtime = 0.0
 steps = 200
