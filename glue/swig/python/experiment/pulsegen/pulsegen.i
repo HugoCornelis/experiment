@@ -55,7 +55,30 @@ int fact(int nonnegative)
 }
 
 
-%typemap(out) void *pvOutput
+%typemap(in) void *pvInput
+{
+
+  double dTemp = PyFloat_AsDouble($input);
+
+  $1 = (double*)&dTemp;
+
+  printf("Got a void pointer: %f\n",(double)(dTemp));
+
+
+}
+
+%typemap(out) void *pvInput
+{
+
+  $result = PyFloat_FromDouble($1);
+
+  printf("Outputting a void pointer: %f\n",(double)($1));
+
+
+}
+
+
+%typemap(out) void *pvInput
 {
 
   $result = PyFloat_FromDouble($1);
