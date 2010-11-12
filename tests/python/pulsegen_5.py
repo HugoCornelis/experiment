@@ -21,7 +21,7 @@ pg = PulseGen("Test name", 50.0, 3.0, 5.0, -20.0,
               5.0, 8.0, 10.0, 0)
 
 
-d = 0.0
+d = 10.0
 pg.AddVariable(d)
 
 print "Value in added variable is %f" % pg.GetOutput()

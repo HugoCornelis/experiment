@@ -11,6 +11,7 @@
 #include <string.h>
 #include "../../../../../experiment/pulsegen.h"
 
+
 // This is just an example function
 int fact(int nonnegative)
 {
@@ -25,6 +26,8 @@ int fact(int nonnegative)
 ***************************************************/
 
 %import "cpointer.i"
+
+%pointer_functions(double,pdouble);
 
 /* commented out for now
 %typemap(in) double {
@@ -87,16 +90,14 @@ int fact(int nonnegative)
 }
 */
 
-/*%typemap(argout) void *pvInput
+%typemap(argout) void *pvInput
 {
-  PyObject *o;
-  double * dTemp;
-  dTemp = &$input;
-  o = PyFloat_FromDouble((double)$1);
+  double *tmp = (double*)malloc(sizeof(double));
 
-  $result = o;
+  *tmp = 100.0;
+  $1 = tmp;
 }
-*/
+
 extern struct simobj_PulseGen * PulseGenNew(char *pcName);
 
 

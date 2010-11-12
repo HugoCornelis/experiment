@@ -24,6 +24,12 @@ from pulsegen_base import PulseGenReset
 from pulsegen_base import PulseGenSingleStep
 from pulsegen_base import PulseGenSetFields
 
+from pulsegen_base import new_pdouble
+from pulsegen_base import copy_pdouble
+from pulsegen_base import delete_pdouble
+from pulsegen_base import pdouble_assign
+from pulsegen_base import pdouble_value
+
 #importing our constants.
 from pulsegen_base import FREE_RUN
 from pulsegen_base import EXT_TRIG
@@ -132,22 +138,14 @@ class PulseGen:
 
         return self.spg.iTriggerMode
 
-    def SetOutput(self,output):
-
-        dout = c_double(output)
-
-        pdout = pointer(dout)
-
-        self.spg.pdPulseOut = pdout
-
-
     def GetOutput(self):
 
         if self.spg.pdPulseOut == None:
 
             return None
-        pdb.set_trace()
-        return self.spg.pdPulseOut
+
+        #pdb.set_trace()
+        return pdouble_value(self.spg.pdPulseOut)
 
     def SingleStep(self,time=0.0):
 
