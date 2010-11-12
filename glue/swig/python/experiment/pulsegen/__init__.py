@@ -146,8 +146,8 @@ class PulseGen:
         if self.spg.pdPulseOut == None:
 
             return None
-
-        return self.spg.pdPulseOut[0]
+        pdb.set_trace()
+        return self.spg.pdPulseOut
 
     def SingleStep(self,time=0.0):
 
@@ -179,5 +179,5 @@ class PulseGen:
 
         PulseGenAddVariable(self.spg,output)
        
- 
+        
 

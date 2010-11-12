@@ -24,7 +24,7 @@ int fact(int nonnegative)
 * End C code block
 ***************************************************/
 
-
+%import "cpointer.i"
 
 /* commented out for now
 %typemap(in) double {
@@ -41,6 +41,13 @@ int fact(int nonnegative)
   $1 = $input;
 }
 */
+
+
+%typemap(out) int 
+{
+  $result = PyInt_FromLong($1);
+}
+
 
 %typemap(in) void *pvOutput
 {
@@ -62,32 +69,34 @@ int fact(int nonnegative)
 
   $1 = (double*)&dTemp;
 
-  printf("Got a void pointer: %f\n",(double)(dTemp));
+  printf("Got a void pointer 1: %f\n",(double)(dTemp));
 
 
 }
 
-%typemap(out) void *pvInput
+/*%typemap(out) void *pvInput
 {
 
   $result = PyFloat_FromDouble($1);
+
+  
 
   printf("Outputting a void pointer: %f\n",(double)($1));
 
 
 }
+*/
 
-
-%typemap(out) void *pvInput
+/*%typemap(argout) void *pvInput
 {
+  PyObject *o;
+  double * dTemp;
+  dTemp = &$input;
+  o = PyFloat_FromDouble((double)$1);
 
-  $result = PyFloat_FromDouble($1);
-
-  printf("Outputting a void pointer: %f\n",(double)($1));
-
-
+  $result = o;
 }
-
+*/
 extern struct simobj_PulseGen * PulseGenNew(char *pcName);
 
 
