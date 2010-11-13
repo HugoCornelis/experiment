@@ -95,6 +95,50 @@ Done!
 
 			       },
 
+
+			       {
+				arguments => [
+					     ],
+				command => 'tests/python/pulsegen_freerun.py',
+				command_tests => [
+						  {
+						   description => "Can a single pulsegen object output amplitude in free run mode ?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pulsegen-freerun.txt`),
+						   timeout => 40,
+						  },
+						 ],
+				description => "pulsegen functionality, can we output a current in free run mode?",
+			       },
+
+
+			       {
+				arguments => [
+					     ],
+				command => 'tests/python/pulsegen_extgate.py',
+				command_tests => [
+						  {
+						   description => " Can a single pulsegen object output amplitude in ext gate mode?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pulsegen-extgate.txt`),
+						   timeout => 40,
+						  },
+						 ],
+				description => "pulsegen functionality, can we output a constant pulse with no trigger ?",
+			       },
+			       {
+				arguments => [
+					     ],
+				command => 'tests/python/pulsegen_exttrig.py',
+				command_tests => [
+						  {
+						   description => "Can a single pulsegen object output amplitude in ext gate mode ?",
+						   read => (join '', `cat $::config->{core_directory}/tests/specifications/strings/pulsegen-exttrig.txt`),
+						   timeout => 40,
+						  },
+						 ],
+				description => "pulsegen functionality, can we output a constant pulse with no gate input ?",
+			       },
+
+
 			      ],
        description => "Tests for the PulseGen python bindings.",
        name => 'python_pulsegen.t',
