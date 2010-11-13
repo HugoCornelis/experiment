@@ -47,24 +47,17 @@ __status__ = "Development"
 
 class PulseGen:
 
-    def __init__(self,name="", level1=0, width1=0, delay1=0,
+    def __init__(self,name="Unnamed PulseGen",
+                 level1=0, width1=0, delay1=0,
                  level2=0, width2=0, delay2=0,
                  base_level=0, trigger_mode=0):
 
-        self.spg = PulseGenNew("My Pulsegen")
+        self.spg = PulseGenNew(name)
 
-        self.spg.pcName = name
-        self.spg.dLevel1 = level1
-        self.spg.dWidth1 = width1
-        self.spg.dDelay1 = delay1
-        self.spg.dLevel2 = level2
-        self.spg.dWidth2 = width2
-        self.spg.dDelay2 = delay2
-        self.spg.dBaseLevel = base_level
-        self.spg.iTriggerMode = trigger_mode
-#        self.spg.pdPulseOut = pointer(c_double(float(1.0)))
-
-        self.pulse_out = None
+        PulseGenSetFields(self.spg,
+                          level1,width1,delay1,
+                          level2,width2,delay2,
+                          base_level,trigger_mode)
         
     def SetName(self,name):
 

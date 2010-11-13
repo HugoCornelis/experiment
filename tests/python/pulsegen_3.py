@@ -33,9 +33,8 @@ pg.AddVariable(pulseout)
 
 for i in range(0,200):
 
+  print "%.1f %d" % (dtime,pg.GetOutput())
   pg.SingleStep(dtime)
   dtime += stepsize
-  pdb.set_trace()
-  print "%f %f" % (dtime,pg.GetOutput())
 
 print "Done!"
