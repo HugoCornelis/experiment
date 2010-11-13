@@ -11,6 +11,17 @@
 #include <string.h>
 #include "../../../../../experiment/pulsegen.h"
 
+double GetOutput(struct simobj_PulseGen *ppg)
+{
+  if(!ppg || !ppg->pdPulseOut)
+  {
+    return FLT_MAX;
+  }
+
+  printf("The output val is %f\n\n",(double)(*ppg->pdPulseOut));
+  return (*ppg->pdPulseOut);
+
+}
 
 // This is just an example function
 int fact(int nonnegative)
@@ -28,6 +39,9 @@ int fact(int nonnegative)
 %import "cpointer.i"
 
 %pointer_functions(double,pdouble);
+
+%import "typemaps.i"
+
 
 /* commented out for now
 %typemap(in) double {
@@ -57,10 +71,11 @@ int fact(int nonnegative)
 
   double dTemp = PyFloat_AsDouble($input);
 
-  $1 = (double*)&dTemp;
+  double *dOutput = (double*)malloc(sizeof(double));
 
-  printf("Got a void pointer: %f\n",(double)(dTemp));
+  *dOutput = dTemp;
 
+  $1 = (double*)dOutput;
 
 }
 
@@ -80,15 +95,13 @@ int fact(int nonnegative)
 /*%typemap(out) void *pvInput
 {
 
-  $result = PyFloat_FromDouble($1);
-
-  
+  $result = PyFloat_FromDouble($1);  
 
   printf("Outputting a void pointer: %f\n",(double)($1));
 
 
 }
-*/
+
 
 %typemap(argout) void *pvInput
 {
@@ -97,10 +110,9 @@ int fact(int nonnegative)
   *tmp = 100.0;
   $1 = tmp;
 }
+*/
 
 extern struct simobj_PulseGen * PulseGenNew(char *pcName);
-
-
 extern int PulseGenSetFields(
 	struct simobj_PulseGen *ppg,
 	double dLevel1,
@@ -137,6 +149,9 @@ extern int PulseGenAddVariable(struct simobj_PulseGen *ppg, void *pvOutput);
 extern int fact(int nonnegative);
 %}
 
+%inline %{
+extern double GetOutput(struct simobj_PulseGen *ppg);
+%}
 
 /*------------------------------------------------------------------------
 * Grab the original header file so SWIG can import the prototypes and

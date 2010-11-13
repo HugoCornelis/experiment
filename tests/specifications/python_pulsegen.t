@@ -77,6 +77,24 @@ Done!
 
 			       },
 
+
+			       {
+
+				command => 'tests/python/pulsegen_5.py',
+				command_tests => [
+						  {
+						   description => "Can set an output variable ?",
+
+						   read => "Value in added variable is 10.000000
+Done!
+",
+
+						  },
+						 ],
+				description => "Creates an output variable for the pulsegen output",
+
+			       },
+
 			      ],
        description => "Tests for the PulseGen python bindings.",
        name => 'python_pulsegen.t',
