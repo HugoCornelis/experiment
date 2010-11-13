@@ -25,16 +25,21 @@ pg = PulseGen("Test name", 50.0, 3.0, 5.0, -20.0,
 pg.SetTriggerMode(FREE_RUN)
 
 dtime = 0.0
-steps = 200
+steps = 12
 stepsize = 0.5
 pulseout = 0.0
 
 pg.AddVariable(pulseout)
 
-for i in range(0,200):
+for i in range(0,steps):
 
-  print "%.1f %d" % (dtime,pg.GetOutput())
   pg.SingleStep(dtime)
   dtime += stepsize
+
+print "Output value before reset %.1f" % pg.GetOutput()
+
+pg.Reset()
+
+print "Output value after reset %.1f" % pg.GetOutput()
 
 print "Done!"

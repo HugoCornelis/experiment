@@ -77,6 +77,26 @@ Done!
 
 			       },
 
+			       {
+
+				arguments => [
+					     ],
+				command => 'tests/python/pulsegen_3.py',
+				command_tests => [
+						  {
+						   description => "Can we reset a pulsegen object from python ?",
+
+						   read => "Output value before reset 50.0
+Output value after reset 10.0
+Done!
+",
+
+						  },
+						 ],
+				description => "Creates a pulsegen object, steps 12 steps then resets",
+
+			       },
+
 
 			       {
 
