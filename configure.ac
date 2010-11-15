@@ -483,7 +483,6 @@ AC_SUBST(TEST_SPECIFICATION_FILES)
 AC_CONFIG_FILES([Makefile
                  glue/Makefile
                  glue/swig/perl/Makefile
-                 glue/swig/python/Makefile
 		 glue/swig/python/experiment/Makefile
 		 glue/swig/python/experiment/pulsegen/Makefile
                  tests/Makefile])
