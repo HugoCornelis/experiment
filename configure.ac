@@ -370,20 +370,28 @@ case "$host_os" in
 	*darwin10.2.0 | *darwin10.3.0 | *darwin10.4.0)
 	    dnl This is snow leopard
 
-            SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.$(PYTHONLIB_EXTENSION) /usr/lib/bundle1.o swiggable_experiment_wrap.o'
+            SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.so /usr/lib/bundle1.o swiggable_experiment_wrap.o'
             AC_SUBST(SWIGLINKCOMMAND_PYTHON)
 
 
-            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.$(PYTHONLIB_EXTENSION) /usr/lib/bundle1.o pulsegen_wrap.o'
-            AC_SUBST(SWIGLINKCOMMAND_PYTHON)
+            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.so /usr/lib/bundle1.o pulsegen_wrap.o'
+            AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)
+
+            PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _perfectclamp_base.so /usr/lib/bundle1.o perfectclamp_wrap.o'
+            AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)
+
 	;;
 	*)
-            SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.$(PYTHONLIB_EXTENSION)  swiggable_experiment_wrap.o'
+            SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.so  swiggable_experiment_wrap.o'
             AC_SUBST(SWIGLINKCOMMAND_PYTHON)
 
 
-            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.$(PYTHONLIB_EXTENSION)  pulsegen_wrap.o'
+            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.so  pulsegen_wrap.o'
             AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)	
+
+            PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _perfectclamp_base.so  perfectclamp_wrap.o'
+            AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)	
+
         ;;
     esac 
 
@@ -452,8 +460,12 @@ case "$host_os" in
     AC_SUBST(SWIGLINKCOMMAND_PYTHON)
 
 
-    PULSEGEN_SWIGLINKCOMMAND_PYTHON='gcc -shared pulsegen_wrap.o $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.$(PYTHONLIB_EXTENSION)'
+    PULSEGEN_SWIGLINKCOMMAND_PYTHON='gcc -shared pulsegen_wrap.o $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.so'
     AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)
+
+
+    PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='gcc -shared perfectclamp_wrap.o $(SWIGLDLINKSFORPYTHON) -o _perfectclamp_base.so'
+    AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)
     dnl }}} End of General Settings
 
   ;;
@@ -472,6 +484,7 @@ AC_CONFIG_FILES([Makefile
                  glue/Makefile
                  glue/swig/perl/Makefile
                  glue/swig/python/Makefile
+		 glue/swig/python/experiment/Makefile
 		 glue/swig/python/experiment/pulsegen/Makefile
                  tests/Makefile])
 AC_OUTPUT

@@ -16,7 +16,7 @@
 ##############################################################################
 
 
-SUBDIRS = experiment/pulsegen
+SUBDIRS = experiment/ experiment/pulsegen
 
 
 #t the following rules are crap complete, would be good if a auto
