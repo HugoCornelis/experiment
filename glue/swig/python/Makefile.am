@@ -22,41 +22,41 @@ SUBDIRS = experiment/ experiment/pulsegen
 #t the following rules are crap complete, would be good if a auto
 #t expert takes a look at it.
 
-dist-hook:
-	cp $(srcdir)/experiment.i $(distdir)
-	$(INSTALL) -d $(distdir)/tests
-	cp $(srcdir)/tests/*.py $(distdir)/tests
+#dist-hook:
+#	cp $(srcdir)/experiment.i $(distdir)
+#	$(INSTALL) -d $(distdir)/tests
+#	cp $(srcdir)/tests/*.py $(distdir)/tests
 
-swigdir = $(prefix)/glue/swig
+#swigdir = $(prefix)/glue/swig
 
-#t use $(swigdir) here
+##t use $(swigdir) here
 
-pythondir = $(prefix)/glue/swig/python
+#pythondir = $(prefix)/glue/swig/python
 
-nobase_python_HEADERS = 
+#nobase_python_HEADERS = 
 
-python_DATA = $(srcdir)/experiment.i SwiggableExperiment.py _SwiggableExperiment.$(PYTHONLIB_EXTENSION) tests/experiment_test.py
+#python_DATA = $(srcdir)/experiment.i SwiggableExperiment.py _SwiggableExperiment.$(PYTHONLIB_EXTENSION) tests/experiment_test.py
 
-BUILT_SOURCES = \
-	SwiggableExperiment.py \
-	swiggable_experiment_wrap.c
+#BUILT_SOURCES = \
+#	SwiggableExperiment.py \
+#	swiggable_experiment_wrap.c
 
-SwiggableExperiment.py swiggable_experiment_wrap.c: $(swig_DATA)
-	$(SWIG) -I$(builddir)../../.. -I$(srcdir)/../../.. -python -makedefault -module SwiggableExperiment -o swiggable_experiment_wrap.c $(srcdir)/experiment.i 
+#SwiggableExperiment.py swiggable_experiment_wrap.c: $(swig_DATA)
+#	$(SWIG) -I$(builddir)../../.. -I$(srcdir)/../../.. -python -makedefault -module SwiggableExperiment -o swiggable_experiment_wrap.c $(srcdir)/experiment.i 
 
-swiggable_experiment_wrap.o: swiggable_experiment_wrap.c
-	$(SWIGCOMPILECOMMAND_PYTHON)
+#swiggable_experiment_wrap.o: swiggable_experiment_wrap.c
+#	$(SWIGCOMPILECOMMAND_PYTHON)
 
 
-_SwiggableExperiment.$(PYTHONLIB_EXTENSION): swiggable_experiment_wrap.o
-	$(SWIGLINKCOMMAND_PYTHON)
+#_SwiggableExperiment.$(PYTHONLIB_EXTENSION): swiggable_experiment_wrap.o
+#	$(SWIGLINKCOMMAND_PYTHON)
 
-all: _SwiggableExperiment.$(PYTHONLIB_EXTENSION)
+#all: _SwiggableExperiment.$(PYTHONLIB_EXTENSION)
 
-CLEANFILES = \
-	SwiggableExperiment.py \
-	swiggable_experiment_wrap.c \
-	swiggable_experiment_wrap.o \
-	_SwiggableExperiment.$(PYTHONLIB_EXTENSION)
+#CLEANFILES = \
+#	SwiggableExperiment.py \
+#	swiggable_experiment_wrap.c \
+#	swiggable_experiment_wrap.o \
+#	_SwiggableExperiment.$(PYTHONLIB_EXTENSION)
 
 
