@@ -38,7 +38,7 @@
 
 int
 PerfectClampAddVariable
-(struct PerfectClamp * ppc, void *pvVoltage)
+(struct simobj_PerfectClamp * ppc, void *pvVoltage)
 {
     //- set default result: ok
 
@@ -71,7 +71,7 @@ PerfectClampAddVariable
 /// \brief Free the voltage clamper.
 /// 
 
-int PerfectClampFinish(struct PerfectClamp * ppc)
+int PerfectClampFinish(struct simobj_PerfectClamp * ppc)
 {
     //- set default result: ok
 
@@ -111,7 +111,7 @@ int PerfectClampFinish(struct PerfectClamp * ppc)
 /// \brief Initiate the voltage clamper.
 /// 
 
-int PerfectClampInitiate(struct PerfectClamp * ppc)
+int PerfectClampInitiate(struct simobj_PerfectClamp * ppc)
 {
     //- set default result: ok
 
@@ -126,22 +126,22 @@ int PerfectClampInitiate(struct PerfectClamp * ppc)
 /// 
 /// \arg pcName name of this object.
 /// 
-/// \return struct PerfectClamp *
+/// \return struct simobj_PerfectClamp *
 /// 
 ///	voltage clamper, NULL for failure.
 /// 
 /// \brief voltage clamper.
 /// 
 
-struct PerfectClamp * PerfectClampNew(char *pcName)
+struct simobj_PerfectClamp * PerfectClampNew(char *pcName)
 {
     //- set default result: failure
 
-    struct PerfectClamp * ppcResult = NULL;
+    struct simobj_PerfectClamp * ppcResult = NULL;
 
     //- allocate voltage clamper
 
-    ppcResult = (struct PerfectClamp *)calloc(1, sizeof(struct PerfectClamp));
+    ppcResult = (struct simobj_PerfectClamp *)calloc(1, sizeof(struct simobj_PerfectClamp));
 
     if (!ppcResult)
     {
@@ -174,7 +174,7 @@ struct PerfectClamp * PerfectClampNew(char *pcName)
 
 int
 PerfectClampSetFields
-(struct PerfectClamp * ppc,
+(struct simobj_PerfectClamp * ppc,
  double dCommand,
  char *pcFilename)
 {
@@ -237,7 +237,7 @@ PerfectClampSetFields
 ///	Old current values are overwritten.
 /// 
 
-int PerfectClampSingleStep(struct PerfectClamp * ppc, double dTime)
+int PerfectClampSingleStep(struct simobj_PerfectClamp * ppc, double dTime)
 {
     //- set default result: ok
 

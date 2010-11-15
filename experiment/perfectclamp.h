@@ -23,7 +23,7 @@
 #include <stdio.h>
 
 
-struct PerfectClamp
+struct simobj_PerfectClamp
 {
     /// a string identifier, for what it is worth
 
@@ -52,19 +52,19 @@ struct PerfectClamp
 
 int
 PerfectClampAddVariable
-(struct PerfectClamp * ppc, void *pvVoltage);
+(struct simobj_PerfectClamp * ppc, void *pvVoltage);
 
-int PerfectClampSingleStep(struct PerfectClamp * ppc, double dTime);
+int PerfectClampSingleStep(struct simobj_PerfectClamp * ppc, double dTime);
 
-int PerfectClampFinish(struct PerfectClamp * ppc);
+int PerfectClampFinish(struct simobj_PerfectClamp * ppc);
 
-int PerfectClampInitiate(struct PerfectClamp * ppc);
+int PerfectClampInitiate(struct simobj_PerfectClamp * ppc);
 
-struct PerfectClamp * PerfectClampNew(char *pcName);
+struct simobj_PerfectClamp * PerfectClampNew(char *pcName);
 
 int
 PerfectClampSetFields
-(struct PerfectClamp * ppc,
+(struct simobj_PerfectClamp * ppc,
  double dCommand,
  char *pcFilename);
 

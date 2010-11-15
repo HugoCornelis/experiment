@@ -132,13 +132,13 @@ void * output_generator_get_event_processor(struct OutputGenerator *pog)
 }
 
 
-void * perfect_clamp_get_driver_data(struct PerfectClamp *ppc)
+void * perfect_clamp_get_driver_data(struct simobj_PerfectClamp *ppc)
 {
     return((void *)ppc);
 }
 
 
-void * perfect_clamp_get_driver_method(struct PerfectClamp *ppc)
+void * perfect_clamp_get_driver_method(struct simobj_PerfectClamp *ppc)
 {
     return((void *)PerfectClampSingleStep);
 }
