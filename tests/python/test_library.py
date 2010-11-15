@@ -20,6 +20,14 @@ def print_simobj_pulsegen(spg):
     print "TriggerMode: %s" % spg.iTriggerMode
 
 
+def print_simobj_perfectclamp(spc):
+
+    print "Name: %s" % spc.pcName
+    print "Clamps Active: %d" % spc.iClampsActive
+#    print "Voltage: %s" % spc.pdVoltage
+    print "Command: %.2f" % spc.dCommand
+    print "Filename: %s" % spc.pcFilename
+    
 def print_pulsegen(pg):
 
     print "Name: %s" % pg.GetName()

@@ -16,6 +16,8 @@ Makefile$
 ^glue/swig/python/swiggable_experiment_wrap.c$
 ^glue/swig/python/experiment/pulsegen/pulsegen_base.py$
 ^glue/swig/python/experiment/pulsegen/pulsegen_wrap.c$
+^glue/swig/python/experiment/perfectclamp_base.py$
+^glue/swig/python/experiment/perfectclamp_wrap.c$
 ^html/
 ^installed$
 ^installed/
