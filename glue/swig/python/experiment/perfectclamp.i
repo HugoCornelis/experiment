@@ -31,7 +31,7 @@
 }
 
 
-%typemap(in) void *pvOutput
+%typemap(in) void *pvVoltage
 {
 
   double dTemp = PyFloat_AsDouble($input);
@@ -44,38 +44,6 @@
 
 }
 
-
-%typemap(in) void *pvInput
-{
-
-  double dTemp = PyFloat_AsDouble($input);
-
-  $1 = (double*)&dTemp;
-
-  printf("Got a void pointer 1: %f\n",(double)(dTemp));
-
-
-}
-
-/*%typemap(out) void *pvInput
-{
-
-  $result = PyFloat_FromDouble($1);  
-
-  printf("Outputting a void pointer: %f\n",(double)($1));
-
-
-}
-
-
-%typemap(argout) void *pvInput
-{
-  double *tmp = (double*)malloc(sizeof(double));
-
-  *tmp = 100.0;
-  $1 = tmp;
-}
-*/
 
 
 extern int PerfectClampAddVariable(struct simobj_PerfectClamp * ppc, void *pvVoltage);
