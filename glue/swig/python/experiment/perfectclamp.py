@@ -8,6 +8,13 @@ import os
 import pdb
 import sys
 
+try:
+
+    import pulsegen_base
+
+except ImportError:
+    sys.exit("Could not import compiled SWIG pulsegen_base library: %s")
+
 
 from perfectclamp_base import PerfectClampAddVariable
 from perfectclamp_base import PerfectClampFinish
