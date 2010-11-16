@@ -16,6 +16,11 @@ from perfectclamp_base import PerfectClampNew
 from perfectclamp_base import PerfectClampSetFields
 from perfectclamp_base import PerfectClampSingleStep
 
+from perfectclamp_base import new_pdouble
+from perfectclamp_base import copy_pdouble
+from perfectclamp_base import delete_pdouble
+from perfectclamp_base import pdouble_assign
+from perfectclamp_base import pdouble_value
 
 __author__ = 'Mando Rodriguez'
 __credits__ = []
@@ -34,6 +39,18 @@ class PerfectClamp:
 
         # exception?
 
+    def SetCommandVoltage(self,command):
+
+        self.pc.dCommand = command
+
+    def GetCommandVoltage(self):
+
+        return self.pc.dCommand
+
+    def GetVoltage(self):
+
+        return pdouble_value(self.pc.pdVoltage)
+    
     def SetFields(self,command,filename):
 
         result = PerfectClampSetFields(self.pc,
