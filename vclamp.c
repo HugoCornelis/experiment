@@ -39,7 +39,7 @@
 
 int
 VClampAddVariable
-(struct VClamp * pvc, double *pdVoltage, double *pdInjector)
+(struct simobj_VClamp * pvc, double *pdVoltage, double *pdInjector)
 {
     //- set default result: ok
 
@@ -74,7 +74,7 @@ VClampAddVariable
 /// \brief Free the voltage clamper.
 /// 
 
-int VClampFinish(struct VClamp * pvc)
+int VClampFinish(struct simobj_VClamp * pvc)
 {
     //- set default result: ok
 
@@ -100,7 +100,7 @@ int VClampFinish(struct VClamp * pvc)
 /// \brief Initiate the voltage clamper.
 /// 
 
-int VClampInitiate(struct VClamp * pvc)
+int VClampInitiate(struct simobj_VClamp * pvc)
 {
     //- set default result: ok
 
@@ -123,22 +123,22 @@ int VClampInitiate(struct VClamp * pvc)
 /// 
 /// \arg pcName name of this object.
 /// 
-/// \return struct VClamp *
+/// \return struct simobj_VClamp *
 /// 
 ///	voltage clamper, NULL for failure.
 /// 
 /// \brief voltage clamper.
 /// 
 
-struct VClamp * VClampNew(char *pcName)
+struct simobj_VClamp * VClampNew(char *pcName)
 {
     //- set default result: failure
 
-    struct VClamp * pvcResult = NULL;
+    struct simobj_VClamp * pvcResult = NULL;
 
     //- allocate voltage clamper
 
-    pvcResult = (struct VClamp *)calloc(1, sizeof(struct VClamp));
+    pvcResult = (struct simobj_VClamp *)calloc(1, sizeof(struct simobj_VClamp));
 
     if (!pvcResult)
     {
@@ -181,7 +181,7 @@ struct VClamp * VClampNew(char *pcName)
 
 int
 VClampSetFields
-(struct VClamp * pvc,
+(struct simobj_VClamp * pvc,
  double dInjected,
  double dC,
  double dR,
@@ -229,7 +229,7 @@ VClampSetFields
 ///	Old current values are overwritten.
 /// 
 
-int VClampSingleStep(struct VClamp * pvc, double dTime)
+int VClampSingleStep(struct simobj_VClamp * pvc, double dTime)
 {
     //- set default result: ok
 

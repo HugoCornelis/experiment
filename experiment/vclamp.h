@@ -23,7 +23,7 @@
 #include <stdio.h>
 
 
-struct VClamp
+struct simobj_VClamp
 {
     /// a string identifier, for what it is worth
 
@@ -81,19 +81,19 @@ struct VClamp
 
 int
 VClampAddVariable
-(struct VClamp * pvc, double *pdVoltage, double *pdInjector);
+(struct simobj_VClamp * pvc, double *pdVoltage, double *pdInjector);
 
-int VClampSingleStep(struct VClamp * pvc, double dTime);
+int VClampSingleStep(struct simobj_VClamp * pvc, double dTime);
 
-int VClampFinish(struct VClamp * pvc);
+int VClampFinish(struct simobj_VClamp * pvc);
 
-int VClampInitiate(struct VClamp * pvc);
+int VClampInitiate(struct simobj_VClamp * pvc);
 
-struct VClamp * VClampNew(char *pcName);
+struct simobj_VClamp * VClampNew(char *pcName);
 
 int
 VClampSetFields
-(struct VClamp * pvc,
+(struct simobj_VClamp * pvc,
  double dInjected,
  double dC,
  double dR,
