@@ -136,9 +136,6 @@ else
   # that do not have python-config can get the python info
   # This has always been a bit error prone, particularly if the 
   # user has more than one python version installed.
- 
-  AC_MSG_CHECKING([Herp])
-  AC_MSG_RESULT([Derp])
 
   PYTHON_PREFIX=`echo $PYTHON | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
   PYTHON_PREFIX=`echo $PYTHON_PREFIX | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
