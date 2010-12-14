@@ -50,7 +50,7 @@ AM_PATH_PYTHON(,[],[
    exit -1
 ])
 
-AC_MSG_CHECKING([Python prefix is!!!!!])
+AC_MSG_CHECKING([Python prefix is])
   AC_MSG_RESULT(['$PYTHON_PREFIX'])
 
 dnl
@@ -146,7 +146,7 @@ else
   AC_MSG_RESULT([$PYTHON_PREFIX])
 
 
-  PYTHON_HEADERS='$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)'
+  PYTHON_HEADERS=$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)
   AC_SUBST(PYTHON_HEADERS)
 
   AC_MSG_CHECKING([Python includes are])
