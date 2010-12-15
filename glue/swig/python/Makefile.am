@@ -33,9 +33,11 @@ swigdir = $(prefix)/glue/swig
 
 pythondir = $(prefix)/glue/swig/python
 
-nobase_python_HEADERS = 
+nobase_python_HEADERS = experiment/__init__.py
 
-python_DATA = $(srcdir)/experiment.i SwiggableExperiment.py _SwiggableExperiment.$(PYTHONLIB_EXTENSION) tests/experiment_test.py
+python_DATA =  SwiggableExperiment.py _SwiggableExperiment.$(PYTHONLIB_EXTENSION) tests/experiment_test.py
+
+EXTRA_DIST = $(srcdir)/experiment.i
 
 BUILT_SOURCES = \
 	SwiggableExperiment.py \
