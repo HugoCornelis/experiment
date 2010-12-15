@@ -37,7 +37,7 @@ nobase_python_HEADERS = experiment/__init__.py
 
 python_DATA =  SwiggableExperiment.py _SwiggableExperiment.$(PYTHONLIB_EXTENSION) tests/experiment_test.py
 
-EXTRA_DIST = $(srcdir)/experiment.i
+EXTRA_DIST = experiment.i
 
 BUILT_SOURCES = \
 	SwiggableExperiment.py \

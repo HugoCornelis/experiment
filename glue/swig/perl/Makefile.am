@@ -23,7 +23,6 @@ SUBDIRS =
 #t expert takes a look at it.
 
 dist-hook:
-	cp $(srcdir)/experiment.i $(distdir)
 	cp $(srcdir)/experiment_test.pm $(distdir)
 
 swigdir = $(prefix)/glue/swig
@@ -32,7 +31,7 @@ swigdir = $(prefix)/glue/swig
 
 perldir = $(prefix)/glue/swig/perl
 
-swig_DATA = experiment.i
+EXTRA_DIST = experiment.i 
 
 perl_HEADERS = Experiment.pm
 
