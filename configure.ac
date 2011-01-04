@@ -483,6 +483,7 @@ AC_CONFIG_FILES([Makefile
 		 glue/swig/python/Makefile
 		 glue/swig/python/experiment/Makefile
 		 glue/swig/python/experiment/pulsegen/Makefile
+		 glue/swig/python_old/Makefile
                  tests/Makefile])
 AC_OUTPUT
 
