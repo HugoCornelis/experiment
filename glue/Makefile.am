@@ -16,7 +16,7 @@
 ##############################################################################
 
 
-SUBDIRS = swig/perl swig/python
+SUBDIRS = swig/perl swig/python_old
 
 test: check
 

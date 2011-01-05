@@ -12,8 +12,8 @@ Makefile$
 ^doxygen/docs/
 ^glue/swig/perl/SwiggableExperiment.pm$
 ^glue/swig/perl/swiggable_experiment_wrap.c$
-^glue/swig/python/SwiggableExperiment.py$
-^glue/swig/python/swiggable_experiment_wrap.c$
+^glue/swig/python_old/SwiggableExperiment.py$
+^glue/swig/python_old/swiggable_experiment_wrap.c$
 ^glue/swig/python/experiment/pulsegen/pulsegen_base.py$
 ^glue/swig/python/experiment/pulsegen/pulsegen_wrap.c$
 ^glue/swig/python/experiment/perfectclamp_base.py$

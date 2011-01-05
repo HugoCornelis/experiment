@@ -19,6 +19,7 @@ my $test
 
 						  },
 						 ],
+				disabled => "Working on this",
 				description => "Just performs a basic import",
 
 			       },
@@ -41,6 +42,8 @@ Done!
 
 						  },
 						 ],
+				disabled => "Working on this",
+
 				description => "Creates a perfectclamp base type",
 
 			       },

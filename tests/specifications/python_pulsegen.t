@@ -19,6 +19,8 @@ my $test
 
 						  },
 						 ],
+				disabled => "Working on this",
+
 				description => "Just performs a basic import",
 
 			       },
@@ -46,6 +48,8 @@ Done!
 
 						  },
 						 ],
+				disabled => "Working on this",
+
 				description => "Creates a pulsegen base type",
 
 			       },
@@ -73,6 +77,8 @@ Done!
 
 						  },
 						 ],
+				disabled => "Working on this",
+
 				description => "Creates a pulsegen object with basic test values",
 
 			       },
@@ -93,6 +99,8 @@ Done!
 
 						  },
 						 ],
+				disabled => "Working on this",
+
 				description => "Creates a pulsegen object, steps 12 steps then resets",
 
 			       },
@@ -111,6 +119,8 @@ Done!
 
 						  },
 						 ],
+				disabled => "Working on this",
+
 				description => "Creates an output variable for the pulsegen output",
 
 			       },
@@ -127,6 +137,8 @@ Done!
 						   timeout => 40,
 						  },
 						 ],
+				disabled => "Working on this",
+
 				description => "pulsegen functionality, can we output a current in free run mode?",
 			       },
 
@@ -142,6 +154,8 @@ Done!
 						   timeout => 40,
 						  },
 						 ],
+				disabled => "Working on this",
+
 				description => "pulsegen functionality, can we output a constant pulse with no trigger ?",
 			       },
 			       {
@@ -155,6 +169,8 @@ Done!
 						   timeout => 40,
 						  },
 						 ],
+				disabled => "Working on this",
+
 				description => "pulsegen functionality, can we output a constant pulse with no gate input ?",
 			       },
 
