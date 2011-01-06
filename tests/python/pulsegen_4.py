@@ -7,14 +7,11 @@ import os
 import sys
 import pdb
 
+from test_library import add_package_path
 
-root_path = os.environ['HOME'] + "/neurospaces_project/experiment/source/snapshots/0"
+add_package_path("experiment")
 
-pulsegen_path = root_path + "/glue/swig/python/experiment/pulsegen"
-
-sys.path.append(pulsegen_path)
-
-from pulsegen_base import fact
+from experiment.pulsegen_base import fact
 
 var = 100
 varout = fact(var)

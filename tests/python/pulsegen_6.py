@@ -7,15 +7,12 @@ import os
 import sys
 import pdb
 
-
-root_path = os.environ['HOME'] + "/neurospaces_project/experiment/source/snapshots/0"
-
-pulsegen_path = root_path + "/glue/swig/python/experiment/"
-
-sys.path.append(pulsegen_path)
-
 from test_library import print_pulsegen
-from pulsegen import PulseGen
+from test_library import add_package_path
+
+add_package_path("experiment")
+
+from experiment.pulsegen import PulseGen
 
 pg = PulseGen("Test name", 50.0, 3.0, 5.0, -20.0,
               5.0, 8.0, 10.0, 0)
@@ -28,7 +25,7 @@ num_steps = 200
 
 for i in range(0,200):
       
-    
+    pass
 
 
 

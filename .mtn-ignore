@@ -1,6 +1,7 @@
 .*Makefile\.in$
 .+\.dylib$
 Makefile$
+^a.out.dSYM
 ^docs/doxygen.tag$
 ^docs/html
 ^docs/latex
@@ -14,10 +15,10 @@ Makefile$
 ^glue/swig/perl/swiggable_experiment_wrap.c$
 ^glue/swig/python_old/SwiggableExperiment.py$
 ^glue/swig/python_old/swiggable_experiment_wrap.c$
-^glue/swig/python/experiment/pulsegen/pulsegen_base.py$
-^glue/swig/python/experiment/pulsegen/pulsegen_wrap.c$
+^glue/swig/python/experiment/pulsegen_base.py$
+^glue/swig/python/pulsegen_wrap.c$
 ^glue/swig/python/experiment/perfectclamp_base.py$
-^glue/swig/python/experiment/perfectclamp_wrap.c$
+^glue/swig/python/perfectclamp_wrap.c$
 ^html/
 ^installed$
 ^installed/

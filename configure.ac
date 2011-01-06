@@ -371,10 +371,10 @@ case "$host_os" in
             AC_SUBST(SWIGLINKCOMMAND_PYTHON)
 
 
-            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.so /usr/lib/bundle1.o pulsegen_wrap.o'
+            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_pulsegen_base.so /usr/lib/bundle1.o pulsegen_wrap.o'
             AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)
 
-            PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _perfectclamp_base.so /usr/lib/bundle1.o perfectclamp_wrap.o'
+            PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_perfectclamp_base.so /usr/lib/bundle1.o perfectclamp_wrap.o'
             AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)
 
 	;;
@@ -383,10 +383,10 @@ case "$host_os" in
             AC_SUBST(SWIGLINKCOMMAND_PYTHON)
 
 
-            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.so  pulsegen_wrap.o'
+            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_pulsegen_base.so  pulsegen_wrap.o'
             AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)	
 
-            PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o _perfectclamp_base.so  perfectclamp_wrap.o'
+            PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_perfectclamp_base.so  perfectclamp_wrap.o'
             AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)	
 
         ;;
@@ -457,11 +457,11 @@ case "$host_os" in
     AC_SUBST(SWIGLINKCOMMAND_PYTHON)
 
 
-    PULSEGEN_SWIGLINKCOMMAND_PYTHON='gcc -shared pulsegen_wrap.o $(SWIGLDLINKSFORPYTHON) -o _pulsegen_base.so'
+    PULSEGEN_SWIGLINKCOMMAND_PYTHON='gcc -shared pulsegen_wrap.o $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_pulsegen_base.so'
     AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)
 
 
-    PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='gcc -shared perfectclamp_wrap.o $(SWIGLDLINKSFORPYTHON) -o _perfectclamp_base.so'
+    PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='gcc -shared perfectclamp_wrap.o $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/ _perfectclamp_base.so'
     AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)
     dnl }}} End of General Settings
 
@@ -481,8 +481,6 @@ AC_CONFIG_FILES([Makefile
                  glue/Makefile
                  glue/swig/perl/Makefile
 		 glue/swig/python/Makefile
-		 glue/swig/python/experiment/Makefile
-		 glue/swig/python/experiment/pulsegen/Makefile
 		 glue/swig/python_old/Makefile
                  tests/Makefile])
 AC_OUTPUT

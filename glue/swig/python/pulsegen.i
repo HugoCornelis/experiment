@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../../../../experiment/pulsegen.h"
+#include "experiment/pulsegen.h"
 
 double GetOutput(struct simobj_PulseGen *ppg)
 {
@@ -158,4 +158,4 @@ extern double GetOutput(struct simobj_PulseGen *ppg);
 * create low level data classes out of the member structs. Apparently this
 * line must be at the end of the file otherwise SWIG will ignore my typemaps.
 *------------------------------------------------------------------------*/
-%include "../../../../../experiment/pulsegen.h"
+%include "experiment/pulsegen.h"

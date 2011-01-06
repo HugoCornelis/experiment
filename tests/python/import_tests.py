@@ -7,18 +7,25 @@ import os
 import sys
 import pdb
 
-root_path = os.environ['HOME'] + "/neurospaces_project/model_container/source/snapshots/0"
+root_path = os.environ['HOME'] + "/neurospaces_project/experiment/source/snapshots/0"
 
 nmc_path = root_path + "/glue/swig/python/"
 
 sys.path.append(nmc_path)
 
 
-print "Importing nmc_base"
-import nmc.nmc_base
+print "Importing pulsegen_base"
+import experiment.pulsegen_base
 
 
-print "Importing nmc"
-import nmc
+print "Importing pulsegen"
+import experiment.pulsegen
+
+
+print "Importing perfectclamp_base"
+import experiment.perfectclamp_base
+
+print "Importing perfectclamp"
+import experiment.perfectclamp
 
 print "Done!"

@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../../../../experiment/perfectclamp.h"
+#include "experiment/perfectclamp.h"
 
 %}
 /***************************************************
@@ -64,4 +64,4 @@ extern int PerfectClampSetFields(struct simobj_PerfectClamp * ppc, double dComma
 * create low level data classes out of the member structs. Apparently this
 * line must be at the end of the file otherwise SWIG will ignore my typemaps.
 *------------------------------------------------------------------------*/
-%include "../../../../experiment/perfectclamp.h"
+%include "experiment/perfectclamp.h"
