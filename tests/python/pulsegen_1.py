@@ -10,9 +10,10 @@ import pdb
 
 from test_library import add_package_path
 from test_library import print_simobj_pulsegen
-from experiment.pulsegen_base import simobj_PulseGen
 
 add_package_path("experiment")
+
+from experiment.pulsegen_base import simobj_PulseGen
 
 spg = simobj_PulseGen()
 

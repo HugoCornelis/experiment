@@ -19,6 +19,8 @@ Makefile$
 ^glue/swig/python/pulsegen_wrap.c$
 ^glue/swig/python/experiment/perfectclamp_base.py$
 ^glue/swig/python/perfectclamp_wrap.c$
+^glue/swig/python/experiment/output_base.py$
+^glue/swig/python/output_wrap.c$
 ^html/
 ^installed$
 ^installed/
@@ -45,3 +47,4 @@ tar.gz$
 ^a.out.dSYM$
 _BUILD$
 \.pkg$
+\.so$

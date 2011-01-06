@@ -377,6 +377,9 @@ case "$host_os" in
             PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_perfectclamp_base.so /usr/lib/bundle1.o perfectclamp_wrap.o'
             AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)
 
+            OUTPUT_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_output_base.so /usr/lib/bundle1.o output_wrap.o'
+            AC_SUBST(OUTPUT_SWIGLINKCOMMAND_PYTHON)
+
 	;;
 	*)
             SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.so  swiggable_experiment_wrap.o'
@@ -387,7 +390,10 @@ case "$host_os" in
             AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)	
 
             PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_perfectclamp_base.so  perfectclamp_wrap.o'
-            AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)	
+            AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)
+
+            OUTPUT_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_output_base.so  output_wrap.o'
+            AC_SUBST(OUTPUT_SWIGLINKCOMMAND_PYTHON)	
 
         ;;
     esac 
@@ -463,6 +469,10 @@ case "$host_os" in
 
     PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='gcc -shared perfectclamp_wrap.o $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/ _perfectclamp_base.so'
     AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)
+
+
+    OUTPUT_SWIGLINKCOMMAND_PYTHON='gcc -shared output_wrap.o $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/ _output_base.so'
+    AC_SUBST(OUTPUT_SWIGLINKCOMMAND_PYTHON)
     dnl }}} End of General Settings
 
   ;;
