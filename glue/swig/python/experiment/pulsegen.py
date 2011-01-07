@@ -12,8 +12,8 @@ try:
 
     import pulsegen_base
 
-except ImportError:
-    sys.exit("Could not import compiled SWIG pulsegen_base library: %s")
+except ImportError, e:
+    sys.exit("Could not import compiled SWIG pulsegen_base library: %s", e)
 
 from pulsegen_base import simobj_PulseGen
 from pulsegen_base import PulseGenNew
@@ -39,11 +39,6 @@ FREE_RUN = pulsegen_base.FREE_RUN
 EXT_TRIG = pulsegen_base.EXT_TRIG
 EXT_GATE = pulsegen_base.EXT_GATE
 
-__author__ = 'Mando Rodriguez'
-__credits__ = []
-__license__ = "GPL"
-__version__ = "0.1"
-__status__ = "Development"
 
 class PulseGen:
 
@@ -58,6 +53,24 @@ class PulseGen:
                           level1,width1,delay1,
                           level2,width2,delay2,
                           base_level,trigger_mode)
+
+    def __str__(self):
+
+        string = "---\n \
+ - Name: %s\n \
+ - Level1: %s\n \
+ - Width1: %s\n \
+ - Delay1: %s\n \
+ - Level2: %s\n \
+ - Width2: %s\n \
+ - Delay2: %s\n \
+ - BaseLevel: %s\n \
+ - TriggerMode: %s\n" % (spg.pcName,
+ spg.dLevel1, spg.dWidth1, spg.dDelay1,
+ spg.dLevel2, spg.dWidth2, spg.dDelay2,
+ spg.dBaseLevel, spg.iTriggerMode)
+
+        return string
         
     def SetName(self,name):
 
