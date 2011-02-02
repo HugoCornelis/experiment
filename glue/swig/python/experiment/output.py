@@ -22,6 +22,9 @@ class Output:
         """
         self._og = output_base.OutputGeneratorNew(filename)
 
+        result = output_base.OutputGeneratorInitiate(self._og)
+
+        # exception on bad return val?
     
     def Advance(self, time):
         """!
