@@ -11,21 +11,49 @@ except ImportError, e:
 
     sys.exit("Could not import compiled SWIG output_base library: %s", e)
 
+
+#---------------------------------------------------------------------------
+
 class Output:
     """!
     @class Output
     """
 
+#---------------------------------------------------------------------------
+
     def __init__(self, filename):
         """!
 
         """
+        self.filename = filename
+
+        self.initiated = False
+        
         self._og = output_base.OutputGeneratorNew(filename)
 
-        result = output_base.OutputGeneratorInitiate(self._og)
+        if self._og is None:
 
-        # exception on bad return val?
-    
+            raise Exception("Error: Can't create Output Generator for file '%s'\n" % self.filename)
+
+
+        self.Initialize()
+        
+#---------------------------------------------------------------------------
+
+    def Initialize(self):
+
+        if not self.initiated:
+            
+            result = output_base.OutputGeneratorInitiate(self._og)
+
+            if result == 0:
+
+                raise Exception("Can't create file '%s' for Output Generator\n" % self.filename)
+
+            self.initiated = True
+
+#---------------------------------------------------------------------------
+
     def Advance(self, time):
         """!
 
@@ -34,21 +62,24 @@ class Output:
 
         return result
 
+
+#---------------------------------------------------------------------------
+
     def Step(self, time):
         """!
 
         """
         return self.Advance(time)
-    
+
+#---------------------------------------------------------------------------    
 
     def Compile(self):
         """!
 
         """
-        result = output_base.OutputGeneratorInitiate(self._og)
-
-        return result
+        self.Initialize()
     
+#---------------------------------------------------------------------------
 
     def AddOutput(self, name, address):
         """!
@@ -56,11 +87,19 @@ class Output:
         """
         output_base.OutputGeneratorAddVariable(self._og, name, address)
 
+#---------------------------------------------------------------------------
+
     def Finish(self):
         """!
 
         """
         output_base.OutputGeneratorFinish(self._og)
 
+
+#---------------------------------------------------------------------------
+
 # An alias
 OutputGenerator = Output
+
+
+#---------------------------------------------------------------------------
