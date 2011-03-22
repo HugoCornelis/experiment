@@ -72,6 +72,14 @@ class Output:
 
         output_base.OutputGeneratorSetFormat(self._og, fmt)
 
+#---------------------------------------------------------------------------
+
+    def SetResolution(self, resolution):
+        """
+        @brief Sets the output resolution
+        """
+
+        self._og.iResolution = resolution
 
 #---------------------------------------------------------------------------
 
