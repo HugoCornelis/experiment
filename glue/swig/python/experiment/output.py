@@ -16,7 +16,7 @@ except ImportError, e:
 
 class Output:
     """!
-    @class Output
+    @class Output A class for the output generator.
     """
 
 #---------------------------------------------------------------------------
@@ -62,6 +62,27 @@ class Output:
 
         return result
 
+
+#---------------------------------------------------------------------------
+
+    def SetFormat(self, fmt):
+        """
+        @brief Sets the string format options
+        """
+
+        output_base.OutputGeneratorSetFormat(self._og, fmt)
+
+
+#---------------------------------------------------------------------------
+
+    def SetSteps(self, steps):
+        """
+        @brief Turns on/off steps mode.
+
+        1 to turn on steps mode, 0 to turn it off.
+        """
+        output_base.OutputGeneratorSetSteps(self._og, steps)
+        
 
 #---------------------------------------------------------------------------
 
