@@ -281,7 +281,7 @@ case "$host_os" in
 
     dnl On the MAC we will only look for perl in the standard location for the Apple
     dnl native perl. 
-    AC_CHECK_PROG(PERL, perl, NULL, [/usr/bin/perl],[/usr/local/bin/perl /opt/local/bin/perl])
+    AC_CHECK_PROG(PERL, perl, NULL, [/usr/bin/perl],[/usr/local/bin/perl /opt/local/bin/perl /sw/bin/perl])
     AC_SUBST(PERL)
 
     AC_MSG_CHECKING([Checking the perl installation])
