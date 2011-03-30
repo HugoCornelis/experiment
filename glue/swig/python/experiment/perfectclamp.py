@@ -44,11 +44,28 @@ class PerfectClamp:
 
         self.pc = PerfectClampNew(name)
 
+        if self.pc is None:
+
+            raise Exception("Error: Can't create PulseGen '%s'" % name)
+
+        self.name = name
+        
+        self.initiated = False
+
         # this will be the solved variable
         self.voltage = sys.maxint
 
         # exception?
 
+
+#---------------------------------------------------------------------------
+
+    def GetName(self):
+        """
+        @brief Returns the perfect clamps name
+        """
+        return self.name
+        
 
 #---------------------------------------------------------------------------
 
@@ -101,11 +118,18 @@ class PerfectClamp:
 
 #---------------------------------------------------------------------------
 
-    def Initiate(self):
+    def Initialize(self):
 
-        result = PerfectClampInitiate(self.pc)
+        if not self.initiated:
+            
+            result = PerfectClampInitiate(self.pc)
+
+            if result == 0:
+
+                raise Exception("Can't initialize PerfectClamp '%s'" % )
 
         return result
+
 
 #---------------------------------------------------------------------------
 
@@ -117,5 +141,14 @@ class PerfectClamp:
         result = PerfectClampAddVariable(self.pc,voltage)
 
         return result
+
+#---------------------------------------------------------------------------
+
+    def AddInput(self,voltage):
+        """
+        Add a solved variable.
+        """
+        
+        return self.AddVariable(voltage)
 
 #---------------------------------------------------------------------------
