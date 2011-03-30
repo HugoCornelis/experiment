@@ -37,7 +37,10 @@ __status__ = "Development"
 
 class PerfectClamp:
 
-    def __init__(self,name):
+
+#---------------------------------------------------------------------------
+
+    def __init__(self, name):
 
         self.pc = PerfectClampNew(name)
 
@@ -46,18 +49,30 @@ class PerfectClamp:
 
         # exception?
 
+
+#---------------------------------------------------------------------------
+
     def SetCommandVoltage(self,command):
 
         self.pc.dCommand = command
+
+
+#---------------------------------------------------------------------------
 
     def GetCommandVoltage(self):
 
         return self.pc.dCommand
 
+
+#---------------------------------------------------------------------------
+
     def GetVoltage(self):
 
         return pdouble_value(self.pc.pdVoltage)
-    
+
+
+#---------------------------------------------------------------------------
+
     def SetFields(self,command,filename):
 
         result = PerfectClampSetFields(self.pc,
@@ -66,6 +81,9 @@ class PerfectClamp:
         # extra error checking?
         return result
 
+
+#---------------------------------------------------------------------------
+
     def SingleStep(self,time):
 
         # error cheking?
@@ -73,7 +91,7 @@ class PerfectClamp:
 
         return result
 
-
+#---------------------------------------------------------------------------
     
     def Finish(self):
 
@@ -81,13 +99,15 @@ class PerfectClamp:
 
         return result
 
+#---------------------------------------------------------------------------
 
     def Initiate(self):
 
         result = PerfectClampInitiate(self.pc)
 
         return result
-            
+
+#---------------------------------------------------------------------------
 
     def AddVariable(self,voltage):
         """
@@ -97,3 +117,5 @@ class PerfectClamp:
         result = PerfectClampAddVariable(self.pc,voltage)
 
         return result
+
+#---------------------------------------------------------------------------
