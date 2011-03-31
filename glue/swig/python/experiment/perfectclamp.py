@@ -126,7 +126,7 @@ class PerfectClamp:
 
             if result == 0:
 
-                raise Exception("Can't initialize PerfectClamp '%s'" % )
+                raise Exception("Can't initialize PerfectClamp '%s'" % self.GetName())
 
         return result
 
