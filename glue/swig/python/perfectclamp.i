@@ -30,6 +30,19 @@
   $result = PyInt_FromLong($1);
 }
 
+/* commented out
+%typemap(in) void *pvVoltage
+{
+
+  double dTemp = PyFloat_AsDouble($input);
+
+  $1 = (double*)&dTemp;
+
+  printf("Got a void pointer 1: %f\n",(double)(dTemp));
+
+
+}
+
 
 %typemap(in) void *pvVoltage
 {
@@ -43,7 +56,7 @@
   $1 = (double*)dOutput;
 
 }
-
+*/
 
 
 extern int PerfectClampAddVariable(struct simobj_PerfectClamp * ppc, void *pvVoltage);
