@@ -101,7 +101,7 @@ class PerfectClamp:
 
 #---------------------------------------------------------------------------
 
-    def SingleStep(self,time):
+    def Step(self,time):
 
         # error cheking?
         result = PerfectClampSingleStep(self.pc,time)
