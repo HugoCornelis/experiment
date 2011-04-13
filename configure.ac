@@ -36,6 +36,34 @@ dnl AC_CONFIG_SUBDIRS(tests/code glue)
 AM_INIT_AUTOMAKE(experiment, 0.0.0-alpha)
 
 
+
+AC_MSG_CHECKING(whether we build universal binaries.)
+AC_ARG_WITH(universal,
+[AS_HELP_STRING([--with-universal],
+              [Build universal binaries on Mac OS X.])],
+[ case "$val" in
+  no)
+
+    AC_MSG_RESULT(no)
+    OSX_UNIVERSAL="no"
+
+    ;;
+  *)
+
+    AC_MSG_RESULT(yes)
+    OSX_UNIVERSAL="yes"
+
+    CFLAGS="$CFLAGS -arch x86_64 -arch i386 -arch ppc"
+    AC_SUBST(CFLAGS)
+
+    ;;
+  esac ],
+  AC_MSG_RESULT(no)
+  OSX_UNIVERSAL="no"
+)
+AC_SUBST(OSX_UNIVERSAL)
+
+
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_RANLIB
@@ -299,8 +327,29 @@ case "$host_os" in
 
     # determine linker flags for perl embedding
 
-    PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts | $PERL -pe 's/\-arch\s\S+\s//g'`
+
+    if test "$OSX_UNIVERSAL" == "yes"; then
+
+      PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts`
+      
+      PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts`
+
+      PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+
+    else
+
+      PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`
+    
+      PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+
+      PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+
+    fi
+
     AC_SUBST(PERL_CCOPTS)
+    AC_SUBST(PERL_LDADD)
+    AC_SUBST(PERL_LDFLAGS)
+
 
     AC_CHECK_PROG(SWIG, swig, NULL, [/usr/bin/swig],[/usr/local/bin/swig /opt/local/bin/swig])
     AC_SUBST(SWIG)
@@ -327,15 +376,33 @@ case "$host_os" in
     SWIGCOMPILECOMMAND_PERL='gcc $(SWIGCOMPILELINKSFORPERL) -c swiggable_experiment_wrap.c'
     AC_SUBST(SWIGCOMPILECOMMAND_PERL)
 
- 
 
-    SWIGLDLINKSFORPERL='-L${top_builddir} 	-lexperiment 	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/neurospaces/instrumentor/hierarchy/output/symbols/ -lsymbol_algorithms -lncurses -lreadline -bundle -undefined suppress -flat_namespace'
+    if test "$OSX_UNIVERSAL" == "yes"; then 
+
+      SWIGLDLINKSFORPERL='-dynamic -undefined suppress -flat_namespace -L${top_builddir} 	-lexperiment 	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/neurospaces/instrumentor/hierarchy/output/symbols/ -lsymbol_algorithms -lncurses -lreadline $(PERL_LDFLAGS)'
+
+    else
+
+      SWIGLDLINKSFORPERL='-L${top_builddir} 	-lexperiment 	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/neurospaces/instrumentor/hierarchy/output/symbols/ -lsymbol_algorithms -lncurses -lreadline -bundle -undefined suppress -flat_namespace'
+
+    fi
+
     AC_SUBST(SWIGLDLINKSFORPERL)
 
     case "$host_os" in
 	darwin10*)
 	    dnl This is snow leopard
-            SWIGLINKCOMMAND_PERL='ld 	$(SWIGLDLINKSFORPERL) 	-o SwiggableExperiment.$(PERLLIB_EXTENSION) /usr/lib/bundle1.o  swiggable_experiment_wrap.o'
+
+	    if test "$OSX_UNIVERSAL" == "yes"; then
+
+              SWIGLINKCOMMAND_PERL='$(AR) $(SWIGLDLINKSFORPERL) -o SwiggableExperiment.$(PERLLIB_EXTENSION) swiggable_experiment_wrap.o'
+
+            else
+
+              SWIGLINKCOMMAND_PERL='ld $(SWIGLDLINKSFORPERL) -o SwiggableExperiment.$(PERLLIB_EXTENSION) /usr/lib/bundle1.o  swiggable_experiment_wrap.o'
+
+            fi
+
             AC_SUBST(SWIGLINKCOMMAND_PERL)
 
 
@@ -359,7 +426,7 @@ case "$host_os" in
     SWIGCOMPILECOMMAND_PYTHON='gcc         $(SWIGCOMPILELINKSFORPYTHON)         -c swiggable_experiment_wrap.c'
     AC_SUBST(SWIGCOMPILECOMMAND_PYTHON)
 
-    SWIGLDLINKSFORPYTHON='$(PYTHON_LDFLAGS) -L${top_builddir} -lexperiment  -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline  -framework Python -flat_namespace -undefined suppress -bundle -bundle_loader $(PYTHON_EXE)'
+    SWIGLDLINKSFORPYTHON='$(PYTHON_LDFLAGS) -L${top_builddir} -lexperiment  -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/model-container/lib -lsymbol_algorithms -lncurses -lreadline  -framework Python -flat_namespace -undefined suppress -bundle -bundle_loader $(PYTHON_EXE)'
     AC_SUBST(SWIGLDLINKSFORPYTHON)
 
 
@@ -440,7 +507,7 @@ case "$host_os" in
     AC_SUBST(SWIGCOMPILECOMMAND_PERL)
 
 
-    SWIGLDLINKSFORPERL='-g -shared swiggable_experiment_wrap.o -L${top_builddir} -lexperiment -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC'
+    SWIGLDLINKSFORPERL='-g -shared swiggable_experiment_wrap.o -L${top_builddir} -lexperiment -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/model-container/lib -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC'
     AC_SUBST(SWIGLDLINKSFORPERL)
 
     SWIGLINKCOMMAND_PERL='gcc $(SWIGLDLINKSFORPERL) -o SwiggableExperiment.$(PERLLIB_EXTENSION)'
@@ -456,7 +523,7 @@ case "$host_os" in
    SWIGCOMPILECOMMAND_PYTHON='gcc $(SWIGCOMPILELINKSFORPYTHON) -c swiggable_experiment_wrap.c'
    AC_SUBST(SWIGCOMPILECOMMAND_PYTHON)
 
-    SWIGLDLINKSFORPYTHON='-g -L${top_builddir} -lexperiment -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/neurospaces/algorithms/symbol -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC -Xlinker -export-dynamic $(PYTHON_LDFLAGS)'
+    SWIGLDLINKSFORPYTHON='-g -L${top_builddir} -lexperiment -L/usr/local/lib/model-container -lneurospacesread -L/usr/local/lib/model-container/lib -lsymbol_algorithms -lncurses -lreadline -lhistory -fPIC -Xlinker -export-dynamic $(PYTHON_LDFLAGS)'
     AC_SUBST(SWIGLDLINKSFORPYTHON)
 
     SWIGLINKCOMMAND_PYTHON='gcc -shared swiggable_experiment_wrap.o $(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.$(PYTHONLIB_EXTENSION)'

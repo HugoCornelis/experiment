@@ -134,8 +134,8 @@ class PerfectClamp:
 #---------------------------------------------------------------------------
 
     def AddVariable(self,voltage):
-        """
-        Add a solved variable.
+        """!
+        @brief Add a solved variable.
         """
         
         result = PerfectClampAddVariable(self.pc,voltage)
@@ -145,8 +145,8 @@ class PerfectClamp:
 #---------------------------------------------------------------------------
 
     def AddInput(self,voltage):
-        """
-        Add a solved variable.
+        """!
+        @brief Add a solved variable.
         """
         
         return self.AddVariable(voltage)
