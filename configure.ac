@@ -379,7 +379,7 @@ case "$host_os" in
 
     if test "$OSX_UNIVERSAL" == "yes"; then 
 
-      SWIGLDLINKSFORPERL='-dynamic -undefined suppress -flat_namespace -L${top_builddir} 	-lexperiment 	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/neurospaces/instrumentor/hierarchy/output/symbols/ -lsymbol_algorithms -lncurses -lreadline $(PERL_LDFLAGS)'
+      SWIGLDLINKSFORPERL='-dynamic -undefined suppress -flat_namespace -L${top_builddir} 	-lexperiment 	-L/usr/local/lib/model-container 	-lneurospacesread 	-L/usr/local/neurospaces/instrumentor/hierarchy/output/symbols/ -lsymbol_algorithms -L$(top_builddir)/../../../../model-container/source/snapshots/0/algorithms/event -levent_algorithms -lncurses -lreadline $(PERL_LDFLAGS)'
 
     else
 
