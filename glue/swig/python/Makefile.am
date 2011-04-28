@@ -1,22 +1,22 @@
 
 SUBDIRS =
 
-pythondir = $(prefix)/glue/swig/python/g3
+pythondir = $(prefix)/glue/swig/python/
 
 nobase_python_HEADERS = \
-	$(srcdir)/experiment/__cbi__.py \
-	$(srcdir)/experiment/__init__.py \
-	$(srcdir)/experiment/pulsegen.py \
-	$(srcdir)/experiment/perfectclamp.py \
-	$(srcdir)/experiment/output.py 
+	$(srcdir)/neurospaces/experiment/__cbi__.py \
+	$(srcdir)/neurospaces/experiment/__init__.py \
+	$(srcdir)/neurospaces/experiment/pulsegen.py \
+	$(srcdir)/neurospaces/experiment/perfectclamp.py \
+	$(srcdir)/neurospaces/experiment/output.py 
 
 nobase_python_DATA = \
-	experiment/pulsegen_base.py \
-	experiment/_pulsegen_base.so \
-	experiment/perfectclamp_base.py \
-	experiment/_perfectclamp_base.so \
-	experiment/output_base.py \
-	experiment/_output_base.so 
+	neurospaces/experiment/pulsegen_base.py \
+	neurospaces/experiment/_pulsegen_base.so \
+	neurospaces/experiment/perfectclamp_base.py \
+	neurospaces/experiment/_perfectclamp_base.so \
+	neurospaces/experiment/output_base.py \
+	neurospaces/experiment/_output_base.so 
 
 EXTRA_DIST = \
 	$(srcdir)/pulsegen.i \
@@ -25,11 +25,11 @@ EXTRA_DIST = \
 
 BUILT_SOURCES = \
 	$(srcdir)/pulsegen_wrap.c \
-	$(srcdir)/experiment/pulsegen_base.py \
+	$(srcdir)/neurospaces/experiment/pulsegen_base.py \
 	$(srcdir)/perfectclamp_wrap.c \
-	$(srcdir)/experiment/perfectclamp_base.py \
+	$(srcdir)/neurospaces/experiment/perfectclamp_base.py \
 	$(srcdir)/output_wrap.c \
-	$(srcdir)/experiment/output_base.py
+	$(srcdir)/neurospaces/experiment/output_base.py
 
 all: _pulsegen_base.so _perfectclamp_base.so _output_base.so
 
@@ -42,7 +42,7 @@ pulsegen_wrap.o: pulsegen_wrap.c
 	gcc $(SWIGCOMPILELINKSFORPYTHON) -c $(srcdir)/pulsegen_wrap.c
 
 pulsegen_wrap.c: 
-	$(SWIG) -I$(top_builddir) -python -outdir $(srcdir)/experiment -o $(srcdir)/pulsegen_wrap.c $(srcdir)/pulsegen.i
+	$(SWIG) -I$(top_builddir) -python -outdir $(srcdir)/neurospaces/experiment -o $(srcdir)/pulsegen_wrap.c $(srcdir)/pulsegen.i
 
 #------------------ End rules for pulsegen swig ------------
 #-----------------------------------------------------------
@@ -57,7 +57,7 @@ perfectclamp_wrap.o: perfectclamp_wrap.c
 	gcc $(SWIGCOMPILELINKSFORPYTHON) -c $(srcdir)/perfectclamp_wrap.c
 
 perfectclamp_wrap.c: 
-	$(SWIG) -I$(top_builddir) -python -outdir $(srcdir)/experiment -o $(srcdir)/perfectclamp_wrap.c $(srcdir)/perfectclamp.i
+	$(SWIG) -I$(top_builddir) -python -outdir $(srcdir)/neurospaces/experiment -o $(srcdir)/perfectclamp_wrap.c $(srcdir)/perfectclamp.i
 
 #-------------- End rules for perfectclamp swig ------------
 #-----------------------------------------------------------
@@ -71,24 +71,24 @@ output_wrap.o: output_wrap.c
 	gcc $(SWIGCOMPILELINKSFORPYTHON) -c $(srcdir)/output_wrap.c
 
 output_wrap.c: 
-	$(SWIG) -I$(top_builddir) -python -outdir $(srcdir)/experiment -o $(srcdir)/output_wrap.c $(srcdir)/output.i
+	$(SWIG) -I$(top_builddir) -python -outdir $(srcdir)/neurospaces/experiment -o $(srcdir)/output_wrap.c $(srcdir)/output.i
 
 #-------------------- End rules for output swig ------------
 #-----------------------------------------------------------
 
 clean-local:
-	rm -f $(srcdir)/*.o $(srcdir)/experiment/*.pyc $(srcdir)/experiment/*.so
+	rm -f $(srcdir)/*.o $(srcdir)/neurospaces/experiment/*.pyc $(srcdir)/neurospaces/experiment/*.so
 
 CLEANFILES = \
 	$(srcdir)/pulsegen_wrap.c \
 	$(srcdir)/pulsegen_wrap.o \
-	$(srcdir)/experiment/_pulsegen_base.so \
-	$(srcdir)/experiment/pulsegen_base.py \
+	$(srcdir)/neurospaces/experiment/_pulsegen_base.so \
+	$(srcdir)/neurospaces/experiment/pulsegen_base.py \
 	$(srcdir)/perfectclamp_wrap.c \
 	$(srcdir)/perfectclamp_wrap.o \
-	$(srcdir)/experiment/_perfectclamp_base.so \
-	$(srcdir)/experiment/perfectclamp_base.py \
+	$(srcdir)/neurospaces/experiment/_perfectclamp_base.so \
+	$(srcdir)/neurospaces/experiment/perfectclamp_base.py \
 	$(srcdir)/output_wrap.c \
 	$(srcdir)/output_wrap.o \
-	$(srcdir)/experiment/_output_base.so \
-	$(srcdir)/experiment/output_base.py 
+	$(srcdir)/neurospaces/experiment/_output_base.so \
+	$(srcdir)/neurospaces/experiment/output_base.py 

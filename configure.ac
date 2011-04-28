@@ -438,13 +438,13 @@ case "$host_os" in
             AC_SUBST(SWIGLINKCOMMAND_PYTHON)
 
 
-            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_pulsegen_base.so /usr/lib/bundle1.o pulsegen_wrap.o'
+            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/neurospaces/experiment/_pulsegen_base.so /usr/lib/bundle1.o pulsegen_wrap.o'
             AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)
 
-            PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_perfectclamp_base.so /usr/lib/bundle1.o perfectclamp_wrap.o'
+            PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/neurospaces/experiment/_perfectclamp_base.so /usr/lib/bundle1.o perfectclamp_wrap.o'
             AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)
 
-            OUTPUT_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_output_base.so /usr/lib/bundle1.o output_wrap.o'
+            OUTPUT_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/neurospaces/experiment/_output_base.so /usr/lib/bundle1.o output_wrap.o'
             AC_SUBST(OUTPUT_SWIGLINKCOMMAND_PYTHON)
 
 	;;
@@ -453,13 +453,13 @@ case "$host_os" in
             AC_SUBST(SWIGLINKCOMMAND_PYTHON)
 
 
-            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_pulsegen_base.so  pulsegen_wrap.o'
+            PULSEGEN_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/neurospaces/experiment/_pulsegen_base.so  pulsegen_wrap.o'
             AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)	
 
-            PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_perfectclamp_base.so  perfectclamp_wrap.o'
+            PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/neurospaces/experiment/_perfectclamp_base.so  perfectclamp_wrap.o'
             AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)
 
-            OUTPUT_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_output_base.so  output_wrap.o'
+            OUTPUT_SWIGLINKCOMMAND_PYTHON='ld $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/neurospaces/experiment/_output_base.so  output_wrap.o'
             AC_SUBST(OUTPUT_SWIGLINKCOMMAND_PYTHON)	
 
         ;;
@@ -530,15 +530,15 @@ case "$host_os" in
     AC_SUBST(SWIGLINKCOMMAND_PYTHON)
 
 
-    PULSEGEN_SWIGLINKCOMMAND_PYTHON='gcc -shared pulsegen_wrap.o $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_pulsegen_base.so'
+    PULSEGEN_SWIGLINKCOMMAND_PYTHON='gcc -shared pulsegen_wrap.o $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/neurospaces/experiment/_pulsegen_base.so'
     AC_SUBST(PULSEGEN_SWIGLINKCOMMAND_PYTHON)
 
 
-    PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='gcc -shared perfectclamp_wrap.o $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_perfectclamp_base.so'
+    PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON='gcc -shared perfectclamp_wrap.o $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/neurospaces/experiment/_perfectclamp_base.so'
     AC_SUBST(PERFECTCLAMP_SWIGLINKCOMMAND_PYTHON)
 
 
-    OUTPUT_SWIGLINKCOMMAND_PYTHON='gcc -shared output_wrap.o $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/experiment/_output_base.so'
+    OUTPUT_SWIGLINKCOMMAND_PYTHON='gcc -shared output_wrap.o $(SWIGLDLINKSFORPYTHON) -o $(srcdir)/neurospaces/experiment/_output_base.so'
     AC_SUBST(OUTPUT_SWIGLINKCOMMAND_PYTHON)
     dnl }}} End of General Settings
 

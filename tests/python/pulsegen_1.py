@@ -13,7 +13,7 @@ from test_library import print_simobj_pulsegen
 
 add_package_path("experiment")
 
-from experiment.pulsegen_base import simobj_PulseGen
+from neurospaces.experiment.pulsegen_base import simobj_PulseGen
 
 spg = simobj_PulseGen()
 

@@ -15,17 +15,17 @@ sys.path.append(nmc_path)
 
 
 print "Importing pulsegen_base"
-import experiment.pulsegen_base
+import neurospaces.experiment.pulsegen_base
 
 
 print "Importing pulsegen"
-import experiment.pulsegen
+import neurospaces.experiment.pulsegen
 
 
 print "Importing perfectclamp_base"
-import experiment.perfectclamp_base
+import neurospaces.experiment.perfectclamp_base
 
 print "Importing perfectclamp"
-import experiment.perfectclamp
+import neurospaces.experiment.perfectclamp
 
 print "Done!"

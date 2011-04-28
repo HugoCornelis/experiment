@@ -14,7 +14,7 @@ experiment_path = root_path + "/glue/swig/python/"
 sys.path.append(experiment_path)
 
 from test_library import print_simobj_perfectclamp
-from experiment.perfectclamp_base import simobj_PerfectClamp
+from neurospaces.experiment.perfectclamp_base import simobj_PerfectClamp
 
 spc = simobj_PerfectClamp()
 

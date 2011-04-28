@@ -10,7 +10,7 @@ import pdb
 
 root_path = os.environ['HOME'] + "/neurospaces_project/experiment/source/snapshots/0"
 
-pulsegen_path = root_path + "/glue/swig/python/experiment/"
+pulsegen_path = root_path + "/glue/swig/python/neurospaces/experiment/"
 
 sys.path.append(pulsegen_path)
 
