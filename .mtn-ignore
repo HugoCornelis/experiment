@@ -48,3 +48,4 @@ tar.gz$
 _BUILD$
 \.pkg$
 \.so$
+MANIFEST$
