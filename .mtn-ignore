@@ -15,11 +15,11 @@ Makefile$
 ^glue/swig/perl/swiggable_experiment_wrap.c$
 ^glue/swig/python_old/SwiggableExperiment.py$
 ^glue/swig/python_old/swiggable_experiment_wrap.c$
-^glue/swig/python/experiment/pulsegen_base.py$
+^glue/swig/python/neurospaces/experiment/pulsegen_base.py$
 ^glue/swig/python/pulsegen_wrap.c$
-^glue/swig/python/experiment/perfectclamp_base.py$
+^glue/swig/python/neurospaces/experiment/perfectclamp_base.py$
 ^glue/swig/python/perfectclamp_wrap.c$
-^glue/swig/python/experiment/output_base.py$
+^glue/swig/python/neurospaces/experiment/output_base.py$
 ^glue/swig/python/output_wrap.c$
 ^html/
 ^installed$
