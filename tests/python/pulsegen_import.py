@@ -10,9 +10,9 @@ from test_library import add_package_path
 
 add_package_path("experiment")
 
-import neurospaces.experiment.pulsegen_base
+import experiment.pulsegen_base
 
-from neurospaces.experiment.pulsegen import PulseGen
+from experiment.pulsegen import PulseGen
 
 
 print "Done!"

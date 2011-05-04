@@ -12,7 +12,7 @@ from test_library import add_package_path
 
 add_package_path("experiment")
 
-from neurospaces.experiment.pulsegen import PulseGen
+from experiment.pulsegen import PulseGen
 
 pg = PulseGen("Test name", 50.0, 3.0, 5.0, -20.0,
               5.0, 8.0, 10.0, 0)

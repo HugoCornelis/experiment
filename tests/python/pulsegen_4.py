@@ -11,7 +11,7 @@ from test_library import add_package_path
 
 add_package_path("experiment")
 
-from neurospaces.experiment.pulsegen_base import fact
+from experiment.pulsegen_base import fact
 
 var = 100
 varout = fact(var)

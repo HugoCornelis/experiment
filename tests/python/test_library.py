@@ -17,7 +17,7 @@ def add_package_path(package):
 
     root_path = os.environ['HOME'] + directory
 
-    path = root_path + "/glue/swig/python/"
+    path = root_path + "/glue/swig/python/neurospaces"
 
     sys.path.append(path)
 
