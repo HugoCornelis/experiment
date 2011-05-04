@@ -12,7 +12,7 @@ try:
 
     import perfectclamp_base
 
-except ImportError:
+except ImportError, e:
     sys.exit("Could not import compiled SWIG pulsegen_base library: %s")
 
 

@@ -8,13 +8,13 @@ import pdb
 
 root_path = os.environ['HOME'] + "/neurospaces_project/experiment/source/snapshots/0"
 
-experiment_path = root_path + "/glue/swig/python/neurospaces/experiment"
+experiment_path = root_path + "/glue/swig/python"
 
 sys.path.append(experiment_path)
 
-import perfectclamp_base
+import neurospaces.experiment.perfectclamp_base
 
-from perfectclamp import PerfectClamp
+from neurospaces.experiment.perfectclamp import PerfectClamp
 
 
 print "Done!"
