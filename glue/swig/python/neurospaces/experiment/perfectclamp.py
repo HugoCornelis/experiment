@@ -92,6 +92,10 @@ class PerfectClamp:
 
     def SetFields(self,command,filename):
 
+        if not os.path.exists(filename):
+
+            raise Exception("Command file %s does not exist" % filename)
+            
         result = PerfectClampSetFields(self.pc,
                                        command,
                                        filename)
