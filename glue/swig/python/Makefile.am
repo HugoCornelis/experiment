@@ -77,7 +77,13 @@ output_wrap.c:
 #-----------------------------------------------------------
 
 clean-local:
-	rm -f $(srcdir)/*.o $(srcdir)/neurospaces/experiment/*.pyc $(srcdir)/neurospaces/experiment/*.so
+	$(RM) -f $(srcdir)/*.o 
+	$(RM) -f $(srcdir)/neurospaces/experiment/*.pyc 
+	$(RM) -f $(srcdir)/neurospaces/experiment/*.so
+	echo "Removing all compiled byte code files"
+	$(RM) `find . -name "*.pyc"`
+	$(RM) -rf $(srcdir)/build
+	$(RM) -rf $(srcdir)/dist/
 
 CLEANFILES = \
 	$(srcdir)/pulsegen_wrap.c \

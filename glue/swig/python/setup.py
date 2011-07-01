@@ -182,7 +182,7 @@ class ExperimentModule(Extension):
 
         if not self.outdir is None:
 
-            swig_opts.extend(['outdir', self.outdir])
+            swig_opts.extend(['-outdir', self.outdir])
 
         return swig_opts
     
@@ -261,7 +261,7 @@ class ExperimentModule(Extension):
 
     def get_libraries(self):
 
-        return ["neurospacesread", "event_algorithms",
+        return ["neurospacesread",
                 "symbol_algorithms", "ncurses", "readline"]
 
     def get_mac_architectures(self, file):
@@ -412,7 +412,6 @@ EXT_MODULES=[
     ]
 
 #-------------------------------------------------------------------------------
-pdb.set_trace()
 setup(
     name=NAME,
     version=VERSION,
@@ -428,16 +427,15 @@ setup(
     url=URL,
     packages=['neurospaces',
               'neurospaces.experiment',
-              'neurospaces.experiment.output',
-              'neurospaces.experiment.output_base',
-              'neurospaces.experiment.pulsegen',
-              'neurospaces.experiment.pulsegen_base',
-              'neurospaces.experiment.perfectclamp',
-              'neurospaces.experiment.pulsegen',
-              'neurospaces.experiment.pulsegen_base',
               ],
     package_data={'neurospaces' : [os.path.join('neurospaces','__init__.py')],
-                  'neurospaces.experiment' : PACKAGE_FILES},
+                  'neurospaces.experiment' : PACKAGE_FILES,
+                  'neurospaces.experiment' : [
+                      os.path.join('neurospaces', 'experiment','output_base.py'),
+                      os.path.join('neurospaces', 'experiment','pulsegen_base.py'),
+                      os.path.join('neurospaces', 'experiment','perfectclamp_base.py'),
+                      ],                  
+                  },
 #     package_dir={'' : ''},
     classifiers=CLASSIFIERS,
     options=OPTIONS,
