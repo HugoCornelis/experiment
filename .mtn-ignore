@@ -49,3 +49,6 @@ _BUILD$
 \.pkg$
 \.so$
 MANIFEST$
+glue/swig/python/build$
+glue/swig/python/dist$
+glue/swig/python/MANIFEST$
