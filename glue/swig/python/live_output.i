@@ -97,11 +97,11 @@ int LiveOutputInitiate(struct LiveOutput * plo);
 
 struct LiveOutput * LiveOutputNew();
 
-int LiveOutputSetFormat(struct LiveOutput * plo, char *pcFormat);
-
 int LiveOutputSetSteps(struct LiveOutput * plo, int iSteps);
 
 int LiveOutputTimedStep(struct LiveOutput * plo, double dTime);
+
+PyObject * LiveOutputData(struct LiveOutput * plo);
 
 //------------------------------------------ End Prototypes ---------------------------
 
@@ -335,9 +335,11 @@ int LiveOutputTimedStep(struct LiveOutput * plo, double dTime)
 	  if( !PyFloat_Check(ppoVariable) )
 	  {
 	    
-	    PyList_Append(ppoList, ppoVariable);
+	    PyErr_SetString(PyExc_MemoryError,"Can't read variable from address");
 
 	  }
+
+	  PyList_Append(ppoList, ppoVariable);
 
 	  iOutput = 1;
 
@@ -379,6 +381,20 @@ int LiveOutputTimedStep(struct LiveOutput * plo, double dTime)
 /*
  * 
  */
+PyObject * LiveOutputData(struct LiveOutput * plo)
+{
+
+  if( !plo )
+  {
+
+    return NULL;
+
+  }
+
+  return plo->ppoData;
+
+}
+
 //------------------------------------------------------------------------------
 
 

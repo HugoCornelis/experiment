@@ -9,7 +9,7 @@ try:
 
 except ImportError, e:
 
-    sys.exit("Could not import compiled SWIG output_base library: %s", e)
+    sys.exit("Could not import compiled SWIG output_base library: %s" % e)
 
 
 #---------------------------------------------------------------------------
@@ -132,7 +132,7 @@ class LiveOutput:
 
         self.initiated = False
         
-        self._lo = output_base.LiveOutputNew(filename)
+        self._lo = output_base.LiveOutputNew()
 
         self.Initialize()
         
@@ -214,3 +214,9 @@ class LiveOutput:
         This is just left in for consistency
         """
         pass
+
+#---------------------------------------------------------------------------
+
+    def GetData(self):
+
+        return output_base.LiveOutputData(self._lo)
