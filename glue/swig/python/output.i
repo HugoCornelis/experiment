@@ -9,13 +9,11 @@
 
 %}
 
+
 /***************************************************
-* End C code block
+* Imports 
 ***************************************************/
-
-%inline %{
-
-%}
+%include "live_output.i"
 
 %include "experiment/output.h"
 

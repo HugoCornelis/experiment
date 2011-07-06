@@ -54,23 +54,15 @@ class Output:
 
 #---------------------------------------------------------------------------
 
-    def Advance(self, time):
+    def Step(self, time):
         """!
 
         """
         result = output_base.OutputGeneratorTimedStep(self._og, time)
 
         return result
+    
 
-
-#---------------------------------------------------------------------------
-
-    def SetFormat(self, fmt):
-        """
-        @brief Sets the string format options
-        """
-
-        output_base.OutputGeneratorSetFormat(self._og, fmt)
 
 #---------------------------------------------------------------------------
 
@@ -92,13 +84,6 @@ class Output:
         output_base.OutputGeneratorSetSteps(self._og, steps)
         
 
-#---------------------------------------------------------------------------
-
-    def Step(self, time):
-        """!
-
-        """
-        return self.Advance(time)
 
 #---------------------------------------------------------------------------    
 
@@ -132,3 +117,100 @@ OutputGenerator = Output
 
 
 #---------------------------------------------------------------------------
+
+
+class LiveOutput:
+    """
+    """
+    
+#---------------------------------------------------------------------------
+
+    def __init__(self):
+        """!
+
+        """
+
+        self.initiated = False
+        
+        self._lo = output_base.LiveOutputNew(filename)
+
+        self.Initialize()
+        
+#---------------------------------------------------------------------------
+
+    def Initialize(self):
+
+        if not self.initiated:
+            
+            result = output_base.LiveOutputInitiate(self._lo)
+
+            if result == 0:
+
+                raise Exception("Can't create live output")
+
+            self.initiated = True
+
+#---------------------------------------------------------------------------
+
+    def Step(self, time):
+        """!
+
+        """
+        result = output_base.LiveOutputTimedStep(self._lo, time)
+
+        return result
+
+
+#---------------------------------------------------------------------------
+
+    def SetFormat(self, fmt):
+        """
+        @brief Sets the string format options
+        """
+
+        output_base.LiveOutputSetFormat(self._lo, fmt)
+
+#---------------------------------------------------------------------------
+
+    def SetResolution(self, resolution):
+        """
+        @brief Sets the output resolution
+        """
+
+        self._lo.iResolution = resolution
+
+#---------------------------------------------------------------------------
+
+    def SetSteps(self, steps):
+        """
+        @brief Turns on/off steps mode.
+
+        1 to turn on steps mode, 0 to turn it off.
+        """
+        output_base.LiveOutputSetSteps(self._lo, steps)
+
+#---------------------------------------------------------------------------    
+
+    def Compile(self):
+        """!
+
+        """
+        self.Initialize()
+    
+#---------------------------------------------------------------------------
+
+    def AddOutput(self, name, address):
+        """!
+
+        """
+        output_base.LiveOutputAddVariable(self._lo, name, address)
+
+#---------------------------------------------------------------------------
+
+    def Finish(self):
+        """!
+        @brief empty method
+
+        This is just left in for consistency
+        """
+        pass
