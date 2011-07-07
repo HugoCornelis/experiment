@@ -109,6 +109,80 @@ PyObject * LiveOutputData(struct LiveOutput * plo);
 
 //------------------------------------------------------------------------------
 /*
+ * Returns a tuple of coodinates in the form (x, y z)
+ * Attempts cleanup of objects in the event of an error.
+ */
+static PyObject * CoordinateTuple(double dX, double dY, double dZ)
+{
+
+  PyObject * ppoTuple = PyTuple_New(3);
+  
+  if( !ppoTuple )
+  {
+    return NULL;
+  }
+
+  PyObject * ppoX = NULL;
+  PyObject * ppoY = NULL;
+  PyObject * ppoZ = NULL;
+
+  ppoX = PyFloat_FromDouble(dX);
+
+  if( !PyFloat_Check(ppoX) )
+  {
+    free(ppoX);
+    return NULL;
+  }
+
+  ppoY = PyFloat_FromDouble(dY);
+
+  if( !PyFloat_Check(ppoY) )
+  {
+    free(ppoX);
+    free(ppoY);
+    return NULL;
+  }
+
+  ppoZ = PyFloat_FromDouble(dZ);
+  
+  if( !PyFloat_Check(ppoZ) )
+  {
+    free(ppoX);
+    free(ppoY);
+    free(ppoZ);
+    return NULL;
+  }
+
+  ppoTuple = PyTuple_New(3);
+
+  if( !ppoTuple )
+  {
+    free(ppoX);
+    free(ppoY);
+    free(ppoZ);
+    return NULL;
+  }
+
+  PyTuple_SetItem(ppoTuple, 0, ppoX);
+  PyTuple_SetItem(ppoTuple, 1, ppoY);
+  PyTuple_SetItem(ppoTuple, 2, ppoZ);
+
+  if( !PyTuple_Check(ppoTuple) )
+  {
+    free(ppoX);
+    free(ppoY);
+    free(ppoZ);
+    return NULL;
+  }
+
+  return ppoTuple;
+
+}
+//------------------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+/*
  * 
  */
 int
@@ -287,7 +361,8 @@ int LiveOutputTimedStep(struct LiveOutput * plo, double dTime)
     char pcVariables[1000] = "";
     PyObject *ppoList = NULL;
     PyObject *ppoVariable = NULL;
-
+    PyObject *ppoTimeStamp = NULL;
+    PyObject *ppoOutputTuple = NULL;
 
     //- if we are not at the correct resolution time step
 
@@ -305,6 +380,17 @@ int LiveOutputTimedStep(struct LiveOutput * plo, double dTime)
 	plo->iResolutionStep = plo->iResolution;
     }
 
+    //- Create a python tuple for our data
+
+    ppoOutputTuple = PyTuple_New(2);
+
+    if( !ppoOutputTuple || !PyTuple_Check(ppoOutputTuple) )
+    {
+
+      PyErr_SetString(PyExc_MemoryError,"Can't allocate tuple for timed step output");
+
+    }    
+
     //- Create an empty python list
 
     ppoList = PyList_New(0);
@@ -317,6 +403,15 @@ int LiveOutputTimedStep(struct LiveOutput * plo, double dTime)
       //- Should never get here, python will bail out before then
 
       return 0;
+    }
+
+    ppoTimeStamp = PyFloat_FromDouble(dTime);
+
+    if( !PyFloat_Check(ppoTimeStamp) )
+    {
+
+      PyErr_SetString(PyExc_MemoryError,"Can't allocate float for timestamp");
+
     }
 
     //- copy all the variables to our collective list
@@ -361,9 +456,14 @@ int LiveOutputTimedStep(struct LiveOutput * plo, double dTime)
 	return 0;
       }
 
-      //- copy this python list to the data list
+      //- copy this python list to the data tuple list
+      
+      //- First set the items into the tuple
+      PyTuple_SetItem(ppoOutputTuple, 0, ppoTimeStamp);
+      PyTuple_SetItem(ppoOutputTuple, 1, ppoList);
 
-      PyList_Append(plo->ppoData, ppoList);
+
+      PyList_Append(plo->ppoData, ppoOutputTuple);
 
     }
 
