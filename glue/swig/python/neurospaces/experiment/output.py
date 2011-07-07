@@ -85,6 +85,16 @@ class Output:
         
 
 
+
+#---------------------------------------------------------------------------
+
+    def SetFormat(self, fmt):
+        """
+        @brief Sets the string format options
+        """
+        
+        output_base.OutputGeneratorSetFormat(self._og, fmt)
+        
 #---------------------------------------------------------------------------    
 
     def Compile(self):
@@ -159,16 +169,6 @@ class LiveOutput:
         result = output_base.LiveOutputTimedStep(self._lo, time)
 
         return result
-
-
-#---------------------------------------------------------------------------
-
-    def SetFormat(self, fmt):
-        """
-        @brief Sets the string format options
-        """
-
-        output_base.LiveOutputSetFormat(self._lo, fmt)
 
 #---------------------------------------------------------------------------
 
