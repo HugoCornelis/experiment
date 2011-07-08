@@ -12,7 +12,7 @@ except ImportError, e:
     sys.exit("Could not import compiled SWIG output_base library: %s" % e)
 
 
-#---------------------------------------------------------------------------
+#***************************************************************************
 
 class Output:
     """!
@@ -126,8 +126,7 @@ class Output:
 OutputGenerator = Output
 
 
-#---------------------------------------------------------------------------
-
+#***************************************************************************
 
 class LiveOutput:
     """
@@ -220,3 +219,33 @@ class LiveOutput:
     def GetData(self):
 
         return output_base.LiveOutputData(self._lo)
+
+#***************************************************************************
+
+class LineOutput(LiveOutput):
+    """
+    @brief an output object that produces only one line at a time
+
+    An inherited class from the LiveOutput class. This does not
+    keep a persistent data structure with output values, it only
+    outputs one line of output in the form of an array with the
+    first value as the timestamp and following values the output
+    variables. 
+    """
+    
+    def __init__(self):
+
+        LiveOutput.__init__(self)
+
+#---------------------------------------------------------------------------
+
+
+    def Step(self, time):
+        """!
+
+        """
+        output_data = output_base.LiveOutputTimedStepVolatile(self._lo, time)
+
+        return output_data
+
+#---------------------------------------------------------------------------

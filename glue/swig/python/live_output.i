@@ -47,10 +47,6 @@ struct LiveOutput
 
     int iSteps;
 
-    /// output format
-
-    char *pcFormat;
-
     /// output resolution: modulo factor
 
     int iResolution;
@@ -100,6 +96,8 @@ struct LiveOutput * LiveOutputNew();
 int LiveOutputSetSteps(struct LiveOutput * plo, int iSteps);
 
 int LiveOutputTimedStep(struct LiveOutput * plo, double dTime);
+
+PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime);
 
 PyObject * LiveOutputData(struct LiveOutput * plo);
 
@@ -470,6 +468,122 @@ int LiveOutputTimedStep(struct LiveOutput * plo, double dTime)
     //- return result
 
     return(iResult);
+}
+
+
+//------------------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+/*
+ * Only returns a list of values for one step and does not store
+ * them in any way.
+ */
+PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
+{
+    int i;
+    int iResult = 1;
+    int iOutput = 1;
+    double dTmp;
+    char pcVariables[1000] = "";
+    PyObject *ppoList = NULL;
+    PyObject *ppoVariable = NULL;
+    PyObject *ppoTimeStamp = NULL;
+
+    //- if we are not at the correct resolution time step
+
+    if (plo->iResolution > 0)
+    {
+	plo->iResolutionStep--;
+
+	if (plo->iResolutionStep > 0)
+	{
+	    //- nothing to output, return success
+
+	    return(1);
+	}
+
+	plo->iResolutionStep = plo->iResolution;
+    }
+
+    //- Create an empty python list
+
+    ppoList = PyList_New(0);
+
+
+    if( !ppoList || !PyList_Check(ppoList) )
+    {
+      PyErr_SetString(PyExc_MemoryError,"Can't allocate list for timed step");
+
+      //- Should never get here, python will bail out before then
+
+      return 0;
+    }
+
+    ppoTimeStamp = PyFloat_FromDouble(dTime);
+
+    if( !PyFloat_Check(ppoTimeStamp) )
+    {
+
+      PyErr_SetString(PyExc_MemoryError,"Can't allocate float for timestamp");
+
+    }
+
+
+    PyList_Append(ppoList, ppoTimeStamp);
+
+
+    //- copy all the variables to our collective list
+
+    for (i = 0 ; i < plo->iVariablesActive ; i++)
+    {
+	//- if the variable differs from the base value
+
+	if (*plo->ppdVariables[i] != plo->dBase)
+	{
+
+	  dTmp = *plo->ppdVariables[i];
+
+	  ppoVariable = PyFloat_FromDouble(dTmp);
+
+	  if( !PyFloat_Check(ppoVariable) )
+	  {
+	    
+	    PyErr_SetString(PyExc_MemoryError,"Can't read variable from address");
+
+	  }
+
+	  PyList_Append(ppoList, ppoVariable);
+
+	  iOutput = 1;
+
+	}
+    }
+
+    //- if there was any output
+
+    if (iOutput)
+    {
+
+      if( !PyList_Check(ppoList) )
+      {
+
+	PyErr_SetString(PyExc_MemoryError,"Collected variable data list is invalid");
+
+	//- Should never get here, python will bail out before then
+
+	return 0;
+      }
+
+      return ppoList;
+
+    }
+    else
+    {
+
+      return NULL;
+
+    }
 }
 
 
