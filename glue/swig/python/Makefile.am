@@ -21,7 +21,8 @@ nobase_python_DATA = \
 EXTRA_DIST = \
 	$(srcdir)/pulsegen.i \
 	$(srcdir)/perfectclamp.i \
-	$(srcdir)/output.i
+	$(srcdir)/output.i \
+	$(srcdir)/live_output.i 
 
 BUILT_SOURCES = \
 	$(srcdir)/pulsegen_wrap.c \
