@@ -72,13 +72,14 @@ AC_PATH_PROGS(DOXYGEN,doxygen)
 AC_PATH_PROGS(DOT,dot)
 AC_PATH_PROGS(SOURCE_HIGHLIGHT,source-highlight)
 
+
 dnl Check for Python and it's headers
 AM_PATH_PYTHON(,[],[
    echo "Python is not installed."
    exit -1
 ])
 
-AC_MSG_CHECKING([Python prefix is])
+AC_MSG_CHECKING([Python prefix is ])
   AC_MSG_RESULT(['$PYTHON_PREFIX'])
 
 dnl
@@ -107,8 +108,6 @@ case "$host_os" in
 
   ;;
 esac
-
-
 
 
 if test "$HAVE_PYTHON_CONFIG" == "yes"; then
@@ -169,12 +168,10 @@ else
   PYTHON_PREFIX=`echo $PYTHON_PREFIX | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
   AC_SUBST(PYTHON_PREFIX)
 
-
   AC_MSG_CHECKING([Python prefix is])
   AC_MSG_RESULT([$PYTHON_PREFIX])
 
-
-  PYTHON_HEADERS=$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)
+  PYTHON_HEADERS='$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)'
   AC_SUBST(PYTHON_HEADERS)
 
   AC_MSG_CHECKING([Python includes are])
@@ -187,13 +184,30 @@ else
   AC_SUBST(PYTHON_LIBS)
   AC_MSG_RESULT([$PYTHON_LIBS])
 				
-
-
   PYTHON_EXE='$(PYTHON_PREFIX)/bin/python'
   AC_SUBST(PYTHON_EXE)
 fi
 
 
+PERL_MODULES=`(cd perl && find . -name "*.pm" | perl -pe 's/\n/ /g')`
+AC_SUBST(PERL_MODULES)
+
+PERL_DATA=`(cd perl && find . -name "numbers-7x11.txt" | perl -pe 's/\n/ /g')`
+AC_SUBST(PERL_DATA)
+
+# Checks for programs.
+
+#   check for packaging programs for debian and red hat.
+#   no need to bail out if these are missing since they're optional. 
+AC_CHECK_PROGS([DPKG_BUILDPACKAGE],dpkg-buildpackage,[NULL])
+AC_CHECK_PROGS([DH],dh,[NULL])
+AC_CHECK_PROGS([RPMBUILD],rpmbuild,[NULL])
+
+dnl Check for Python and it's headers
+AM_PATH_PYTHON(,[],[
+   echo "Python is not installed."
+   exit -1
+])
 
 # Checks for options
 
