@@ -176,7 +176,13 @@ class LiveOutput:
         @brief Sets the output resolution
         """
 
-        self._lo.iResolution = resolution
+        output_base.SetResolution(self._lo, resolution)
+
+#---------------------------------------------------------------------------
+
+    def GetResolution(self):
+
+        return self._lo.iResolution
 
 #---------------------------------------------------------------------------
 
