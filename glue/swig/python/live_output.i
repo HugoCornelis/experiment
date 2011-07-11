@@ -502,9 +502,8 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 
 	if (plo->iResolutionStep > 0)
 	{
-	    //- nothing to output, return success
 
-	    return(1);
+	    return NULL;
 	}
 
 	plo->iResolutionStep = plo->iResolution;
@@ -521,7 +520,7 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 
       //- Should never get here, python will bail out before then
 
-      return 0;
+      return NULL;
     }
 
     ppoTimeStamp = PyFloat_FromDouble(dTime);
@@ -576,7 +575,7 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 
 	//- Should never get here, python will bail out before then
 
-	return 0;
+	return NULL;
       }
 
       return ppoList;
