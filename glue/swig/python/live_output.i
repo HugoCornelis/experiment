@@ -101,6 +101,10 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime);
 
 PyObject * LiveOutputData(struct LiveOutput * plo);
 
+int GetResolution(struct LiveOutput * plo);
+
+int SetResolution(struct LiveOutput * plo, int iResolution);
+
 //------------------------------------------ End Prototypes ---------------------------
 
 
@@ -498,9 +502,8 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 
 	if (plo->iResolutionStep > 0)
 	{
-	    //- nothing to output, return success
 
-	    return(1);
+	    return NULL;
 	}
 
 	plo->iResolutionStep = plo->iResolution;
@@ -517,7 +520,7 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 
       //- Should never get here, python will bail out before then
 
-      return 0;
+      return NULL;
     }
 
     ppoTimeStamp = PyFloat_FromDouble(dTime);
@@ -572,7 +575,7 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 
 	//- Should never get here, python will bail out before then
 
-	return 0;
+	return NULL;
       }
 
       return ppoList;
@@ -610,6 +613,53 @@ PyObject * LiveOutputData(struct LiveOutput * plo)
 }
 
 //------------------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+
+
+
+//------------------------------------------------------------------------------
+/*
+ * 
+ */
+
+int GetResolution(struct LiveOutput * plo)
+{
+
+  if( !plo )
+  {
+    return 0;
+  }
+
+  return plo->iResolution;
+}
+
+
+//------------------------------------------------------------------------------
+
+
+
+//------------------------------------------------------------------------------
+/*
+ * 
+ */
+ int SetResolution(struct LiveOutput * plo, int iResolution)
+{
+
+  if( !plo )
+  {
+    return 0;
+  }
+
+  plo->iResolution = iResolution;
+
+  return 1;
+
+}
+//------------------------------------------------------------------------------
+
+
 
 
 
