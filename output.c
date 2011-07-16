@@ -39,6 +39,8 @@
 /// 
 /// \brief Schedule a variable for output.
 /// 
+/// Error: the impediment of this experiment
+/// 
 
 int
 OutputGeneratorAddVariable
