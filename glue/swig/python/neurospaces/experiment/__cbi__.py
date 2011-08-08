@@ -20,22 +20,25 @@ in simulations in GENESIS 3.
 """
 __download_url__ = "http://repo-genesis3.cbi.utsa.edu"
 
-def GetRevisionInfo():
-# $Format: "    return \"${monotone_id}\""$
-    return "bf8d4762270a230e4a784b9c6f4133ca7f8134c0"
+class PackageInfo:
+    
+    def GetRevisionInfo():
+# $Format: "        return \"${monotone_id}\""$
+        return "b827606eacc9c544355df892a8244865898ab937"
 
-def GetPackageName():
-# $Format: "    return \"${package}\""$
-    return "experiment"
+    def GetName():
+# $Format: "        return \"${package}\""$
+        return "experiment"
 
-def GetVersion():
-# $Format: "    return \"${major}.${minor}.${micro}-${label}\""$
-    return "0.0.0-alpha"
+    def GetVersion():
+# $Format: "        return \"${major}.${minor}.${micro}-${label}\""$
+        return "0.0.0-alpha"
 
-def GetDependencies():
-    """!
-    @brief Provides a list of other CBI dependencies needed.
-    """
-    dependencies = []
+    def GetDependencies():
+        """!
+        @brief Provides a list of other CBI dependencies needed.
+        """
+        dependencies = []
+        
+        return dependencies
 
-    return dependencies
