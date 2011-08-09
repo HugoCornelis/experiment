@@ -22,19 +22,19 @@ __download_url__ = "http://repo-genesis3.cbi.utsa.edu"
 
 class PackageInfo:
     
-    def GetRevisionInfo():
+    def GetRevisionInfo(self):
 # $Format: "        return \"${monotone_id}\""$
         return "b827606eacc9c544355df892a8244865898ab937"
 
-    def GetName():
+    def GetName(self):
 # $Format: "        return \"${package}\""$
         return "experiment"
 
-    def GetVersion():
+    def GetVersion(self):
 # $Format: "        return \"${major}.${minor}.${micro}-${label}\""$
         return "0.0.0-alpha"
 
-    def GetDependencies():
+    def GetDependencies(self):
         """!
         @brief Provides a list of other CBI dependencies needed.
         """
