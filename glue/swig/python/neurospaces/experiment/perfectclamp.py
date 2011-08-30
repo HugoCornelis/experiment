@@ -13,7 +13,7 @@ try:
     import perfectclamp_base
 
 except ImportError, e:
-    sys.exit("Could not import compiled SWIG pulsegen_base library: %s")
+    sys.exit("Could not import compiled SWIG pulsegen_base library: %s" % e)
 
 
 from perfectclamp_base import PerfectClampAddVariable

@@ -7,19 +7,59 @@ import os
 import sys
 import pdb
 
+# This is borrowed from django's setup tools
+def fullsplit(path, result=None):
+    """
+    Split a pathname into components (the opposite of os.path.join) in a
+    platform-neutral way.
+    """
+    if result is None:
+        result = []
+    head, tail = os.path.split(path)
+    if head == '':
+        return [tail] + result
+    if head == path:
+        return result
+    return fullsplit(head, [tail] + result)
 
-
-def add_package_path(package):
+def add_package_path(package, subdir=''):
     """
     Adds an import path to a python module in a project directory.
     """
-    directory = "/neurospaces_project/" + package + "/source/snapshots/0"
 
-    root_path = os.environ['HOME'] + directory
+    path = os.path.join(os.environ['HOME'],
+                        'neurospaces_project',
+                        package,
+                        'source',
+                        'snapshots',
+                        '0',
+                        'glue',
+                        'swig',
+                        'python')
 
-    path = root_path + "/glue/swig/python/neurospaces"
+    build_dir = os.path.join(path, 'build')
 
-    sys.path.append(path)
+    python_build = ""
+    parts = []
+
+    if os.path.exists(build_dir):
+
+        for curr_dir, directories, files in os.walk( build_dir ):
+
+            if os.path.isfile( os.path.join( curr_dir, '__cbi__.py' )):
+
+                parts = list(fullsplit(curr_dir))
+
+                parts.pop() # remove the chemesis3 path
+                parts.pop() # remove the neurospaces path
+
+                python_build = os.path.join(os.sep, os.path.join(*parts))
+                sys.path.append(os.path.join(python_build, subdir))
+
+                return
+
+    # Add this path if we didn't find one previously
+    sys.path.append(os.path.join(path, subdir))
 
 
 def print_simobj_pulsegen(spg):

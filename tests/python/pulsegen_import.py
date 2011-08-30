@@ -8,7 +8,7 @@ import pdb
 
 from test_library import add_package_path
 
-add_package_path("experiment")
+add_package_path("experiment", "neurospaces")
 
 import experiment.pulsegen_base
 

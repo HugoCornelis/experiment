@@ -267,7 +267,7 @@ class ExperimentModule(Extension):
 
     def get_libraries(self):
 
-        return ["neurospacesread",
+        return ["neurospacesread","experiment",
                 "symbol_algorithms", "ncurses", "readline"]
 
     def get_mac_architectures(self, file):

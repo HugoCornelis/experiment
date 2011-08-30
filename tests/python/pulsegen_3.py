@@ -10,8 +10,7 @@ import pdb
 from test_library import add_package_path
 from test_library import print_pulsegen
 
-
-add_package_path("experiment")
+add_package_path("experiment", "neurospaces")
 
 from experiment.pulsegen import PulseGen
 from experiment.pulsegen import FREE_RUN
