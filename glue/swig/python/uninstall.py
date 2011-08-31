@@ -44,5 +44,11 @@ except ImportError:
 
 package_manager = PackageManager(verbose=False)
 
-package_manager.Uninstall('experiment')
+try:
+    
+    package_manager.Uninstall('experiment')
+
+except Exception, e:
+
+    print "Can't uninstall experiment: %s" % e
 
