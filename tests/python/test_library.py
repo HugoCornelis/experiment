@@ -54,12 +54,15 @@ def add_package_path(package, subdir=''):
                 parts.pop() # remove the neurospaces path
 
                 python_build = os.path.join(os.sep, os.path.join(*parts))
-                sys.path.append(os.path.join(python_build, subdir))
+                #sys.path.append(os.path.join(python_build, subdir))
+                sys.path.insert(0, os.path.join(python_build, subdir))
 
                 return
 
     # Add this path if we didn't find one previously
-    sys.path.append(os.path.join(path, subdir))
+    sys.path.insert(0, os.path.join(path, subdir))
+#    sys.path.append(os.path.join(path, subdir))
+
 
 
 def print_simobj_pulsegen(spg):
