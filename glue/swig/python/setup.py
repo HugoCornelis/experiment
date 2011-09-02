@@ -184,13 +184,27 @@ class ExperimentModule(Extension):
 
     def get_swig_opts(self):
 
-        swig_opts = [ '-I../../..']
+        include_dirs = self.get_include_dirs()
 
-        if not self.outdir is None:
+        opts = []
 
-            swig_opts.extend(['-outdir', self.outdir])
+        opts.extend(["-I%s" % d for d in include_dirs])
 
-        return swig_opts
+
+        opts.append("-I%s" % os.path.join(home_dir,
+                                          'neurospaces_project',
+                                          'experiment',
+                                          'source',
+                                          'snapshots',
+                                          '0',
+                                          'glue',
+                                          'swig',
+                                          'python'
+                                          ))
+        
+        opts.extend(["-outdir", self.outdir])
+
+        return opts
     
     def get_library_dirs(self):
 
