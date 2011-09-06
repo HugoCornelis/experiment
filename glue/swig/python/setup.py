@@ -311,26 +311,26 @@ AUTHOR_EMAIL = cbi.__email__
 LICENSE = cbi.__license__
 URL = cbi.__url__
 DOWNLOAD_URL = cbi.__download_url__
-DESCRIPTION="Heccer is a fast compartmental solver, that is based on hsolve of the GENESIS simulator."
+DESCRIPTION="The Experiment package delivers a library of stimulation and recording objects."
 LONG_DESCRIPTION=cbi.__description__
 
 KEYWORDS="neuroscience neurosimulator simulator modeling GENESIS"
 
 # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
 CLASSIFIERS = [
-    'Development Status :: 0 - Alpha',
+    'Development Status :: 3 - Alpha',
     'Environment :: Console',
-    'Environment :: Desktop Application',
     'Intended Audience :: End Users/Desktop',
     'Intended Audience :: Developers',
-    'Intended Audience :: Research',
-    'Intended Audience :: Science',        
-    'License :: OSI Approved :: GPL License',
+    'Intended Audience :: Science/Research',
+    'License :: OSI Approved :: GNU General Public License (GPL)',
     'Operating System :: MacOS :: MacOS X',
-    'Operating System :: POSIX',
-    'Programming Language :: Python',
-    'Topic :: Research :: Neuroscience',
+    'Operating System :: POSIX :: Linux',
+    'Programming Language :: Python :: 2.5',
+    'Programming Language :: Python :: 2.6',
+    'Topic :: Software Development :: Libraries :: Python Modules',
 ]
+
 
 PACKAGE_FILES=find_files(os.path.join('neurospaces', 'experiment'))
 
@@ -396,33 +396,49 @@ _include_paths = [_package_dir,
                   "../../..",
                   "/usr/local/neurospaces/instrumentor"]
 
-pulsegen_module=ExperimentModule(name='neurospaces.experiment._pulsegen_base',
-                                 sources=['pulsegen.i'],
-                                 outdir=os.path.join('neurospaces','experiment'),
-                                 library_paths=_library_paths,
-                                 library_files=_library_files,
-                                 include_paths=_include_paths,
-                                 include_files=['experiment/pulsegen.h'])
-
-
-
-output_module=ExperimentModule(name='neurospaces.experiment._output_base',
-                               sources=['output.i'],
-                               outdir=os.path.join('neurospaces','experiment'),
-                               library_paths=_library_paths,
-                               library_files=_library_files,
-                               include_paths=_include_paths,
-                               include_files=['experiment/output.h'])
-
-
-
-perfectclamp_module=ExperimentModule(name='neurospaces.experiment._perfectclamp_base',
-                                     sources=['perfectclamp.i'],
+try:
+    
+    pulsegen_module=ExperimentModule(name='neurospaces.experiment._pulsegen_base',
+                                     sources=['pulsegen.i'],
                                      outdir=os.path.join('neurospaces','experiment'),
                                      library_paths=_library_paths,
                                      library_files=_library_files,
                                      include_paths=_include_paths,
-                                     include_files=['experiment/perfectclamp.h'])
+                                     include_files=['experiment/pulsegen.h'])
+except Exception, e:
+
+    sys.exit(e)
+
+
+
+try:
+    
+    output_module=ExperimentModule(name='neurospaces.experiment._output_base',
+                                   sources=['output.i'],
+                                   outdir=os.path.join('neurospaces','experiment'),
+                                   library_paths=_library_paths,
+                                   library_files=_library_files,
+                                   include_paths=_include_paths,
+                                   include_files=['experiment/output.h'])
+except Exception, e:
+
+    sys.exit(e)
+
+
+
+try:
+    
+    perfectclamp_module=ExperimentModule(name='neurospaces.experiment._perfectclamp_base',
+                                         sources=['perfectclamp.i'],
+                                         outdir=os.path.join('neurospaces','experiment'),
+                                         library_paths=_library_paths,
+                                         library_files=_library_files,
+                                         include_paths=_include_paths,
+                                         include_files=['experiment/perfectclamp.h'])
+
+except Exception, e:
+
+    sys.exit(e)
 
 
 EXT_MODULES=[
