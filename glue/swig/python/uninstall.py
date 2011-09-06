@@ -46,7 +46,7 @@ package_manager = PackageManager(verbose=False)
 
 try:
     
-    package_manager.Uninstall('experiment')
+    package_manager.uninstall('experiment')
 
 except Exception, e:
 
