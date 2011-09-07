@@ -5,9 +5,25 @@ import sys
 from commands import getoutput
 
 from distutils import log
-from distutils.core import setup, Extension
 from distutils.command.bdist_rpm import bdist_rpm
 from distutils.command.install_data import install_data
+
+# This will work for both setuptools and distutils
+# main difference is that if distutils is imported then
+# the bdist_egg option is not available.
+try:
+    
+    from setuptools import setup, find_packages, Extension
+
+except ImportError:
+
+    from distutils.core import setup
+    from distutils.core import Extension
+    
+    def find_packages():
+
+        return ['neurospaces', 'neurospaces.experiment']
+
 
 #from setuptools import setup, find_packages
 
@@ -461,9 +477,7 @@ setup(
     license=LICENSE,
     keywords=KEYWORDS,
     url=URL,
-    packages=['neurospaces',
-              'neurospaces.experiment',
-              ],
+    packages=find_packages(),
     package_data={'neurospaces' : [os.path.join('neurospaces','__init__.py')],
                   'neurospaces.experiment' : PACKAGE_FILES,
                   'neurospaces.experiment' : [
@@ -472,7 +486,6 @@ setup(
                       os.path.join('neurospaces', 'experiment','perfectclamp_base.py'),
                       ],                  
                   },
-#     package_dir={'' : ''},
     classifiers=CLASSIFIERS,
     options=OPTIONS,
     platforms=PLATFORMS,

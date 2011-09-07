@@ -11,6 +11,7 @@ Makefile$
 ^docs/various.txt$
 ^doxy$
 ^doxygen/docs/
+egg-info$
 ^glue/swig/perl/SwiggableExperiment.pm$
 ^glue/swig/perl/swiggable_experiment_wrap.c$
 ^glue/swig/python_old/SwiggableExperiment.py$

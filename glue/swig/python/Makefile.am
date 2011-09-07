@@ -11,6 +11,33 @@ uninstall-hook:
 
 all: setup
 
+
+clean-local:
+	$(RM) -f $(srcdir)/*.o 
+	$(RM) -f $(srcdir)/neurospaces/experiment/*.pyc 
+	$(RM) -f $(srcdir)/neurospaces/experiment/*.so
+	echo "Removing all compiled byte code files"
+	$(RM) `find . -name "*.pyc"`
+	$(RM) -rf $(srcdir)/build
+	$(RM) -rf $(srcdir)/dist/
+	$(RM) -rf $(srcdir)/*.egg-info
+
+CLEANFILES = \
+	$(srcdir)/pulsegen_wrap.c \
+	$(srcdir)/pulsegen_wrap.o \
+	$(srcdir)/neurospaces/experiment/_pulsegen_base.so \
+	$(srcdir)/neurospaces/experiment/pulsegen_base.py \
+	$(srcdir)/perfectclamp_wrap.c \
+	$(srcdir)/perfectclamp_wrap.o \
+	$(srcdir)/neurospaces/experiment/_perfectclamp_base.so \
+	$(srcdir)/neurospaces/experiment/perfectclamp_base.py \
+	$(srcdir)/output_wrap.c \
+	$(srcdir)/output_wrap.o \
+	$(srcdir)/neurospaces/experiment/_output_base.so \
+	$(srcdir)/neurospaces/experiment/output_base.py 
+
+
+
 # SUBDIRS =
 
 # pythondir = $(prefix)/glue/swig/python/
@@ -90,26 +117,3 @@ all: setup
 # #-----------------------------------------------------------
 
 
-
-clean-local:
-	$(RM) -f $(srcdir)/*.o 
-	$(RM) -f $(srcdir)/neurospaces/experiment/*.pyc 
-	$(RM) -f $(srcdir)/neurospaces/experiment/*.so
-	echo "Removing all compiled byte code files"
-	$(RM) `find . -name "*.pyc"`
-	$(RM) -rf $(srcdir)/build
-	$(RM) -rf $(srcdir)/dist/
-
-CLEANFILES = \
-	$(srcdir)/pulsegen_wrap.c \
-	$(srcdir)/pulsegen_wrap.o \
-	$(srcdir)/neurospaces/experiment/_pulsegen_base.so \
-	$(srcdir)/neurospaces/experiment/pulsegen_base.py \
-	$(srcdir)/perfectclamp_wrap.c \
-	$(srcdir)/perfectclamp_wrap.o \
-	$(srcdir)/neurospaces/experiment/_perfectclamp_base.so \
-	$(srcdir)/neurospaces/experiment/perfectclamp_base.py \
-	$(srcdir)/output_wrap.c \
-	$(srcdir)/output_wrap.o \
-	$(srcdir)/neurospaces/experiment/_output_base.so \
-	$(srcdir)/neurospaces/experiment/output_base.py 
