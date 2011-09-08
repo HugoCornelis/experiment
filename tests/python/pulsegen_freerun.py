@@ -9,11 +9,11 @@ import pdb
 
 from test_library import add_package_path
 
-add_package_path("experiment", os.path.join("neurospaces","experiment"))
+add_package_path("experiment")
 
 from test_library import print_pulsegen
-from pulsegen import PulseGen
-from pulsegen import FREE_RUN
+from experiment.pulsegen import PulseGen
+from experiment.pulsegen import FREE_RUN
 
 pg = PulseGen("Test name", 50.0, 3.0, 5.0, -20.0,
               5.0, 8.0, 10.0, 0)

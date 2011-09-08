@@ -2,6 +2,8 @@
 .+\.dylib$
 Makefile$
 ^a.out.dSYM
+build$
+dist$
 ^docs/doxygen.tag$
 ^docs/html
 ^docs/latex
@@ -16,12 +18,12 @@ egg-info$
 ^glue/swig/perl/swiggable_experiment_wrap.c$
 ^glue/swig/python_old/SwiggableExperiment.py$
 ^glue/swig/python_old/swiggable_experiment_wrap.c$
-^glue/swig/python/neurospaces/experiment/pulsegen_base.py$
-^glue/swig/python/pulsegen_wrap.c$
-^glue/swig/python/neurospaces/experiment/perfectclamp_base.py$
-^glue/swig/python/perfectclamp_wrap.c$
-^glue/swig/python/neurospaces/experiment/output_base.py$
-^glue/swig/python/output_wrap.c$
+pulsegen_base.py$
+pulsegen_wrap.c$
+perfectclamp_base.py$
+perfectclamp_wrap.c$
+output_base.py$
+output_wrap.c$
 ^html/
 ^installed$
 ^installed/
@@ -50,6 +52,4 @@ _BUILD$
 \.pkg$
 \.so$
 MANIFEST$
-glue/swig/python/build$
-glue/swig/python/dist$
-glue/swig/python/MANIFEST$
+\.pyc$

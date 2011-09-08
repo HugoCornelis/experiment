@@ -22,7 +22,7 @@ except ImportError:
     
     def find_packages():
 
-        return ['neurospaces', 'neurospaces.experiment']
+        return ['experiment']
 
 
 #from setuptools import setup, find_packages
@@ -32,8 +32,8 @@ except ImportError:
 # if we import from nmc.__cbi__
 #cbi = imp.load_source('__cbi__', os.path.join('neurospaces', 'experiment', '__cbi__.py'))
 
-import neurospaces.experiment.__cbi__ as cbi
-from neurospaces.experiment.__cbi__ import PackageInfo
+import experiment.__cbi__ as cbi
+from experiment.__cbi__ import PackageInfo
 
 _package_info = PackageInfo()
 
@@ -348,7 +348,7 @@ CLASSIFIERS = [
 ]
 
 
-PACKAGE_FILES=find_files(os.path.join('neurospaces', 'experiment'))
+PACKAGE_FILES=find_files(os.path.join('experiment'))
 
 OPTIONS={
     'sdist': {
@@ -362,9 +362,6 @@ OPTIONS={
     }
 
 PLATFORMS=["Unix", "Lunix", "MacOS X"]
-
-PY_MODULES=['neurospaces.heccer']
-
 
 CMDCLASS = {
 #    'build_ext': build_ext,
@@ -414,9 +411,9 @@ _include_paths = [_package_dir,
 
 try:
     
-    pulsegen_module=ExperimentModule(name='neurospaces.experiment._pulsegen_base',
+    pulsegen_module=ExperimentModule(name='experiment._pulsegen_base',
                                      sources=['pulsegen.i'],
-                                     outdir=os.path.join('neurospaces','experiment'),
+                                     outdir=os.path.join('experiment'),
                                      library_paths=_library_paths,
                                      library_files=_library_files,
                                      include_paths=_include_paths,
@@ -429,9 +426,9 @@ except Exception, e:
 
 try:
     
-    output_module=ExperimentModule(name='neurospaces.experiment._output_base',
+    output_module=ExperimentModule(name='experiment._output_base',
                                    sources=['output.i'],
-                                   outdir=os.path.join('neurospaces','experiment'),
+                                   outdir=os.path.join('experiment'),
                                    library_paths=_library_paths,
                                    library_files=_library_files,
                                    include_paths=_include_paths,
@@ -444,9 +441,9 @@ except Exception, e:
 
 try:
     
-    perfectclamp_module=ExperimentModule(name='neurospaces.experiment._perfectclamp_base',
+    perfectclamp_module=ExperimentModule(name='experiment._perfectclamp_base',
                                          sources=['perfectclamp.i'],
-                                         outdir=os.path.join('neurospaces','experiment'),
+                                         outdir=os.path.join('experiment'),
                                          library_paths=_library_paths,
                                          library_files=_library_files,
                                          include_paths=_include_paths,
@@ -477,13 +474,12 @@ setup(
     license=LICENSE,
     keywords=KEYWORDS,
     url=URL,
-    packages=find_packages(),
-    package_data={'neurospaces' : [os.path.join('neurospaces','__init__.py')],
-                  'neurospaces.experiment' : PACKAGE_FILES,
-                  'neurospaces.experiment' : [
-                      os.path.join('neurospaces', 'experiment','output_base.py'),
-                      os.path.join('neurospaces', 'experiment','pulsegen_base.py'),
-                      os.path.join('neurospaces', 'experiment','perfectclamp_base.py'),
+    packages=['experiment'],
+    package_data={'experiment' : PACKAGE_FILES,
+                  'experiment' : [
+                      os.path.join('experiment','output_base.py'),
+                      os.path.join('experiment','pulsegen_base.py'),
+                      os.path.join('experiment','perfectclamp_base.py'),
                       ],                  
                   },
     classifiers=CLASSIFIERS,

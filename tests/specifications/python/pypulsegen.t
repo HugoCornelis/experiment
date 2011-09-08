@@ -169,7 +169,7 @@ Done!
 
 			      ],
        description => "Tests for the PulseGen python bindings.",
-       name => 'python_pulsegen.t',
+       name => 'pypulsegen.t',
       };
 
 

@@ -9,7 +9,7 @@ import pdb
 
 from test_library import add_package_path
 
-add_package_path("experiment", "neurospaces")
+add_package_path("experiment")
 
 from test_library import print_simobj_perfectclamp
 from experiment.perfectclamp_base import simobj_PerfectClamp

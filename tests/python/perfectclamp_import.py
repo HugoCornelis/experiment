@@ -10,9 +10,9 @@ from test_library import add_package_path
 
 add_package_path("experiment")
 
-import neurospaces.experiment.perfectclamp_base
+import experiment.perfectclamp_base
 
-from neurospaces.experiment.perfectclamp import PerfectClamp
+from experiment.perfectclamp import PerfectClamp
 
 
 print "Done!"

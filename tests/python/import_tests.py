@@ -14,17 +14,17 @@ add_package_path("experiment")
 
 
 print "Importing pulsegen_base"
-import neurospaces.experiment.pulsegen_base
+import experiment.pulsegen_base
 
 
 print "Importing pulsegen"
-import neurospaces.experiment.pulsegen
+import experiment.pulsegen
 
 
 print "Importing perfectclamp_base"
-import neurospaces.experiment.perfectclamp_base
+import experiment.perfectclamp_base
 
 print "Importing perfectclamp"
-import neurospaces.experiment.perfectclamp
+import experiment.perfectclamp
 
 print "Done!"
