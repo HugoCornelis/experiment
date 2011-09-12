@@ -356,8 +356,17 @@ class ExperimentModule(Extension):
 
                     least_archs = arch
 
-        
-        return "-arch %s" % " -arch ".join(least_archs)
+        intel_archs = ['i486', 'i586', 'i686']
+
+        common_archs = []
+
+        for a in least_archs:
+
+            if a in exe_archs:
+
+                common_archs.append(a)
+
+        return "-arch %s" % " -arch ".join(common_archs)
                 
                 
     def get_mac_architecture(self, file):
@@ -460,6 +469,7 @@ _model_container_package_dir = os.path.join(home_dir,
 _library_files = ["libexperiment.a", "libneurospacesread.a", "libsymbol_algorithms.a"]
 _library_paths = [_package_dir,
                   _model_container_package_dir,
+                  os.path.join(_model_container_package_dir, 'algorithms', 'symbol'),
                   "../../..",
                   "/usr/local/lib/model-container"]
 
