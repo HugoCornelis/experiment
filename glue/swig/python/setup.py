@@ -394,8 +394,8 @@ VERSION = _package_info.GetVersion()
 AUTHOR = cbi.__author__
 AUTHOR_EMAIL = cbi.__email__
 LICENSE = cbi.__license__
-URL = cbi.__url__
-DOWNLOAD_URL = cbi.__download_url__
+URL = "http://pypi.python.org/pypi/experiment"
+DOWNLOAD_URL = "http://pypi.python.org/pypi/experiment"
 DESCRIPTION="The Experiment package delivers a library of stimulation and recording objects."
 LONG_DESCRIPTION=cbi.__description__
 
