@@ -13,14 +13,9 @@ all: setup
 
 
 clean-local:
-	$(RM) -f $(srcdir)/*.o 
-	$(RM) -f $(srcdir)/experiment/*.pyc 
-	$(RM) -f $(srcdir)/experiment/*.so
 	echo "Removing all compiled byte code files"
 	$(RM) `find . -name "*.pyc"`
-	$(RM) -rf $(srcdir)/build
-	$(RM) -rf $(srcdir)/dist/
-	$(RM) -rf $(srcdir)/*.egg-info
+	$(PYTHON) clean.py
 
 CLEANFILES = \
 	$(srcdir)/pulsegen_wrap.c \
