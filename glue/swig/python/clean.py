@@ -35,7 +35,7 @@ def remove_python_garbage():
         if re.search("\*", g):
             # If this is a pattern then we use glob.
 
-            found_infos = glob.glob("%s%s*.egg-info" % (_this_directory, os.sep))
+            found_infos = glob.glob("%s%s%s" % (_this_directory, os.sep,g))
 
             for i in found_infos:
 
