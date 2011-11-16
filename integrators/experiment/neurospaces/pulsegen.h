@@ -11,6 +11,29 @@
 struct pulsegen_info
 {
 
+  struct simobj_PulseGen *ppg;
+
+  char *pcName;
+
+  double dLevel1;
+  double dWidth1;
+  double dDelay1;
+
+  double dLevel2;
+  double dWidth2;
+  double dDelay2;
+
+  double dBaseLevel;
+
+  double dTriggerTime;
+  int iTriggerMode;
+
+  
+  int iPreviousInput;
+  
+  double *pdPulseIn;
+
+  double *pdPulseOut;
 
 }
 
