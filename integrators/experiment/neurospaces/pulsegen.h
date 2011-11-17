@@ -1,5 +1,5 @@
-#ifndef CHEMESIS3_NEUROSPACES_CHEMESIS3_H
-#define CHEMESIS3_NEUROSPACES_CHEMESIS3_H
+#ifndef PULSE_GEN_NEUROSPACES_PULSE_GEN_H
+#define PULSE_GEN_NEUROSPACES_PULSE_GEN_H
 
 
 #define PRE_PROTO_TRAVERSAL 1
@@ -8,40 +8,13 @@
 
 
 
-struct pulsegen_info
-{
 
-  struct simobj_PulseGen *ppg;
-
-  char *pcName;
-
-  double dLevel1;
-  double dWidth1;
-  double dDelay1;
-
-  double dLevel2;
-  double dWidth2;
-  double dDelay2;
-
-  double dBaseLevel;
-
-  double dTriggerTime;
-  int iTriggerMode;
-
-  
-  int iPreviousInput;
-  
-  double *pdPulseIn;
-
-  double *pdPulseOut;
-
-}
 
 
 
 //s translator specific service data
 
-struct Chemesis3TranslationServiceData
+struct PulseGenTranslationServiceData
 {
     //m neurospaces
 
@@ -59,13 +32,13 @@ struct Chemesis3TranslationServiceData
 };
 
 
-int Chemesis3ConnectDistributor(struct simobj_Chemesis3 *pch3, struct EventDistributor *ped, struct SolverRegistry *psr, struct ProjectionQuery *ppq);
+int PulseGenConnectDistributor(struct simobj_PulseGen *pch3, struct EventDistributor *ped, struct SolverRegistry *psr, struct ProjectionQuery *ppq);
 
-int Chemesis3ConnectQueuer(struct simobj_Chemesis3 *pch3, struct EventQueuer *peq, struct SolverRegistry *psr, struct ProjectionQuery *ppq);
+int PulseGenConnectQueuer(struct simobj_PulseGen *pch3, struct EventQueuer *peq, struct SolverRegistry *psr, struct ProjectionQuery *ppq);
 
-int Chemesis3Construct(struct simobj_Chemesis3 *pch3, void *pvNeurospaces, char *pcModel, void *pvEventDistributor, void *pvEventQueuer);
+int PulseGenConstruct(struct simobj_PulseGen *pch3, void *pvNeurospaces, char *pcModel, void *pvEventDistributor, void *pvEventQueuer);
 
-int Chemesis3NeurospacesKinetics2Chemesis3(struct Chemesis3TranslationService *pcts);
+int PulseGenNeurospacesKinetics2PulseGen(struct PulseGenTranslationService *pcts);
 
 
 #endif
