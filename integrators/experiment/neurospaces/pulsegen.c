@@ -306,9 +306,9 @@ int PulseGenConstruct(struct simobj_PulseGen *pch3, void *pvNeurospaces, char *p
     /// \todo PulseGenConstruct() should not touch inter.
     /// \todo move or copy the field iSerialStart to pctsd
 
-    pch3->iSerialStart = ADDRESSING_NEUROSPACES_2_CHEMESIS3(pctsd->iModel);
+    pch3->iSerialStart = ADDRESSING_NEUROSPACES_2_PULSEGEN(pctsd->iModel);
 
-    pch3->iSerialEnd = ADDRESSING_NEUROSPACES_2_CHEMESIS3(pctsd->iModel + SymbolGetPrincipalNumOfSuccessors(phsleModel));
+    pch3->iSerialEnd = ADDRESSING_NEUROSPACES_2_PULSEGEN(pctsd->iModel + SymbolGetPrincipalNumOfSuccessors(phsleModel));
 
     //- free allocated data
 

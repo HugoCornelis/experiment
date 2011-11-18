@@ -7,11 +7,6 @@
 #include <neurospaces/neurospaces.h>
 
 
-
-
-
-
-
 //s translator specific service data
 
 struct PulseGenTranslationServiceData
