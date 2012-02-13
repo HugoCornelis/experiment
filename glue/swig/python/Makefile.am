@@ -1,4 +1,11 @@
 
+nobase_dist_python_DATA = \
+	experiment/__cbi__.py \
+	experiment/__init__.py \
+	experiment/output.py \
+	experiment/perfectclamp.py \
+	experiment/pulsegen.py 
+
 
 EXTRA_DIST = \
 	clean.py \
