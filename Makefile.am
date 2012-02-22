@@ -76,6 +76,7 @@ clean-local:
 	$(RM) -f $(top_srcdir)/*.changes
 	$(RM) -f $(top_srcdir)/*.deb
 	$(RM) -f $(top_srcdir)/experiment-*.tar.gz
+	$(RM) -rf $(top_srcdir)/experiment-*
 
 dist-hook: 
 	if test -n "$$NEUROSPACES_RELEASE" ; then cd $(srcdir) && if test -n "`mtn ls changed `" ; then false ; else true ; fi ; else true ; fi

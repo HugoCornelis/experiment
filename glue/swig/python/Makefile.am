@@ -1,13 +1,14 @@
 
-nobase_dist_python_DATA = \
+
+EXTRA_DIST = \
+	output.i \
+	pulsegen.i \
+	perfectclamp.i \
 	experiment/__cbi__.py \
 	experiment/__init__.py \
 	experiment/output.py \
 	experiment/perfectclamp.py \
-	experiment/pulsegen.py 
-
-
-EXTRA_DIST = \
+	experiment/pulsegen.py \
 	clean.py \
 	setup.py \
 	uninstall.py 
