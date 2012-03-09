@@ -27,9 +27,7 @@ dist-hook:
 
 swigdir = $(prefix)/glue/swig
 
-#t use $(swigdir) here
-
-perldir = $(prefix)/glue/swig/perl
+perldir = @PMDIR@
 
 EXTRA_DIST = experiment.i 
 
