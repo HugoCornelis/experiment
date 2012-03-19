@@ -410,6 +410,11 @@ int OutputGeneratorSetSteps(struct OutputGenerator * pog, int iSteps)
 /// \details This gets remapped to OutputGeneratorAnnotatedStep(),
 /// with the time as annotation.
 /// 
+/// \todo Note that DES EventDistributorSend() calls the function
+/// OutputGeneratorTimedStep() with an extra argument, namely iTarget.
+/// See the corresponding comments in EventDistributorSend() and
+/// OutputGeneratorTimedStep().
+/// 
 
 int OutputGeneratorTimedStep(struct OutputGenerator * pog, double dTime)
 {
