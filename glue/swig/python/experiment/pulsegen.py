@@ -42,6 +42,8 @@ EXT_GATE = pulsegen_base.EXT_GATE
 
 class PulseGen:
 
+#---------------------------------------------------------------------------
+
     def __init__(self,name="Unnamed PulseGen",
                  level1=0, width1=0, delay1=0,
                  level2=0, width2=0, delay2=0,
@@ -53,6 +55,8 @@ class PulseGen:
                           level1,width1,delay1,
                           level2,width2,delay2,
                           base_level,trigger_mode)
+
+#---------------------------------------------------------------------------
 
     def __str__(self):
 
@@ -71,78 +75,116 @@ class PulseGen:
  spg.dBaseLevel, spg.iTriggerMode)
 
         return string
-        
+
+#---------------------------------------------------------------------------
+
     def SetName(self,name):
 
         self.spg.pcName = name
+
+#---------------------------------------------------------------------------
 
     def GetName(self):
 
         return self.spg.pcName
 
+#---------------------------------------------------------------------------
+
     def SetLevel1(self,level1):
 
         self.spg.dLevel1 = level1
+
+#---------------------------------------------------------------------------
 
     def GetLevel1(self):
 
         return self.spg.dLevel1
 
+#---------------------------------------------------------------------------
+
     def SetWidth1(self,width1):
 
         self.spg.dWidth1 = width1
+
+#---------------------------------------------------------------------------
 
     def GetWidth1(self):
 
         return self.spg.dWidth1
 
+#---------------------------------------------------------------------------
+
     def SetDelay1(self,delay1):
 
         self.spg.dDelay1 = delay1
+
+#---------------------------------------------------------------------------
 
     def GetDelay1(self):
 
         return self.spg.dDelay1
 
+#---------------------------------------------------------------------------
+
     def SetLevel2(self,level2):
 
         self.spg.dLevel2 = level2
+
+#---------------------------------------------------------------------------
 
     def GetLevel2(self):
 
         return self.spg.dLevel2
 
+#---------------------------------------------------------------------------
+
     def SetWidth2(self,width2):
 
         self.spg.dWidth2 = width2
+
+#---------------------------------------------------------------------------
 
     def GetWidth2(self):
 
         return self.spg.dWidth2
 
+#---------------------------------------------------------------------------
+
     def SetDelay2(self,delay2):
 
         self.spg.dDelay2 = delay2
+
+#---------------------------------------------------------------------------
 
     def GetDelay2(self):
 
         return self.spg.dDelay2
 
+#---------------------------------------------------------------------------
+
     def SetBaseLevel(self,base_level):
 
         self.spg.dBaseLevel = base_level
+
+#---------------------------------------------------------------------------
 
     def GetBaseLevel(self):
 
         return self.spg.dBaseLevel
 
+#---------------------------------------------------------------------------
+
     def SetTriggerMode(self,trigger_mode):
 
         self.spg.iTriggerMode = trigger_mode
 
+#---------------------------------------------------------------------------
+
     def GetTriggerMode(self):
 
         return self.spg.iTriggerMode
+
+#---------------------------------------------------------------------------
 
     def GetOutput(self):
 
@@ -152,13 +194,19 @@ class PulseGen:
         
         return pdouble_value(self.spg.pdPulseOut)
 
+#---------------------------------------------------------------------------
+
     def SingleStep(self,time=0.0):
 
         PulseGenSingleStep(self.spg,time)
 
+#---------------------------------------------------------------------------
+
     def Reset(self):
 
         PulseGenReset(self.spg)
+
+#---------------------------------------------------------------------------
 
     def Finish(self):
 
@@ -172,15 +220,19 @@ class PulseGen:
 
             return True
 
+#---------------------------------------------------------------------------
+
     def AddInput(self,input):
 
         PulseGenAddInput(self.spg,input)
 
+#---------------------------------------------------------------------------
 
 
     def AddVariable(self,output):
 
         PulseGenAddVariable(self.spg,output)
        
+#---------------------------------------------------------------------------
         
 
