@@ -49,7 +49,15 @@ class PulseGen:
                  level2=0, width2=0, delay2=0,
                  base_level=0, trigger_mode=0):
 
+        self.name = name
+
+        self.spg = None
+        
         self.spg = PulseGenNew(name)
+
+        if self.spg is None:
+
+            raise Exception("Can't create PulseGen '%s'" % name)
 
         PulseGenSetFields(self.spg,
                           level1,width1,delay1,
@@ -75,6 +83,44 @@ class PulseGen:
  spg.dBaseLevel, spg.iTriggerMode)
 
         return string
+
+#---------------------------------------------------------------------------
+
+    def Initialize(self):
+
+        if self.spg is None:
+
+            self.spg = PulseGenNew(self.name)
+
+
+        if self.spg is None:
+
+            raise Exception("Can't create pulsgen '%s'" % self.name)
+
+#---------------------------------------------------------------------------
+
+    def Compile(self):
+
+        self.Initialize()
+        
+#---------------------------------------------------------------------------
+
+    def SetFields(level1=0,width1=0,delay1=0,
+                  level2=0,width2=0,delay2=0,
+                  base_level=0,trigger_mode=0):
+
+        result = PulseGenSetFields(self.spg,
+                          level1,width1,delay1,
+                          level2,width2,delay2,
+                          base_level,trigger_mode)
+
+        if resulte == 1:
+
+            return True
+
+        else:
+
+            return False
 
 #---------------------------------------------------------------------------
 
