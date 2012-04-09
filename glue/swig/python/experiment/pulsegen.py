@@ -105,7 +105,7 @@ class PulseGen:
         
 #---------------------------------------------------------------------------
 
-    def SetFields(level1=0,width1=0,delay1=0,
+    def SetFields(self,level1=0,width1=0,delay1=0,
                   level2=0,width2=0,delay2=0,
                   base_level=0,trigger_mode=0):
 
@@ -114,7 +114,7 @@ class PulseGen:
                           level2,width2,delay2,
                           base_level,trigger_mode)
 
-        if resulte == 1:
+        if result == 1:
 
             return True
 
