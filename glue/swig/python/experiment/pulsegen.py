@@ -20,9 +20,11 @@ from pulsegen_base import PulseGenNew
 from pulsegen_base import PulseGenFinish
 from pulsegen_base import PulseGenAddInput
 from pulsegen_base import PulseGenAddVariable
+from pulsegen_base import PulseGenAddVariable_Double
 from pulsegen_base import PulseGenReset
 from pulsegen_base import PulseGenSingleStep
 from pulsegen_base import PulseGenSetFields
+
 
 from pulsegen_base import new_pdouble
 from pulsegen_base import copy_pdouble
@@ -237,8 +239,10 @@ class PulseGen:
         if self.spg.pdPulseOut == None:
 
             return None
-        
-        return pdouble_value(self.spg.pdPulseOut)
+
+        else:
+            
+            return pdouble_value(self.spg.pdPulseOut)
 
 #---------------------------------------------------------------------------
 
@@ -274,10 +278,16 @@ class PulseGen:
 
 #---------------------------------------------------------------------------
 
+    def AddVoidVariable(self,output):
+
+        PulseGenAddVariable(self.spg,output)
+
+#---------------------------------------------------------------------------
+
 
     def AddVariable(self,output):
 
-        PulseGenAddVariable(self.spg,output)
+        PulseGenAddVariable_Double(self.spg,output)
        
 #---------------------------------------------------------------------------
         

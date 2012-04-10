@@ -409,3 +409,32 @@ int PulseGenAddVariable(struct simobj_PulseGen *ppg, void *pvOutput)
 
 }
 
+
+//-------------------------------------------------------------------
+/*!
+ *  \fn int PulseGenAddInput_Double(struct simobj_PulseGen *ppg, double *pdOutput)
+ *  \param ppg A pointer to a PulseGen simulation object.
+ *  \return 0 on no operation, 1 on success.
+ *
+ *  Adds an Output to a Pulsegen
+ */
+//-------------------------------------------------------------------
+int PulseGenAddVariable_Double(struct simobj_PulseGen *ppg, double *pdOutput)
+{
+
+
+  if(!ppg)
+  {
+    return 0;
+  }
+
+  if(ppg->pdPulseOut != NULL)
+  {
+    return 0;
+  }
+
+  ppg->pdPulseOut = pdOutput;
+
+  return 1;
+
+}

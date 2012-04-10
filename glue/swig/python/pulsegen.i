@@ -11,6 +11,10 @@
 #include <string.h>
 #include "experiment/pulsegen.h"
 
+double GetOutput(struct simobj_PulseGen *ppg);
+int fact(int nonnegative);
+
+
 double GetOutput(struct simobj_PulseGen *ppg)
 {
   if(!ppg || !ppg->pdPulseOut)
@@ -130,7 +134,7 @@ extern int PulseGenReset(struct simobj_PulseGen *ppg);
 extern int PulseGenFinish(struct simobj_PulseGen *ppg);
 extern int PulseGenAddInput(struct simobj_PulseGen *ppg, void *pvInput);
 extern int PulseGenAddVariable(struct simobj_PulseGen *ppg, void *pvOutput);
-
+extern int PulseGenAddVariable_Double(struct simobj_PulseGen *ppg, double *pdOutput);
 
 /* Commented out for now
 %typemap(in) int {

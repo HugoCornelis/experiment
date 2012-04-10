@@ -27,7 +27,7 @@ steps = 12
 stepsize = 0.5
 pulseout = 0.0
 
-pg.AddVariable(pulseout)
+pg.AddVoidVariable(pulseout)
 
 for i in range(0,steps):
 

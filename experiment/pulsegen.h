@@ -67,6 +67,8 @@ int PulseGenAddInput(struct simobj_PulseGen *ppg, void *pvInput);
 
 int PulseGenAddVariable(struct simobj_PulseGen *ppg, void *pvOutput);
 
+int PulseGenAddVariable_Double(struct simobj_PulseGen *ppg, double *pdOutput);
+
 int PulseGenReset(struct simobj_PulseGen *ppg);
 
 int PulseGenSingleStep(struct simobj_PulseGen *ppg, double dTime);
