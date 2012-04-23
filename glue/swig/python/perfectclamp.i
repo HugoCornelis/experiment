@@ -59,7 +59,7 @@ double GetVoltage(struct simobj_PerfectClamp *ppc)
 }
 
 
-%typemap(in) void *pvOutput
+%typemap(in) void *pvVoltage
 {
 
   double dTemp = PyFloat_AsDouble($input);
