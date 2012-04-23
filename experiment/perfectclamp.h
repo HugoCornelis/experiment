@@ -54,6 +54,10 @@ int
 PerfectClampAddVariable
 (struct simobj_PerfectClamp * ppc, void *pvVoltage);
 
+int
+PerfectClampAddVariable_Double
+(struct simobj_PerfectClamp * ppc, double *pdVoltage);
+
 int PerfectClampSingleStep(struct simobj_PerfectClamp * ppc, double dTime);
 
 int PerfectClampFinish(struct simobj_PerfectClamp * ppc);

@@ -16,7 +16,10 @@ except ImportError, e:
     sys.exit("Could not import compiled SWIG pulsegen_base library: %s" % e)
 
 
+from perfectclamp_base import GetOutput
+from perfectclamp_base import GetVoltage
 from perfectclamp_base import PerfectClampAddVariable
+from perfectclamp_base import PerfectClampAddVariable_Double
 from perfectclamp_base import PerfectClampFinish
 from perfectclamp_base import PerfectClampInitiate
 from perfectclamp_base import PerfectClampNew
@@ -40,7 +43,7 @@ class PerfectClamp:
 
 #---------------------------------------------------------------------------
 
-    def __init__(self, name):
+    def __init__(self, name="Untitled perfectclamp"):
 
         self.pc = PerfectClampNew(name)
 
@@ -85,8 +88,7 @@ class PerfectClamp:
 
     def GetVoltage(self):
 
-        return pdouble_value(self.pc.pdVoltage)
-
+        return GetVoltage(self.pc)
 
 #---------------------------------------------------------------------------
 
@@ -152,6 +154,17 @@ class PerfectClamp:
 
         return result
 
+#---------------------------------------------------------------------------
+
+    def AddDoubleVariable(self,voltage):
+        """!
+        @brief Add a solved variable.
+        """
+        
+        result = PerfectClampAddVariable_Double(self.pc,voltage)
+
+        return result
+    
 #---------------------------------------------------------------------------
 
     def AddInput(self,voltage):

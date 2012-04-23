@@ -63,6 +63,42 @@ PerfectClampAddVariable
 
 /// 
 /// \arg ppc voltage clamper.
+/// \arg pdVoltage pointer to the voltage variable, assumed is double *
+/// 
+/// \return int
+/// 
+///	success of operation.
+/// 
+/// \brief Clamp the given voltage variable.
+/// 
+
+int
+PerfectClampAddVariable_Double
+(struct simobj_PerfectClamp * ppc, double *pdVoltage)
+{
+    //- set default result: ok
+
+    int iResult = 1;
+
+    if (ppc->iClampsActive >= 1)
+    {
+	return(0);
+    }
+
+    //- set next variable
+
+    ppc->pdVoltage = pdVoltage;
+
+    ppc->iClampsActive++;
+
+    //- return result
+
+    return(iResult);
+}
+
+
+/// 
+/// \arg ppc voltage clamper.
 /// 
 /// \return int
 /// 
