@@ -46,6 +46,44 @@ Done!
 
 			       },
 
+			       {
+				arguments => [
+					     ],
+				command => 'tests/python/perfectclamp_3.py',
+				command_tests => [
+						  {
+						   description => "Will perfectclamp hold a voltage variable at -0.06 ?",
+
+						   read => "0.0 0.111000
+0.5 -0.060000
+1.0 -0.060000
+1.5 -0.060000
+2.0 -0.060000
+2.5 -0.060000
+3.0 -0.060000
+3.5 -0.060000
+4.0 -0.060000
+4.5 -0.060000
+5.0 -0.060000
+5.5 -0.060000
+6.0 -0.060000
+6.5 -0.060000
+7.0 -0.060000
+7.5 -0.060000
+8.0 -0.060000
+8.5 -0.060000
+9.0 -0.060000
+9.5 -0.060000
+Done!
+",
+
+						  },
+						 ],
+
+				description => "Steps through 20 steps to see if perfectclamp can hold voltage",
+
+			       },
+
 
 			      ],
        description => "Tests for the PerfectClamp python bindings.",

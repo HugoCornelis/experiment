@@ -20,16 +20,18 @@ pc = PerfectClamp("Test clamp")
 dtime = 0.0
 steps = 200
 stepsize = 0.5
-voltage_out = 0.0
+voltage_out = 0.111
 command_voltage = -0.06
 
 pc.SetCommandVoltage(command_voltage)
 
 pc.AddVariable(voltage_out)
 
-for i in range(0,200):
+pc.Initialize()
 
-  print "%.1f %d" % (dtime,pc.GetVoltage())
+for i in range(0,20):
+
+  print "%.1f %f" % (dtime,pc.GetVoltage())
   pc.Step(dtime)
   dtime += stepsize
 
