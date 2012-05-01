@@ -58,7 +58,7 @@ double GetVoltage(struct simobj_PerfectClamp *ppc)
   $result = PyInt_FromLong($1);
 }
 
-
+/*
 %typemap(in) void *pvVoltage
 {
 
@@ -85,7 +85,7 @@ double GetVoltage(struct simobj_PerfectClamp *ppc)
 
 }
 
-
+*/
 
 extern double GetOutput(struct simobj_PerfectClamp *ppc);
 extern double GetVoltage(struct simobj_PerfectClamp *ppc);
