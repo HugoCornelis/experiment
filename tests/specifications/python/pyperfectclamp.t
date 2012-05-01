@@ -50,6 +50,7 @@ Done!
 				arguments => [
 					     ],
 				command => 'tests/python/perfectclamp_3.py',
+				disabled => "Test needs a typemap that breaks other perfectclamp connections",
 				command_tests => [
 						  {
 						   description => "Will perfectclamp hold a voltage variable at -0.06 ?",
