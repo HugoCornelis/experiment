@@ -143,6 +143,8 @@ class LiveOutput:
         
         self._lo = output_base.LiveOutputNew()
 
+        self.output_data = []
+
         self.Initialize()
         
 #---------------------------------------------------------------------------
@@ -159,16 +161,17 @@ class LiveOutput:
 
             self.initiated = True
 
+
 #---------------------------------------------------------------------------
 
     def Step(self, time):
         """!
 
         """
-        result = output_base.LiveOutputTimedStep(self._lo, time)
+        output = output_base.LiveOutputTimedStepVolatile(self._lo, time)
 
-        return result
-
+        self.output_data.append(output)
+        
 #---------------------------------------------------------------------------
 
     def SetResolution(self, resolution):
@@ -218,13 +221,13 @@ class LiveOutput:
 
         This is just left in for consistency
         """
-        pass
+        self.output_base = []
 
 #---------------------------------------------------------------------------
 
     def GetData(self):
 
-        return output_base.LiveOutputData(self._lo)
+        return self.output_data
 
 #***************************************************************************
 
