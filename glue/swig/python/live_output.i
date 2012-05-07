@@ -530,6 +530,8 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 
       PyErr_SetString(PyExc_MemoryError,"Can't allocate float for timestamp");
 
+      return NULL;
+
     }
 
 
@@ -553,6 +555,8 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 	  {
 	    
 	    PyErr_SetString(PyExc_MemoryError,"Can't read variable from address");
+
+	    return NULL;
 
 	  }
 
