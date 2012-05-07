@@ -18,6 +18,10 @@ PyObject *PyList_AsTuple(PyObject *list);
 int       PyList_Check(PyObject *);
 
 Link to the PyString API functions: http://docs.python.org/c-api/string.html
+
+
+Some info on returning None from within C to Python
+http://docs.python.org/c-api/none.html#Py_RETURN_NONE
 ***********************************************************/
 
 
@@ -588,7 +592,9 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
     else
     {
 
-      return NULL;
+      //- Be sure to return a Python 'None' object
+
+      Py_RETURN_NONE;
 
     }
 }
