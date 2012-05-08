@@ -170,7 +170,13 @@ class LiveOutput:
         """
         output = output_base.LiveOutputTimedStepVolatile(self._lo, time)
 
-        self.output_data.append(output)
+        if output is None:
+
+            print "No data output on timestep %f" % time
+
+        else:
+            
+            self.output_data.append(output)
         
 #---------------------------------------------------------------------------
 
