@@ -507,7 +507,7 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 	if (plo->iResolutionStep > 0)
 	{
 
-	    return NULL;
+	    Py_RETURN_NONE;
 	}
 
 	plo->iResolutionStep = plo->iResolution;
@@ -524,7 +524,7 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 
       //- Should never get here, python will bail out before then
 
-      return NULL;
+      Py_RETURN_NONE;
     }
 
     ppoTimeStamp = PyFloat_FromDouble(dTime);
@@ -534,7 +534,7 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 
       PyErr_SetString(PyExc_MemoryError,"Can't allocate float for timestamp");
 
-      return NULL;
+      Py_RETURN_NONE;
 
     }
 
@@ -560,7 +560,7 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 	    
 	    PyErr_SetString(PyExc_MemoryError,"Can't read variable from address");
 
-	    return NULL;
+	    Py_RETURN_NONE;
 
 	  }
 
@@ -583,7 +583,7 @@ PyObject * LiveOutputTimedStepVolatile(struct LiveOutput * plo, double dTime)
 
 	//- Should never get here, python will bail out before then
 
-	return NULL;
+	Py_RETURN_NONE;
       }
 
       return ppoList;
