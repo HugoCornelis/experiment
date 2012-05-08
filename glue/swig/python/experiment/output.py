@@ -264,3 +264,44 @@ class LineOutput(LiveOutput):
         return output_data
 
 #---------------------------------------------------------------------------
+
+
+#***************************************************************************
+
+class StdOut(LiveOutput):
+    """
+    @brief an output object that produces only one line at a time
+
+    An inherited class from the LiveOutput class. This does not
+    keep a persistent data structure with output values, it only
+    outputs one line of output in the form of an array with the
+    first value as the timestamp and following values the output
+    variables. 
+    """
+    
+    def __init__(self):
+
+        LiveOutput.__init__(self)
+
+#---------------------------------------------------------------------------
+
+
+    def Step(self, time):
+        """!
+
+        """
+        output_data = output_base.LiveOutputTimedStepVolatile(self._lo, time)
+
+        try:
+            
+            print "time %s: %s" % (output_data[0], ','.join(map(str, output_data[1:])))
+
+        except IndexError:
+
+            print "time %s: No outputs" % (output_data[0])
+
+        return 
+
+#---------------------------------------------------------------------------
+
+
