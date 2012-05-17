@@ -172,7 +172,9 @@ class LiveOutput:
 
         if output is None:
 
-            print "No data output on timestep %f" % time
+            if self.verbose:
+                
+                print "No data output on timestep %f" % time
 
         else:
             
