@@ -21,13 +21,15 @@ class Output:
 
 #---------------------------------------------------------------------------
 
-    def __init__(self, filename='/tmp/output'):
+    def __init__(self, filename='/tmp/output', verbose=False):
         """!
 
         """
         self.filename = filename
 
         self.initiated = False
+
+        self.verbose = verbose
         
         self._og = output_base.OutputGeneratorNew(filename)
 
@@ -134,12 +136,14 @@ class LiveOutput:
     
 #---------------------------------------------------------------------------
 
-    def __init__(self):
+    def __init__(self, verbose=False):
         """!
 
         """
 
         self.initiated = False
+
+        self.verbose = verbose
         
         self._lo = output_base.LiveOutputNew()
 
