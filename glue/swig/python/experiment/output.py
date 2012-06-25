@@ -147,6 +147,8 @@ class LiveOutput:
         
         self._lo = output_base.LiveOutputNew()
 
+        self.column_order = False
+        
         self.output_data = []
 
         self.Initialize()
@@ -165,7 +167,6 @@ class LiveOutput:
 
             self.initiated = True
 
-
 #---------------------------------------------------------------------------
 
     def Step(self, time):
@@ -181,8 +182,47 @@ class LiveOutput:
                 print "No data output on timestep %f" % time
 
         else:
+
+            if self.column_order:
+
+                self._ColumnStep(output)
+
+            else:
             
-            self.output_data.append(output)
+                self.output_data.append(output)
+
+#---------------------------------------------------------------------------
+
+    def _ColumnStep(self, output_list):
+
+
+        if len(self.output_data) > 0:
+            # If there's nothing in the data struct yet
+            # then we need to create a set of arrays, one for
+            # each data entry to become a column
+
+            self.output_data = [[] for i in xrange(len(output_list))]
+            
+        for indx, o in enumerate(output_list):
+
+            self.output_data[indx].append(o)
+                
+        
+#---------------------------------------------------------------------------
+
+    def SetOrder(self, order_type):
+
+        if order_type == 'column':
+
+            self.column_order = True
+
+        elif order_type == 'row':
+
+            self.column_order = False
+
+        else:
+
+            raise Exception("Invalid option, only 'row' or 'column' accepted")
         
 #---------------------------------------------------------------------------
 
