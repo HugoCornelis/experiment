@@ -196,7 +196,7 @@ class LiveOutput:
     def _ColumnStep(self, output_list):
 
 
-        if len(self.output_data) > 0:
+        if len(self.output_data) == 0:
             # If there's nothing in the data struct yet
             # then we need to create a set of arrays, one for
             # each data entry to become a column
