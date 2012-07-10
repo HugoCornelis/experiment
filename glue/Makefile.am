@@ -16,7 +16,8 @@
 ##############################################################################
 
 
-SUBDIRS = swig/perl swig/python swig/python_old
+# Disabled the compilation for code in swig/python_old since it's deprecated
+SUBDIRS = swig/perl swig/python
 
 test: check
 
