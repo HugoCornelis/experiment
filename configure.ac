@@ -557,7 +557,6 @@ AC_CONFIG_FILES([Makefile
                  glue/Makefile
                  glue/swig/perl/Makefile
 		 glue/swig/python/Makefile
-		 glue/swig/python_old/Makefile
                  tests/Makefile])
 AC_OUTPUT
 
