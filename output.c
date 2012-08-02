@@ -147,7 +147,19 @@ int OutputGeneratorAnnotatedStep(struct OutputGenerator * pog, char * pc)
 
 	//- write the output to the file
 
-	fprintf(pog->pfileOutput, "%s%s\n", pc ? pc : "", pcVariables);
+        if( pog->iNoTimeStep ) 
+	{
+
+	  fprintf(pog->pfileOutput, "%s\n", pcVariables);
+
+	}
+	else
+	{
+
+	  fprintf(pog->pfileOutput, "%s%s\n", pc ? pc : "", pcVariables);	  
+
+	}
+
     }
 
     //- return result
@@ -336,6 +348,10 @@ struct OutputGenerator * OutputGeneratorNew(char *pcFilename)
     //- initialize: non-steps mode
 
     pogResult->iSteps = 0;
+
+    //- Set no timestep to 'on'
+
+    pogResult->iNoTimeStep = 0;
 
     //- return result
 

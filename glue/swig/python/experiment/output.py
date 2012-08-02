@@ -85,9 +85,16 @@ class Output:
         """
         output_base.OutputGeneratorSetSteps(self._og, steps)
         
+#---------------------------------------------------------------------------
 
-
-
+    def NoTimeStep(self, v):
+        """
+        @brief Toggles the output timestep on and off
+        @param v If 0 the timestep is printed, if non zero it is suppressed
+        """
+        
+        self._og.iNoTimeStep = v
+        
 #---------------------------------------------------------------------------
 
     def SetFormat(self, fmt):

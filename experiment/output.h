@@ -61,6 +61,8 @@ struct OutputGenerator
 
     int iResolutionStep;
 
+    int iNoTimeStep;
+
 /*     /// simulation time */
 
 /*     double dSimulationTime; */
