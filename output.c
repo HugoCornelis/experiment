@@ -120,7 +120,18 @@ int OutputGeneratorAnnotatedStep(struct OutputGenerator * pog, char * pc)
 
 	    //- add it to the output
 
-	    sprintf(pcVariable, pog->pcFormat, *pog->ppdVariables[i]);
+	    if( pog->iNoTimeStep && i == 0 )
+	    {
+	      
+	      sprintf(pcVariable, &pog->pcFormat[1], *pog->ppdVariables[i]);
+
+	    }
+	    else
+	    {
+
+	      sprintf(pcVariable, pog->pcFormat, *pog->ppdVariables[i]);
+
+	    }
 
 	    strcat(pcVariables, pcVariable);
 
