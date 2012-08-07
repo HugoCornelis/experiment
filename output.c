@@ -126,6 +126,8 @@ int OutputGeneratorAnnotatedStep(struct OutputGenerator * pog, char * pc)
 
 	    char pcVariable[iSingleVariableSize] = "";
 
+	    //- dynamically resize the output buffer for new variables
+
 	    if (iMaxLengthVariables < iLengthVariables + iSingleVariableSize)
 	    {
 		iMaxLengthVariables += 10000;
