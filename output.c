@@ -104,7 +104,13 @@ int OutputGeneratorAnnotatedStep(struct OutputGenerator * pog, char * pc)
 
     int iOutput = 1;
 
-    char pcVariables[1000] = "";
+    int iMaxLengthVariables = 0;
+
+    int iLengthVariables = 0;
+
+    char *pcVariables = (char *) calloc(1, sizeof(char));
+
+    pcVariables[0] = '\0';
 
     //- write out all the variables
 
@@ -116,21 +122,33 @@ int OutputGeneratorAnnotatedStep(struct OutputGenerator * pog, char * pc)
 
 	if (*pog->ppdVariables[i] != pog->dBase)
 	{
-	    char pcVariable[100] = "";
+#define iSingleVariableSize 100
 
-	    //- add it to the output
+	    char pcVariable[iSingleVariableSize] = "";
 
-	    if( pog->iNoTimeStep && i == 0 )
+	    if (iMaxLengthVariables < iLengthVariables + iSingleVariableSize)
 	    {
-	      
-	      sprintf(pcVariable, &pog->pcFormat[1], *pog->ppdVariables[i]);
+		iMaxLengthVariables += 10000;
 
+		pcVariables = (char *) realloc(pcVariables, iMaxLengthVariables * sizeof(char));
 	    }
+
+	    //- when the no time option is in effect
+
+	    if (pog->iNoTimeStep && i == 0)
+	    {
+		//- don't emit the white space prefix for the first entry
+
+		iLengthVariables += sprintf(pcVariable, &pog->pcFormat[1], *pog->ppdVariables[i]);
+	    }
+
+	    //- if emitting time or for any entry other than the first
+
 	    else
 	    {
+		//- emit the variable prefixed with a space
 
-	      sprintf(pcVariable, pog->pcFormat, *pog->ppdVariables[i]);
-
+		iLengthVariables += sprintf(pcVariable, pog->pcFormat, *pog->ppdVariables[i]);
 	    }
 
 	    strcat(pcVariables, pcVariable);
@@ -158,20 +176,17 @@ int OutputGeneratorAnnotatedStep(struct OutputGenerator * pog, char * pc)
 
 	//- write the output to the file
 
-        if( pog->iNoTimeStep ) 
+        if (pog->iNoTimeStep)
 	{
-
-	  fprintf(pog->pfileOutput, "%s\n", pcVariables);
-
+	    fprintf(pog->pfileOutput, "%s\n", pcVariables);
 	}
 	else
 	{
-
-	  fprintf(pog->pfileOutput, "%s%s\n", pc ? pc : "", pcVariables);	  
-
+	    fprintf(pog->pfileOutput, "%s%s\n", pc ? pc : "", pcVariables);	  
 	}
-
     }
+
+    free(pcVariables);
 
     //- return result
 
@@ -449,9 +464,13 @@ int OutputGeneratorTimedStep(struct OutputGenerator * pog, double dTime)
 
     int iResult = 1;
 
+    //- create the annotation
+
     char pc[100];
 
     sprintf(pc, "%g", dTime);
+
+    //- output an annotated step
 
     iResult = OutputGeneratorAnnotatedStep(pog, pc);
 
