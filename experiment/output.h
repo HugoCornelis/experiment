@@ -25,6 +25,14 @@
 
 struct OutputGenerator
 {
+    /// current time
+
+    double dTime;
+
+    /// time step
+
+    double dStep;
+
     /// number of variables
 
     int iVariablesAllocated;
@@ -61,7 +69,9 @@ struct OutputGenerator
 
     int iResolutionStep;
 
-    int iNoTimeStep;
+    /// output option: do not emit the time step on the emitted lines of output
+
+    int iEmitTime;
 
 /*     /// simulation time */
 

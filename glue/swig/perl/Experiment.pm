@@ -435,6 +435,16 @@ sub new
 	$self->{backend}->swig_iResolution_set($self->{resolution});
     }
 
+    if ($self->{time_step})
+    {
+	$self->{backend}->swig_dStep_set($self->{time_step});
+    }
+
+    if ($self->{emit_time})
+    {
+	$self->{backend}->swig_iEmitTime_set($self->{emit_time});
+    }
+
     if ($self->{format})
     {
 	$self->set_format($self->{format});

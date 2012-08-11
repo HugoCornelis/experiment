@@ -137,7 +137,7 @@ int OutputGeneratorAnnotatedStep(struct OutputGenerator * pog, char * pc)
 
 	    //- when the no time option is in effect
 
-	    if (pog->iNoTimeStep && i == 0)
+	    if (pog->iEmitTime == 0 && i == 0)
 	    {
 		//- don't emit the white space prefix for the first entry
 
@@ -178,7 +178,7 @@ int OutputGeneratorAnnotatedStep(struct OutputGenerator * pog, char * pc)
 
 	//- write the output to the file
 
-        if (pog->iNoTimeStep)
+        if (pog->iEmitTime == 0)
 	{
 	    fprintf(pog->pfileOutput, "%s\n", pcVariables);
 	}
@@ -292,6 +292,12 @@ int OutputGeneratorInitiate(struct OutputGenerator * pog)
 
     int iResult = 1;
 
+    //- initialize time related variables
+
+    pog->dTime = 0.0;
+
+    pog->dStep = 0.0;
+
 /*     //- if file not opened yet */
 
 /*     if (!pog->pfileOutput) */
@@ -377,9 +383,9 @@ struct OutputGenerator * OutputGeneratorNew(char *pcFilename)
 
     pogResult->iSteps = 0;
 
-    //- Set no timestep to 'on'
+    //- default: we emit time steps
 
-    pogResult->iNoTimeStep = 0;
+    pogResult->iEmitTime = 1;
 
     //- return result
 
@@ -466,15 +472,46 @@ int OutputGeneratorTimedStep(struct OutputGenerator * pog, double dTime)
 
     int iResult = 1;
 
-    //- create the annotation
+    if (pog->dStep != 0.0)
+    {
+	while (pog->dTime < dTime)
+	{
+	    //- update the simulation time
 
-    char pc[100];
+	    pog->dTime += pog->dStep;
 
-    sprintf(pc, "%g", dTime);
+	    //- create the annotation
 
-    //- output an annotated step
+	    char pc[100];
 
-    iResult = OutputGeneratorAnnotatedStep(pog, pc);
+	    sprintf(pc, "%g", pog->dTime);
+
+	    //- output an annotated step
+
+	    iResult = OutputGeneratorAnnotatedStep(pog, pc);
+
+	    if (iResult != 1)
+	    {
+		return(iResult);
+	    }
+	}
+    }
+    else
+    {
+	//- update the simulation time
+
+	pog->dTime = dTime;
+
+	//- create the annotation
+
+	char pc[100];
+
+	sprintf(pc, "%g", pog->dTime);
+
+	//- output an annotated step
+
+	iResult = OutputGeneratorAnnotatedStep(pog, pc);
+    }
 
     //- return result
 
