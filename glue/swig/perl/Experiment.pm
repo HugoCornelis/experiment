@@ -440,7 +440,7 @@ sub new
 	$self->{backend}->swig_dStep_set($self->{time_step});
     }
 
-    if ($self->{emit_time})
+    if (exists $self->{emit_time})
     {
 	$self->{backend}->swig_iEmitTime_set($self->{emit_time});
     }

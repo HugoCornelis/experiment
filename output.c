@@ -292,12 +292,6 @@ int OutputGeneratorInitiate(struct OutputGenerator * pog)
 
     int iResult = 1;
 
-    //- initialize time related variables
-
-    pog->dTime = 0.0;
-
-    pog->dStep = 0.0;
-
 /*     //- if file not opened yet */
 
 /*     if (!pog->pfileOutput) */
@@ -378,6 +372,12 @@ struct OutputGenerator * OutputGeneratorNew(char *pcFilename)
     //- initialize format
 
     pogResult->pcFormat = " %g";
+
+    //- initialize time related variables
+
+    pogResult->dTime = 0.0;
+
+    pogResult->dStep = 0.0;
 
     //- initialize: non-steps mode
 
