@@ -56,6 +56,17 @@ class Output:
 
 #---------------------------------------------------------------------------
 
+    def WriteLine(self, line):
+
+        if not self.initiated:
+
+            raise Exception("Can't write out line, output object hasn't been initiated")
+
+        result = output_base.OutputGeneratorWriteLine(self._og, line)
+
+        
+#---------------------------------------------------------------------------
+
     def Step(self, time):
         """!
 
@@ -119,6 +130,7 @@ class Output:
 
         """
         output_base.OutputGeneratorAddVariable(self._og, name, address)
+
 
 #---------------------------------------------------------------------------
 
