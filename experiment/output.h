@@ -99,6 +99,7 @@ int OutputGeneratorSetSteps(struct OutputGenerator * pog, int iSteps);
 
 int OutputGeneratorTimedStep(struct OutputGenerator * pog, double dTime);
 
+int OutputGeneratorWriteLine(struct OutputGenerator * pog, char *pcLine);
 
 #endif
 

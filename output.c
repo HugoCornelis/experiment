@@ -519,3 +519,35 @@ int OutputGeneratorTimedStep(struct OutputGenerator * pog, double dTime)
 }
 
 
+
+/// 
+/// \arg pog output generator.
+/// \arg pcLine A string with the line to write
+/// 
+/// \return int
+/// 
+///	success of operation.
+/// 
+/// \brief Writes a single line out to the open file descriptor.
+///
+/// \details Just does a direct print to the file output object if it exists
+/// 
+/// 
+int OutputGeneratorWriteLine(struct OutputGenerator * pog, char *pcLine)
+{
+
+  if(!pog || !pcLine)
+  {
+    return 0;
+  }
+
+  if(!pog->pfileOutput)
+  {
+    return 0;
+  }
+
+  fprintf(pog->pfileOutput, "%s\n", pcLine);
+
+  return 1;
+
+}
