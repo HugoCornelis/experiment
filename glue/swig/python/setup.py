@@ -450,13 +450,27 @@ else:
 
 home_dir = ''
 
-if os.getenv('USER') == 'root':
+if os.getenv('USER') == 'root' or os.getenv('LOGNAME') == 'root':
 
-    home_dir = os.path.expanduser("~%s" % os.getenv('SUDO_USER'))
+    _user = os.getenv('SUDO_USER')
+
+    if _user is None:
+
+        _user = os.getenv('LOGNAME')
+        
+    home_dir = os.path.expanduser("~%s" % _user)
 
 else:
+
+    _home = os.getenv('HOME')
+
+    if _home is None:
+
+        _home = os.getenv('USERPROFILE')
     
-    home_dir = os.getenv('HOME') or os.getenv('USERPROFILE')
+    home_dir = _home
+
+
 
 _package_dir = os.path.join(home_dir,
                              'neurospaces_project',
