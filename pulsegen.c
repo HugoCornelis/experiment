@@ -78,6 +78,7 @@ int PulseGenSetFields
     if (!ppg)
     {
 	fprintf(stderr,"%s","No PulseGen Simulation Object Allocated.\n");
+
 	return 0;
     }
 
@@ -411,7 +412,6 @@ int PulseGenAddVariable_Double(struct simobj_PulseGen *ppg, double *pdOutput)
     ppg->pdPulseOut = pdOutput;
 
     return 1;
-
 }
 
 
