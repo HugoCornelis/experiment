@@ -793,31 +793,31 @@ sub new
     {	
 	return "Experiment::PulseGen constructor: width1 is not defined, cannot construct pulsegen object";
     }
-    elsif(!defined $options->{level1})
+    elsif (!defined $options->{level1})
     {
 	return "Experiment::PulseGen constructor: level1 is not defined, cannot construct pulsegen object";
     }
-    elsif(!defined $options->{delay1})
+    elsif (!defined $options->{delay1})
     {
 	return "Experiment::PulseGen constructor: delay1 is not defined, cannot construct pulsegen object";
     }
-    elsif(!defined $options->{level2})
+    elsif (!defined $options->{level2})
     {
 	return "Experiment::PulseGen constructor: level2 is not defined, cannot construct pulsegen object";
     }
-    elsif(!defined $options->{width2})
+    elsif (!defined $options->{width2})
     {
 	return "Experiment::PulseGen constructor: width2 is not defined, cannot construct pulsegen object";
     }
-    elsif(!defined $options->{delay2})
+    elsif (!defined $options->{delay2})
     {
 	return "Experiment::PulseGen constructor: delay2 is not defined, cannot construct pulsegen object";
     }
-    elsif(!defined $options->{baselevel})
+    elsif (!defined $options->{baselevel})
     {
 	return "Experiment::PulseGen constructor: baselevel is not defined, cannot construct pulsegen object";
     }
-    elsif(!defined $options->{triggermode})
+    elsif (!defined $options->{triggermode})
     {
 	return "Experiment::PulseGen constructor: triggermode is not defined, cannot construct pulsegen object";
     }
@@ -825,14 +825,17 @@ sub new
     {
 	my $backend = $self->backend();
 
-	$backend->PulseGenSetFields($options->{level1},
-					$options->{width1},
-					$options->{delay1},
-					$options->{level2},
-					$options->{width2},
-					$options->{delay2},
-					$options->{baselevel},
-					$options->{triggermode});
+	$backend->PulseGenSetFields
+	    (
+	     $options->{level1},
+	     $options->{width1},
+	     $options->{delay1},
+	     $options->{level2},
+	     $options->{width2},
+	     $options->{delay2},
+	     $options->{baselevel},
+	     $options->{triggermode}
+	    );
     }
 
     return $self;

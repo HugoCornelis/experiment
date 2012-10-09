@@ -22,41 +22,31 @@
 
 struct simobj_PulseGen
 {
+    char *pcName;
 
-  char *pcName;
+    double dLevel1;
+    double dWidth1;
+    double dDelay1;
 
-  double dLevel1;
-  double dWidth1;
-  double dDelay1;
+    double dLevel2;
+    double dWidth2;
+    double dDelay2;
 
-  double dLevel2;
-  double dWidth2;
-  double dDelay2;
+    double dBaseLevel;
 
-  double dBaseLevel;
+    double dTriggerTime;
+    int iTriggerMode;
 
-  double dTriggerTime;
-  int iTriggerMode;
+    int iPreviousInput;
 
+    /// An input value referenced via pointer. 
   
-  int iPreviousInput;
+    double *pdPulseIn;
 
-  /// An input value referenced via pointer. 
-  /// Since we don't have "messages" we'll use 
-  /// a pointer for now.
-  
-  double *pdPulseIn;
+    /// solved variables
 
-
-  /// solved variables
-
-  double *pdPulseOut;
-
-
+    double *pdPulseOut;
 };
-
-
-
 
 
 struct simobj_PulseGen * PulseGenNew(char *pcName);
@@ -75,15 +65,15 @@ int PulseGenSingleStep(struct simobj_PulseGen *ppg, double dTime);
 
 int PulseGenSetFields
 (
- struct simobj_PulseGen *ppg,
- double dLevel1,
- double dWidth1,
- double dDelay1,
- double dLevel2,
- double dWidth2,
- double dDelay2,
- double dBaseLevel,
- int iTriggerMode
- );
+    struct simobj_PulseGen *ppg,
+    double dLevel1,
+    double dWidth1,
+    double dDelay1,
+    double dLevel2,
+    double dWidth2,
+    double dDelay2,
+    double dBaseLevel,
+    int iTriggerMode);
+
 
 #endif
