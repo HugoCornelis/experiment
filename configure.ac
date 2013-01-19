@@ -329,10 +329,11 @@ case "$host_os" in
     AC_SUBST(PERL_LDFLAGS)
 
 
-    AC_CHECK_PROG(SWIG, swig, NULL, [/usr/bin/swig],[/usr/local/bin/swig /opt/local/bin/swig])
-    AC_SUBST(SWIG)
 
-    AC_MSG_CHECKING([Checking for swig])
+
+    AC_CHECK_PROGS(SWIG, swig, [NULL], [/usr/bin /usr/local/bin])
+
+    dnl AC_MSG_CHECKING([Checking for swig])
     case $SWIG in
       NULL*)
         echo ""
@@ -340,10 +341,12 @@ case "$host_os" in
         echo "Non standard versions of swig are known to cause problems."
         AC_ERROR([Swig for Mac OSX is not found.])
         ;;
-      *)
-        AC_MSG_RESULT([ $SWIG ])
-        ;;
+dnl       *)
+dnl         AC_MSG_RESULT([ yes ])
+dnl         ;;
     esac
+
+
 
     PERLLIB_EXTENSION='dylib'
     AC_SUBST(PERLLIB_EXTENSION)
