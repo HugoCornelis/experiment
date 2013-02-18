@@ -89,17 +89,16 @@ dist-hook:
 	rm -rf $(distdir)/docs/rtf
 	$(srcdir)/install-sh -d $(distdir)/tests
 	$(srcdir)/install-sh -d $(distdir)/tests/html
-	cp -pR $(srcdir)/tests/tests_2_html $(distdir)/tests
 	cp -pR $(srcdir)/tests/tests.config $(distdir)/tests
 	cp -pR $(srcdir)/tests.config $(distdir)
 
 #! this one breaks the distcheck, because automake makes dist dirs read-only
-#	cd $(distdir)/tests && ./tests_2_html --introduction introduction.html
+#	cd $(distdir)/tests && neurospaces_harness_2_html --introduction introduction.html
 
 test: check
 
 html-upload-prepare:
-	( cd tests && ./tests_2_html --introduction introduction.html )
+	( cd tests && neurospaces_harness_2_html --introduction introduction.html )
 	rm -fr html/htdocs/neurospaces_project/experiment/
 	mkdir -p html/htdocs/neurospaces_project/experiment
 	mkdir -p html/htdocs/neurospaces_project/experiment/html_source
