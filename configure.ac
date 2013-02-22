@@ -109,10 +109,9 @@ AC_ARG_WITH(universal,
   *)
 
     AC_MSG_RESULT(yes)
+    MY_AUTOMAKE_OPTIONS=no-dependencies
+    
     OSX_UNIVERSAL="yes"
-
-    CFLAGS="$CFLAGS -arch x86_64 -arch i386 -arch ppc"
-    AC_SUBST(CFLAGS)
 
     ;;
   esac ],
@@ -131,25 +130,127 @@ AC_PATH_PROGS(DOT,dot)
 AC_PATH_PROGS(SOURCE_HIGHLIGHT,source-highlight)
 
 
-PERL_MODULES=`(cd perl && find . -name "*.pm" | perl -pe 's/\n/ /g')`
-AC_SUBST(PERL_MODULES)
-
-PERL_DATA=`(cd perl && find . -name "numbers-7x11.txt" | perl -pe 's/\n/ /g')`
-AC_SUBST(PERL_DATA)
-
-# Checks for programs.
-
-#   check for packaging programs for debian and red hat.
-#   no need to bail out if these are missing since they're optional. 
-AC_CHECK_PROGS([DPKG_BUILDPACKAGE],dpkg-buildpackage,[NULL])
-AC_CHECK_PROGS([DH],dh,[NULL])
-AC_CHECK_PROGS([RPMBUILD],rpmbuild,[NULL])
-
 dnl Check for Python and it's headers
 AM_PATH_PYTHON(,[],[
    echo "Python is not installed."
    exit -1
 ])
+
+AC_MSG_CHECKING([Python prefix is ])
+  AC_MSG_RESULT(['$PYTHON_PREFIX'])
+
+dnl dnl
+dnl dnl This is a forced fix to make sure a mac installation gets the proper
+dnl dnl python executable. Unless the macpython installer was run, the autotools
+dnl dnl python macro won't look for python in the proper path. 
+dnl dnl 
+dnl case "$host_os" in
+dnl   darwin*)
+
+dnl     PYTHON_PREFIX='/Library/Frameworks/Python.framework/Versions/Current'
+dnl     AC_SUBST(PYTHON_PREFIX)
+    
+dnl     PYTHON=$PYTHON_PREFIX/bin/python
+dnl     AC_SUBST(PYTHON)
+
+dnl     AC_CHECK_PROG(HAVE_PYTHON_CONFIG, python-config, "yes", "no",[$PYTHON_PREFIX/bin])
+dnl     AC_MSG_CHECKING([python-config present])
+dnl     AC_MSG_RESULT([$HAVE_PYTHON_CONFIG])
+dnl   ;;
+dnl   *)
+
+dnl     AC_CHECK_PROG(HAVE_PYTHON_CONFIG, python-config, "yes", "no")
+dnl     AC_MSG_CHECKING([python-config present])
+dnl     AC_MSG_RESULT([$HAVE_PYTHON_CONFIG])
+
+dnl   ;;
+dnl esac
+
+
+dnl if test "$HAVE_PYTHON_CONFIG" == "yes"; then
+
+dnl   # This is to set the proper python-config for getting the 
+dnl   # proper flags and prefixes
+
+  
+dnl   AC_MSG_CHECKING([Python config location])
+dnl   PYTHON_CONFIG=$PYTHON-config
+dnl   AC_SUBST(PYTHON_CONFIG)
+dnl   AC_MSG_RESULT([$PYTHON_CONFIG])
+
+
+dnl   AC_MSG_CHECKING([Python prefix is])
+dnl   PYTHON_PREFIX=`$PYTHON_CONFIG --prefix`
+dnl   AC_SUBST(PYTHON_PREFIX)
+dnl   AC_MSG_RESULT([$PYTHON_PREFIX])
+
+
+dnl   AC_MSG_CHECKING([Python includes are])
+dnl   PYTHON_INCLUDE=`$PYTHON_CONFIG --include`
+dnl   AC_SUBST(PYTHON_INCLUDE)
+dnl   AC_MSG_RESULT([$PYTHON_INCLUDE])
+
+
+dnl   AC_MSG_CHECKING([Python libs are])
+dnl   PYTHON_LIBS=`$PYTHON_CONFIG --libs`
+dnl   AC_SUBST(PYTHON_LIBS)
+dnl   AC_MSG_RESULT([$PYTHON_LIBS])
+
+
+dnl   AC_MSG_CHECKING([Python cflags are])
+dnl   PYTHON_CFLAGS=`$PYTHON_CONFIG --cflags`
+dnl   AC_SUBST(PYTHON_CFLAGS)
+dnl   AC_MSG_RESULT([$PYTHON_CFLAGS])
+
+
+dnl   AC_MSG_CHECKING([Python ldflags are])
+dnl   PYTHON_LDFLAGS=`$PYTHON_CONFIG --ldflags`
+dnl   AC_SUBST(PYTHON_LDFLAGS)
+dnl   AC_MSG_RESULT([$PYTHON_LDFLAGS])
+
+dnl   AC_MSG_CHECKING([Python executable is])
+dnl   PYTHON_EXE=$PYTHON_PREFIX/bin/python
+dnl   AC_SUBST(PYTHON_EXE)
+dnl   AC_MSG_RESULT([$PYTHON_EXE])
+
+
+dnl else
+
+dnl   # This is legacy to make sure that systems with python
+dnl   # that do not have python-config can get the python info
+dnl   # This has always been a bit error prone, particularly if the 
+dnl   # user has more than one python version installed.
+
+dnl   PYTHON_PREFIX=`echo $PYTHON | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
+dnl   PYTHON_PREFIX=`echo $PYTHON_PREFIX | sed -e "s,[[^/]]*$,,;s,/$,,;s,^$,.,"`
+dnl   AC_SUBST(PYTHON_PREFIX)
+
+dnl   AC_MSG_CHECKING([Python prefix is])
+dnl   AC_MSG_RESULT([$PYTHON_PREFIX])
+
+dnl   PYTHON_HEADERS='$(PYTHON_PREFIX)/include/python$(PYTHON_VERSION)'
+dnl   AC_SUBST(PYTHON_HEADERS)
+
+dnl   AC_MSG_CHECKING([Python includes are])
+dnl   PYTHON_INCLUDE='-I$(PYTHON_HEADERS)'
+dnl   AC_SUBST(PYTHON_INCLUDE)
+dnl   AC_MSG_RESULT([$PYTHON_INCLUDE])
+
+dnl   AC_MSG_CHECKING([Python ldflags are])
+dnl   PYTHON_LIBS='-L$(pyexecdir)/../config'
+dnl   AC_SUBST(PYTHON_LIBS)
+dnl   AC_MSG_RESULT([$PYTHON_LIBS])
+				
+dnl   PYTHON_EXE='$(PYTHON_PREFIX)/bin/python'
+dnl   AC_SUBST(PYTHON_EXE)
+dnl fi
+
+
+
+
+
+
+
 
 # Checks for options
 
@@ -256,19 +357,41 @@ case "$host_os" in
     # These are settings specific to MAC OS X.
     #
     dnl {{{{
+
+
+
+    # Check for libtool to make executables
     AC_MSG_CHECKING([Using libtool for MAC OS X.])
-    AR=libtool
-    ARFLAGS='-static -c -o'
-    AC_SUBST(AR)
-    AC_SUBST(ARFLAGS)
-    AC_MSG_RESULT([$AR $ARFLAGS])
+    AC_CHECK_PROG(LIBTOOL_PRESENT, libtool, yes, no)
+
+    case $LIBTOOL_PRESENT in
+      yes*)
+
+        AR=libtool
+        ARFLAGS='-static -c -o'
+        AC_SUBST(AR)
+        AC_SUBST(ARFLAGS)
+
+      ;;
+      no*)
+
+        AC_ERROR([libtool for Mac OSX is not found. It's needed to make executables.])
+
+      ;;
+    esac
+
+
 
     dnl On the MAC we will only look for perl in the standard location for the Apple
     dnl native perl. 
-    AC_CHECK_PROG(PERL, perl, NULL, [/usr/bin/perl],[/usr/local/bin/perl /opt/local/bin/perl /sw/bin/perl])
-    AC_SUBST(PERL)
+    dnl OLD LINE: AC_CHECK_PROG(PERL, perl, NULL, [/usr/bin/perl],[/usr/local/bin/perl /opt/local/bin/perl /sw/bin/perl])
+    dnl AC_CHECK_PROG(PERL_PRESENT, perl,yes, no, [/usr/bin], [/usr/local/bin/perl /opt/local/bin/perl /sw/bin/perl])
+    dnl AC_SUBST(PERL_PRESENT)
 
-    AC_MSG_CHECKING([Checking the perl installation])
+    dnl Going to restrict the search for perl to use the mac standard location
+    AC_CHECK_PROGS(PERL, perl, [NULL], [/usr/bin])
+
+    dnl AC_MSG_CHECKING([Checking the perl installation])
     case $PERL in
       NULL*)
         echo ""
@@ -276,10 +399,18 @@ case "$host_os" in
         echo "Non standard versions of perl are known to cause problems."
         AC_ERROR([Perl for Mac OSX is not found.])
         ;;
-      *)
-        AC_MSG_RESULT([ $PERL ])
+        *)
+        dnl Ensure that ONLY the standard mac perl is used throughout.
+	PERL='/usr/bin/perl'
+        AC_SUBST(PERL)
         ;;
+dnl       *)
+
+dnl         AC_MSG_RESULT([ $PERL ])
+
+dnl         ;;
     esac
+
 
 
     #-- Here we determine the install path for perl modules --
@@ -303,32 +434,74 @@ case "$host_os" in
     # --- End perl module directory selection --------------
 
 
-    # determine linker flags for perl embedding
 
 
-    if test "$OSX_UNIVERSAL" == "yes"; then
-
-      PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts`
-      
-      PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts`
-
-      PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
-
-    else
-
-      PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`
     
-      PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+    # This is to get rid of the annoying error that occurs when
+    # you use two arch flags.occur By default these commands produce a -arch for both
+    # architectures. If now differentiates between OSX lion, which rejects the -fstack-protector
+    # flag on the standard build environment.
 
-      PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+    echo "This is host_os: $host_os"
 
-    fi
+    case "$host_os" in
+
+	darwin11*|darwin12*) dnl This is Max OSX lion or OSX mountain lion
+
+          if test "$OSX_UNIVERSAL" == "yes"; then
+
+	    dnl No PPC support in Lion and above so we only pass intel archs
+	    dnl CFLAGS="$CFLAGS -arch x86_64 -arch i386"
+            dnl AC_SUBST(CFLAGS)	
+
+            PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts | perl -pe 's/\-fstack\-protector//g'`
+      
+            PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-fstack\-protector//g'`
+
+            # When using libtool, you can't use arch arguments.
+            PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g' | perl -pe 's/\-fstack\-protector//g'`
+
+          else
+
+            PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g' | perl -pe 's/\-fstack\-protector//g'`
+    
+            PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g' | perl -pe 's/\-fstack\-protector//g'`
+
+            PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g' | perl -pe 's/\-fstack\-protector//g'`
+
+          fi
+        ;;
+	
+	*) dnl all other Mac OSX versions
+
+          if test "$OSX_UNIVERSAL" == "yes"; then
+
+            dnl CFLAGS="$CFLAGS -arch x86_64 -arch i386 -arch ppc"
+            dnl AC_SUBST(CFLAGS)
+
+            PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts`
+      
+            PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts`
+
+            # When using libtool, you can't use arch arguments.
+            PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+
+          else
+
+            PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts | perl -pe 's/\-arch\s\S+\s//g'`
+    
+            PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+
+            PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts | perl -pe 's/\-arch\s\S+\s//g'`
+
+          fi
+        ;;
+
+    esac
 
     AC_SUBST(PERL_CCOPTS)
     AC_SUBST(PERL_LDADD)
     AC_SUBST(PERL_LDFLAGS)
-
-
 
 
     AC_CHECK_PROGS(SWIG, swig, [NULL], [/usr/bin /usr/local/bin])
@@ -345,7 +518,6 @@ dnl       *)
 dnl         AC_MSG_RESULT([ yes ])
 dnl         ;;
     esac
-
 
 
     PERLLIB_EXTENSION='dylib'
@@ -370,11 +542,11 @@ dnl         ;;
 
     AC_SUBST(SWIGLDLINKSFORPERL)
 
+
     case "$host_os" in
 	darwin10*)
-	    dnl This is snow leopard
 
-	    if test "$OSX_UNIVERSAL" == "yes"; then
+            if test "$OSX_UNIVERSAL" == "yes"; then
 
               SWIGLINKCOMMAND_PERL='$(AR) $(SWIGLDLINKSFORPERL) -o SwiggableExperiment.$(PERLLIB_EXTENSION) swiggable_experiment_wrap.o'
 
@@ -413,6 +585,7 @@ dnl         ;;
 
     case "$host_os" in
 	darwin10*)
+
 	    dnl This is snow leopard
 
             SWIGLINKCOMMAND_PYTHON='ld 	$(SWIGLDLINKSFORPYTHON) -o _SwiggableExperiment.so /usr/lib/bundle1.o swiggable_experiment_wrap.o'
@@ -455,9 +628,7 @@ dnl         ;;
 
 
   *)
-    #
-    # These are settings specific to Linux/Unix POSIX systems.
-    #
+  
     dnl {{{
     AR='ar'
     ARFLAGS='cru'
@@ -490,13 +661,18 @@ dnl         ;;
     AC_MSG_RESULT([ $PMDIR ])
     # --- End perl module directory selection --------------
 
-
     AC_CHECK_PROGS(SWIG, swig)
     AC_SUBST(SWIG)
 
-
     PERL_CCOPTS=`$PERL -MExtUtils::Embed -e ccopts`
     AC_SUBST(PERL_CCOPTS)
+
+    PERL_LDADD=`$PERL -MExtUtils::Embed -e ldopts`
+    AC_SUBST(PERL_LDADD)
+
+    PERL_LDFLAGS=`$PERL -MExtUtils::Embed -e ldopts`
+    AC_SUBST(PERL_LDFLAGS)
+
 
     PERLLIB_EXTENSION='so'
     AC_SUBST(PERLLIB_EXTENSION)
