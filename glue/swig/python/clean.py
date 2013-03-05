@@ -31,7 +31,7 @@ def remove_python_garbage():
     for g in garbage:
 
         delete_me = ''
-        
+
         if re.search("\*", g):
             # If this is a pattern then we use glob.
 
@@ -44,7 +44,11 @@ def remove_python_garbage():
         else:
 
             if os.path.exists(g):
-                
+
+                if os.path.isdir(g):
+
+                    _empty_directory(g)
+                    
                 _delete(g)
 
     print "Done deleting python build garbage"
@@ -64,6 +68,22 @@ def _delete(path):
         cmdout = getoutput("sudo rm -rf %s" % path)
 
     print cmdout
+
+#---------------------------------------------------------------------------
+
+def _empty_directory(directory):
+
+    for path, dirs, files in os.walk(directory, topdown=False):
+
+        for d in dirs:
+
+            _empty_directory(os.path.join(path,d))
+
+        for f in files:
+
+            _delete(os.path.join(path,f))
+
+        _delete(path)
 
 #---------------------------------------------------------------------------
 
