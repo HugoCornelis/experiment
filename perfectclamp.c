@@ -26,19 +26,19 @@
 
 
 /// 
-/// \arg ppc voltage clamper.
-/// \arg pvVoltage pointer to the voltage variable, assumed is double *
+/// \arg ppc perfect clamper.
+/// \arg pv pointer to the variable to be clamped, assumed is double *.
 /// 
 /// \return int
 /// 
 ///	success of operation.
 /// 
-/// \brief Clamp the given voltage variable.
+/// \brief Clamp the given variable during the simulation.
 /// 
 
 int
 PerfectClampAddVariable
-(struct simobj_PerfectClamp * ppc, void *pvVoltage)
+(struct simobj_PerfectClamp * ppc, void *pvVariable)
 {
     //- set default result: ok
 
@@ -51,7 +51,7 @@ PerfectClampAddVariable
 
     //- set next variable
 
-    ppc->pdVoltage = (double *)pvVoltage;
+    ppc->pdVariable = (double *)pvVariable;
 
     ppc->iClampsActive++;
 
@@ -62,19 +62,19 @@ PerfectClampAddVariable
 
 
 /// 
-/// \arg ppc voltage clamper.
-/// \arg pdVoltage pointer to the voltage variable, assumed is double *
+/// \arg ppc perfect clamper.
+/// \arg pd pointer to the variable to be clamped, assumed is double *.
 /// 
 /// \return int
 /// 
 ///	success of operation.
 /// 
-/// \brief Clamp the given voltage variable.
+/// \brief Clamp the given variable during the simulation.
 /// 
 
 int
 PerfectClampAddVariable_Double
-(struct simobj_PerfectClamp * ppc, double *pdVoltage)
+(struct simobj_PerfectClamp * ppc, double *pdVariable)
 {
     //- set default result: ok
 
@@ -87,7 +87,7 @@ PerfectClampAddVariable_Double
 
     //- set next variable
 
-    ppc->pdVoltage = pdVoltage;
+    ppc->pdVariable = pdVariable;
 
     ppc->iClampsActive++;
 
@@ -98,13 +98,13 @@ PerfectClampAddVariable_Double
 
 
 /// 
-/// \arg ppc voltage clamper.
+/// \arg ppc perfect clamper.
 /// 
 /// \return int
 /// 
 ///	success of operation.
 /// 
-/// \brief Free the voltage clamper.
+/// \brief Release memory occupied by the perfect clamper.
 /// 
 
 int PerfectClampFinish(struct simobj_PerfectClamp * ppc)
@@ -138,13 +138,13 @@ int PerfectClampFinish(struct simobj_PerfectClamp * ppc)
 
 
 /// 
-/// \arg ppc voltage clamper.
+/// \arg ppc perfect clamper.
 /// 
 /// \return int
 /// 
 ///	success of operation.
 /// 
-/// \brief Initiate the voltage clamper.
+/// \brief Initiate the perfect clamper.
 /// 
 
 int PerfectClampInitiate(struct simobj_PerfectClamp * ppc)
@@ -164,9 +164,9 @@ int PerfectClampInitiate(struct simobj_PerfectClamp * ppc)
 /// 
 /// \return struct simobj_PerfectClamp *
 /// 
-///	voltage clamper, NULL for failure.
+///	perfect clamper, NULL for failure.
 /// 
-/// \brief voltage clamper.
+/// \brief perfect clamper.
 /// 
 
 struct simobj_PerfectClamp * PerfectClampNew(char *pcName)
@@ -175,9 +175,9 @@ struct simobj_PerfectClamp * PerfectClampNew(char *pcName)
 
     struct simobj_PerfectClamp * ppcResult = NULL;
 
-    //- allocate voltage clamper
+    //- allocate perfect clamper
 
-    ppcResult = (struct simobj_PerfectClamp *)calloc(1, sizeof(struct simobj_PerfectClamp));
+    ppcResult = (struct simobj_PerfectClamp *) calloc(1, sizeof(struct simobj_PerfectClamp));
 
     if (!ppcResult)
     {
@@ -197,15 +197,15 @@ struct simobj_PerfectClamp * PerfectClampNew(char *pcName)
 
 
 /// 
-/// \arg ppc voltage clamper.
-/// \arg dCommand command voltage, ignored if a filename is given.
-/// \arg pcFilename filename, file contains sequence of command voltages.
+/// \arg ppc perfect clamper.
+/// \arg dCommand command level, ignored if a filename is given.
+/// \arg pcFilename filename, file contains sequence of command levels to be applied during the simulation.
 /// 
 /// \return int
 /// 
 ///	success of operation.
 /// 
-/// \brief set operation fields of voltage clamper.
+/// \brief set operation fields of the perfect clamper.
 /// 
 
 int
@@ -259,18 +259,18 @@ PerfectClampSetFields
 
 
 /// 
-/// \arg ppc voltage clamper.
+/// \arg ppc perfect clamper.
 /// \arg dTime current simulation time.
 /// 
 /// \return int
 /// 
 ///	success of operation.
 /// 
-/// \brief Compute new currents to correct voltages.
+/// \brief Compute new command levels, set new variable values.
 /// 
 /// \note 
 /// 
-///	Old current values are overwritten.
+///	Old values are overwritten.
 /// 
 
 int PerfectClampSingleStep(struct simobj_PerfectClamp * ppc, double dTime)
@@ -279,11 +279,11 @@ int PerfectClampSingleStep(struct simobj_PerfectClamp * ppc, double dTime)
 
     int iResult = 1;
 
-    //- if running with a file open
+    //- if running with a file
 
     if (ppc->pfile)
     {
-	//- read a command voltage from the file
+	//- read a command levels from the file
 
 	char pcStep[100];
 
@@ -311,13 +311,13 @@ int PerfectClampSingleStep(struct simobj_PerfectClamp * ppc, double dTime)
 
 	//- set the output
 
-	*ppc->pdVoltage = ppc->dCommand;
+	*ppc->pdVariable = ppc->dCommand;
     }
     else
     {
 	//- set the output
 
-	*ppc->pdVoltage = ppc->dCommand;
+	*ppc->pdVariable = ppc->dCommand;
     }
 
     //- return result

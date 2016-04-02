@@ -23,7 +23,7 @@ stepsize = 0.5
 voltage_out = 0.111
 command_voltage = -0.06
 
-pc.SetCommandVoltage(command_voltage)
+pc.SetCommand(command_voltage)
 
 pc.AddVariable(voltage_out)
 
@@ -31,7 +31,7 @@ pc.Initialize()
 
 for i in range(0,20):
 
-  print "%.1f %f" % (dtime,pc.GetVoltage())
+  print "%.1f %f" % (dtime,pc.GetVariableValue())
   pc.Step(dtime)
   dtime += stepsize
 

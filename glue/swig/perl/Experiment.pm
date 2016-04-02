@@ -606,7 +606,7 @@ sub initiate
 {
     my $self = shift;
 
-    #t perhaps need to set the command voltage here ?
+    #t perhaps need to set the command level here ?
 }
 
 
@@ -632,7 +632,7 @@ sub new
 	return undef;
     }
 
-    # make distinction between command_filename and command voltage option
+    # make distinction between command_filename and command level option
 
     if (defined $options->{command})
     {
@@ -644,7 +644,7 @@ sub new
     {
 	my $backend = $self->backend();
 
-	#! the command voltage is ignored in this case, use an
+	#! the command level is ignored in this case, use an
 	#! unreasonable value to make result invalid if it would be used
 	#! (due to a bug).
 
@@ -652,7 +652,7 @@ sub new
     }
     else
     {
-	return "Experiment::PerfectClamp constructor: cannot construct a perfect clamp without command voltage and without a filename";
+	return "Experiment::PerfectClamp constructor: cannot construct a perfect clamp without neither a command level nor a filename";
     }
 
     return $self;

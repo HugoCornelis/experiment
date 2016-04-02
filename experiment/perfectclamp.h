@@ -33,15 +33,15 @@ struct simobj_PerfectClamp
 
     int iClampsActive;
 
-    /// input, solved variable
+    /// output, solved variable
 
-    double *pdVoltage;
+    double *pdVariable;
 
-    /// command voltage
+    /// command level
 
     double dCommand;
 
-    /// filename with command voltages
+    /// filename with command levels
 
     char *pcFilename;
 
@@ -52,11 +52,11 @@ struct simobj_PerfectClamp
 
 int
 PerfectClampAddVariable
-(struct simobj_PerfectClamp * ppc, void *pvVoltage);
+(struct simobj_PerfectClamp * ppc, void *pvVariable);
 
 int
 PerfectClampAddVariable_Double
-(struct simobj_PerfectClamp * ppc, double *pdVoltage);
+(struct simobj_PerfectClamp * ppc, double *pdVariable);
 
 int PerfectClampSingleStep(struct simobj_PerfectClamp * ppc, double dTime);
 
