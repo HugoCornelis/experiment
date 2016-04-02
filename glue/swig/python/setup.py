@@ -171,7 +171,11 @@ class ExperimentModule(Extension):
         # determine arch flags if we are on a mac
         if sys.platform == "darwin":
 
-            os.environ['ARCHFLAGS'] = self.get_mac_arch_flags()
+            arch = autodetect()
+            
+            if arch == 'i386':
+
+                os.environ['ARCHFLAGS'] = self.get_mac_arch_flags()
 
         Extension.__init__(self,
                            self.name,
