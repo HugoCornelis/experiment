@@ -89,6 +89,7 @@ def autodetect():
                  'i686': 'i386',
                  'i86pc': 'i386',    # Solaris/Intel
                  'x86':   'i386',    # Apple
+                 'x86_64':   'i386',    # Apple
                  }[mach]
      except KeyError:
          raise ProcessorAutodetectError, "unsupported processor '%s'" % mach

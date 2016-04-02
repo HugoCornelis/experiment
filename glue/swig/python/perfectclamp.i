@@ -12,31 +12,31 @@
 
 #include "experiment/perfectclamp.h"
 
-double GetOutput(struct simobj_PerfectClamp *ppc);
-double GetVoltage(struct simobj_PerfectClamp *ppc);
+double GetVariableValue(struct simobj_PerfectClamp *ppc);
+/* double GetCommand(struct simobj_PerfectClamp *ppc); */
 
 
-double GetOutput(struct simobj_PerfectClamp *ppc)
+double GetVariableValue(struct simobj_PerfectClamp *ppc)
 {
-  if(!ppc || !ppc->pdVoltage)
+  if (!ppc || !ppc->pdVariable)
   {
     return FLT_MAX;
   }
 
-  return (*ppc->pdVoltage);
+  return (*ppc->pdVariable);
 
 }
 
-double GetVoltage(struct simobj_PerfectClamp *ppc)
-{
-  if(!ppc || !ppc->pdVoltage)
-  {
-    return FLT_MAX;
-  }
+/* double GetCommand(struct simobj_PerfectClamp *ppc) */
+/* { */
+/*   if (!ppc || !ppc->pdVariable) */
+/*   { */
+/*     return FLT_MAX; */
+/*   } */
 
-  return (*ppc->pdVoltage);
+/*   return (*ppc->pdVariable); */
 
-}
+/* } */
 
 
 %}
@@ -59,7 +59,7 @@ double GetVoltage(struct simobj_PerfectClamp *ppc)
 }
 
 /*
-%typemap(in) void *pvVoltage
+%typemap(in) void *pvVariable
 {
 
   double dTemp = PyFloat_AsDouble($input);
@@ -87,11 +87,11 @@ double GetVoltage(struct simobj_PerfectClamp *ppc)
 
 */
 
-extern double GetOutput(struct simobj_PerfectClamp *ppc);
-extern double GetVoltage(struct simobj_PerfectClamp *ppc);
+extern double GetVariableValue(struct simobj_PerfectClamp *ppc);
+/* extern double GetLevel(struct simobj_PerfectClamp *ppc); */
 
-extern int PerfectClampAddVariable(struct simobj_PerfectClamp * ppc, void *pvVoltage);
-extern int PerfectClampAddVariable_Double(struct simobj_PerfectClamp * ppc, double *pdVoltage);
+extern int PerfectClampAddVariable(struct simobj_PerfectClamp * ppc, void *pvVariable);
+extern int PerfectClampAddVariable_Double(struct simobj_PerfectClamp * ppc, double *pdVariable);
 
 extern int PerfectClampSingleStep(struct simobj_PerfectClamp * ppc, double dTime);
 

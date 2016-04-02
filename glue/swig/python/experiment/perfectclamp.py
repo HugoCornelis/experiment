@@ -16,8 +16,8 @@ except ImportError, e:
     sys.exit("Could not import compiled SWIG pulsegen_base library: %s" % e)
 
 
-from perfectclamp_base import GetOutput
-from perfectclamp_base import GetVoltage
+# from perfectclamp_base import GetOutput
+from perfectclamp_base import GetVariableValue
 from perfectclamp_base import PerfectClampAddVariable
 from perfectclamp_base import PerfectClampAddVariable_Double
 from perfectclamp_base import PerfectClampFinish
@@ -56,7 +56,7 @@ class PerfectClamp:
         self.initiated = False
 
         # this will be the solved variable
-        self.voltage = sys.maxint
+        self.command = sys.maxint
 
         # exception?
 
@@ -72,23 +72,23 @@ class PerfectClamp:
 
 #---------------------------------------------------------------------------
 
-    def SetCommandVoltage(self,command):
+    def SetCommand(self,command):
 
         self.pc.dCommand = command
 
 
 #---------------------------------------------------------------------------
 
-    def GetCommandVoltage(self):
+    def GetCommand(self):
 
         return self.pc.dCommand
 
 
 #---------------------------------------------------------------------------
 
-    def GetVoltage(self):
+    def GetVariableValue(self):
 
-        return GetVoltage(self.pc)
+        return GetVariableValue(self.pc)
 
 #---------------------------------------------------------------------------
 
@@ -145,33 +145,33 @@ class PerfectClamp:
 
 #---------------------------------------------------------------------------
 
-    def AddVariable(self,voltage):
+    def AddVariable(self, variable):
         """!
         @brief Add a solved variable.
         """
         
-        result = PerfectClampAddVariable(self.pc,voltage)
+        result = PerfectClampAddVariable(self.pc, variable)
 
         return result
 
 #---------------------------------------------------------------------------
 
-    def AddDoubleVariable(self,voltage):
+    def AddDoubleVariable(self, variable):
         """!
         @brief Add a solved variable.
         """
         
-        result = PerfectClampAddVariable_Double(self.pc,voltage)
+        result = PerfectClampAddVariable_Double(self.pc, variable)
 
         return result
     
 #---------------------------------------------------------------------------
 
-    def AddInput(self,voltage):
+    def AddInput(self, variable):
         """!
         @brief Add a solved variable.
         """
         
-        return self.AddVariable(voltage)
+        return self.AddVariable(variable)
 
 #---------------------------------------------------------------------------
