@@ -446,7 +446,7 @@ dnl         ;;
 
     case "$host_os" in
 
-	darwin11*|darwin12*) dnl This is Max OSX lion or OSX mountain lion
+	darwin11*|darwin12*|darwin13*|darwin14*|darwin15*) dnl This is Max OSX lion or OSX mountain lion
 
           if test "$OSX_UNIVERSAL" == "yes"; then
 
