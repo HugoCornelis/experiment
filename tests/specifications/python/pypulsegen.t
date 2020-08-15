@@ -169,7 +169,8 @@ Done!
 
 			      ],
        description => "Tests for the PulseGen python bindings.",
-       name => 'pypulsegen.t',
+       disabled => "the python modules have been disabled",
+       name => 'python/pypulsegen.t',
       };
 
 

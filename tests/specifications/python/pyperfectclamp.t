@@ -88,7 +88,8 @@ Done!
 
 			      ],
        description => "Tests for the PerfectClamp python bindings.",
-       name => 'python_perfectclamp.t',
+       disabled => "the python modules have been disabled",
+       name => 'python/pyperfectclamp.t',
       };
 
 
