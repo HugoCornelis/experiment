@@ -18,11 +18,7 @@
 
 SUBDIRS = .
 
-#t automake does not allow to pass in arguments for tests ?
-
-#check_SCRIPTS = $(srcdir)/neurospaces_harness 
-
-TESTS = /usr/local/bin/neurospaces_harness
+TESTS = run_harness.sh
 
 test: check
 
